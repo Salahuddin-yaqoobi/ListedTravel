@@ -1765,7 +1765,25 @@ input:focus, textarea:focus {
     color: #162e2e;
     margin: 0;
 }
-
+.brand-scroll-indicator {
+	margin-top: 20px;
+  }
+  
+.dot {
+	display: inline-block;
+	height: 10px;
+	width: 10px;
+	margin: 5px;
+	background-color: #c4c4c4;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background-color 0.3s;
+  }
+  
+  .dot.active {
+	background-color: #4a5c74;
+  }
+  
 
 /* -------- Footer Css -------- */
 
