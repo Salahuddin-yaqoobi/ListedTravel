@@ -63,5 +63,12 @@ $(document).ready(function () {
             .catch(error => console.error('Error loading product page:', error));
     });
 });
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('active');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('active');
+}
 
 
