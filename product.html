@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heavy Equipment Marketplace</title>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .product-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .product-card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            aspect-ratio: 16/9; /* Maintain image aspect ratio */
+            object-fit: cover;
+        }
+        .product-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .product-card p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .product-card .details-link {
+            color: #0078d7;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .product-card .details-link:hover {
+            text-decoration: underline;
+        }
+        .product-card .favorite-icon {
+            float: right;
+            font-size: 1.2em;
+            color: #888;
+            cursor: pointer;
+        }
+        .product-card .favorite-icon:hover {
+            color: #e53e3e; /* Change color on hover, e.g., to red */
+        }
+        .product-card .ref-number {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .for-sale-tag {
+            background-color: #f0c300; /* Example yellow color */
+            color: #1a202c;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .condition-tag {
+            background-color: #48bb78;  /* Example green for "New" */
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 8px;
+            display: inline-block;
+        }
+        .condition-tag.used {
+            background-color: #a0aec0; /* Example gray for "Used" */
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-6">Heavy Equipment</h1>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="filter-section md:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Filters</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Condition</h3>
+                            <select class="w-full border border-gray-300 rounded-md p-2">
+                                <option>All</option>
+                                <option>New</option>
+                                <option>Used</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Sales Method</h3>
+                            <select class="w-full border border-gray-300 rounded-md p-2">
+                                <option>All</option>
+                                <option>Auction</option>
+                                <option>Fixed Price</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Industry</h3>
+                            <select class="w-full border border-gray-300 rounded-md p-2">
+                                <option>All</option>
+                                <option>Construction</option>
+                                <option>Mining</option>
+                                <option>Agriculture</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Availability</h3>
+                            <select class="w-full border border-gray-300 rounded-md p-2">
+                                <option>All</option>
+                                <option>In Stock</option>
+                                <option>Coming Soon</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Category</h3>
+                            <select class="w-full border border-gray-300 rounded-md p-2">
+                                 <option>All</option>
+                                 <option>Excavators</option>
+                                 <option>Loaders</option>
+                                 <option>Bulldozers</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Equipment Type</h3>
+                            <select class="w-full border border-gray-300 rounded-md p-2">
+                                <option>All</option>
+                                <option>Crawler Excavators</option>
+                                <option>Mini Excavators</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Brand</h3>
+                            <select class="w-full border border-gray-300 rounded-md p-2">
+                                <option>All</option>
+                                <option>Kobelco</option>
+                                <option>Caterpillar</option>
+                                <option>Komatsu</option>
+                            </select>
+                        </div>
+                         <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Model</h3>
+                            <select class="w-full border border-gray-300 rounded-md p-2">
+                                <option>All</option>
+                                <option>SK850LC</option>
+                                 <option>SK210LC</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Price (USD)</h3>
+                            <div class="flex space-x-2">
+                                <input type="number" placeholder="Min" class="w-1/2 border border-gray-300 rounded-md p-2">
+                                <input type="number" placeholder="Max" class="w-1/2 border border-gray-300 rounded-md p-2">
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-600 mb-2">Year of Manufacture</h3>
+                             <div class="flex space-x-2">
+                                <input type="number" placeholder="From" class="w-1/2 border border-gray-300 rounded-md p-2">
+                                <input type="number" placeholder="To" class="w-1/2 border border-gray-300 rounded-md p-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-listing md:col-span-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="product-card">
+                        <img src="img/all-1.webp" alt="Equipment 1">
+                        <span class="for-sale-tag">For Sale</span>
+                        <span class="condition-tag">New</span>
+                        <h3>2025 Kobelco SK850LC Track...</h3>
+                        <p>0 hrs | 81,700 kg | 490 hp</p>
+                        <p>Get more info about availability, price and delivery</p>
+                        <a href="#" class="details-link">View Details</a>
+                        <span class="favorite-icon">&#9825;</span>
+                        <p class="ref-number">Ref. No. AMH007</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="img/all-2.webp" alt="Equipment 2">
+                         <span class="for-sale-tag">For Sale</span>
+                        <span class="condition-tag used">Used</span>
+                        <h3>2024 Caterpillar D8K Dozer</h3>
+                        <p>5,285 hrs | 29,484 kg | 300 hp</p>
+                        <p>Used Caterpillar D8K for sale.  Good condition.</p>
+                        <a href="#" class="details-link">View Details</a>
+                        <span class="favorite-icon">&#9825;</span>
+                        <p class="ref-number">Ref. No. AMH008</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="img/all-3.webp" alt="Equipment 3">
+                        <span class="for-sale-tag">For Sale</span>
+                        <span class="condition-tag">New</span>
+                        <h3>2025 Komatsu WA600-8 Loader</h3>
+                        <p>10 hrs | 31,650 kg | 356 hp</p>
+                        <p>Brand new Komatsu loader.  Available now.</p>
+                        <a href="#" class="details-link">View Details</a>
+                        <span class="favorite-icon">&#9825;</span>
+                        <p class="ref-number">Ref. No. AMH009</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="img/all-4.webp" alt="Equipment 3">
+                        <span class="for-sale-tag">For Sale</span>
+                        <span class="condition-tag">New</span>
+                        <h3>2025 Komatsu WA600-8 Loader</h3>
+                        <p>10 hrs | 31,650 kg | 356 hp</p>
+                        <p>Brand new Komatsu loader.  Available now.</p>
+                        <a href="#" class="details-link">View Details</a>
+                        <span class="favorite-icon">&#9825;</span>
+                        <p class="ref-number">Ref. No. AMH009</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="img/all-5.webp" alt="Equipment 3">
+                        <span class="for-sale-tag">For Sale</span>
+                        <span class="condition-tag">New</span>
+                        <h3>2025 Komatsu WA600-8 Loader</h3>
+                        <p>10 hrs | 31,650 kg | 356 hp</p>
+                        <p>Brand new Komatsu loader.  Available now.</p>
+                        <a href="#" class="details-link">View Details</a>
+                        <span class="favorite-icon">&#9825;</span>
+                        <p class="ref-number">Ref. No. AMH009</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="img/all-6.png" alt="Equipment 3">
+                        <span class="for-sale-tag">For Sale</span>
+                        <span class="condition-tag">New</span>
+                        <h3>2025 Komatsu WA600-8 Loader</h3>
+                        <p>10 hrs | 31,650 kg | 356 hp</p>
+                        <p>Brand new Komatsu loader.  Available now.</p>
+                        <a href="#" class="details-link">View Details</a>
+                        <span class="favorite-icon">&#9825;</span>
+                        <p class="ref-number">Ref. No. AMH009</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="img/all-7.webp" alt="Equipment 3">
+                        <span class="for-sale-tag">For Sale</span>
+                        <span class="condition-tag">New</span>
+                        <h3>2025 Komatsu WA600-8 Loader</h3>
+                        <p>10 hrs | 31,650 kg | 356 hp</p>
+                        <p>Brand new Komatsu loader.  Available now.</p>
+                        <a href="#" class="details-link">View Details</a>
+                        <span class="favorite-icon">&#9825;</span>
+                        <p class="ref-number">Ref. No. AMH009</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="img/all-8.webp" alt="Equipment 3">
+                        <span class="for-sale-tag">For Sale</span>
+                        <span class="condition-tag">New</span>
+                        <h3>2025 Komatsu WA600-8 Loader</h3>
+                        <p>10 hrs | 31,650 kg | 356 hp</p>
+                        <p>Brand new Komatsu loader.  Available now.</p>
+                        <a href="#" class="details-link">View Details</a>
+                        <span class="favorite-icon">&#9825;</span>
+                        <p class="ref-number">Ref. No. AMH009</p>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // You can add JavaScript here for interactive features,
+        // such as filtering, sorting, or handling the favorite icon click.
+
+        // Example:  Favorite icon click handler
+        document.querySelectorAll('.favorite-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                if (this.innerHTML === '♥') {
+                    this.innerHTML = '&#9825;'; // Change to empty heart
+                } else {
+                    this.innerHTML = '♥'; // Change to filled heart
+                }
+                //  You would also likely want to send an update to a server here
+                //  to save the user's favorite.
+                console.log('Favorite clicked!');
+            });
+        });
+    </script>
+</body>
+</html>

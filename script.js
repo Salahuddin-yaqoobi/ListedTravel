@@ -36,4 +36,32 @@ $(document).ready(function () {
       });
     });
   });
-  
+
+  document.querySelectorAll('.exploreInventoryBtn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault(); // Stop normal link behavior
+
+        // Hide the route-area (your slider section)
+        const routeArea = document.querySelector('.route-area');
+        if (routeArea) {
+            routeArea.style.display = 'none'; // ✅ move this inside the if block
+        }
+
+        // Now load the product page into a container
+        fetch('product.html')
+            .then(response => response.text())
+            .then(data => {
+                // Where to inject the products
+                const container = document.getElementById('dynamicContent');
+                if (container) { // ✅ Always check if container exists
+                    container.innerHTML = data;
+                    window.scrollTo(0, 0); // Scroll to top
+                } else {
+                    console.error('Container with id dynamicContent not found!');
+                }
+            })
+            .catch(error => console.error('Error loading product page:', error));
+    });
+});
+
+
