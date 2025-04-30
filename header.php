@@ -5,7 +5,7 @@ if(!isset($_SESSION['username'])){
     header("Location: http://localhost/fancyshop/admin/");
     exit();
 }
-var_dump($_SESSION);
+// var_dump($_SESSION);
 //in this way i directly does not log in through the url
 ?>
 
@@ -33,7 +33,7 @@ var_dump($_SESSION);
                 <div class="row">
                     <!-- LOGO -->
                     <div class="col-md-2">
-                        <a href="post.php"><img src="../img/logo.png" class="logo"></a>
+                        <a href="post.php"><img src="img/logo.png" class="logo"></a>
                     </div>
                     <!-- /LOGO -->
                       <!-- LOGO-Out -->
@@ -57,12 +57,6 @@ var_dump($_SESSION);
                             <?php 
                             if($_SESSION['role'] == '1'){
                             ?>
-                            <li>
-                                <a href="category.php">Category</a>
-                            </li>
-                            <li>
-                                <a href="users.php">Users</a>
-                            </li>
                             <?php }?>
                         </ul>
                     </div>

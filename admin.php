@@ -1,9 +1,9 @@
 <?php
-// session_start();
-// if(isset($_SESSION['username'])){
-//     header("Location: http://localhost/fancyshop/post.php");
-//     exit();
-// }
+session_start();
+if(isset($_SESSION['username'])){
+    header("Location: http://localhost/fancyshop/post.php");
+    exit();
+}
 ?>
 <!doctype html>
 <html lang="en">

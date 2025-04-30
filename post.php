@@ -1,9 +1,9 @@
 <?php include "header.php";
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: http://localhost/fancyshop/admin.php"); // Redirect to login page if not logged in
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['username'])) {
+//     header("Location: http://localhost/fancyshop/admin.php"); // Redirect to login page if not logged in
+//     exit();
+// }
 
 ?>
 <?php 
