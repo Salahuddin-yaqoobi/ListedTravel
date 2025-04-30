@@ -157,7 +157,7 @@
 				<li><a href="rent.html" style="color: #111827; text-decoration: none;">For Rent</a></li>
 				<li><a href="shop.html" style="color: #111827; text-decoration: none;">New for Sale</a></li>
 				<li><a href="used-products.html" style="color: #111827; text-decoration: none;">Used for Sale</a></li>
-				<li><a href="brands.html" style="color: #111827; text-decoration: none;">Brands</a></li>
+				<li><a href="admin.php" style="color: #111827; text-decoration: none;">Admin panel</a></li>
 				<li><a href="#" onclick="openSidebar()" style="color: #111827; text-decoration: none;">Contact</a></li>
 			  </ul>
 			</nav>
