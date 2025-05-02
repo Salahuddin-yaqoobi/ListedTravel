@@ -1,35 +1,38 @@
 <?php
 include "config.php";
+
 $hostname = "http://localhost/fancyshop";
 
 if (isset($_GET['id'])) {
-    $post_id = intval($_GET['id']);  // Secure post ID
+    $post_id = intval($_GET['id']);
 
-    // Get post image filename
-    $sql1 = "SELECT post_img FROM post WHERE post_id = {$post_id}";
-    $result = mysqli_query($conn, $sql1) or die("Query Failed: Select post image");
+    // Step 1: Fetch image name from DB
+    $sql = "SELECT post_img FROM post WHERE post_id = {$post_id}";
+    $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $image_path = "uploads/" . $row['post_img'];
+        $image_name = basename($row['post_img']); // Clean file name
 
-        // Delete the image file if it exists
-        if (file_exists($image_path) && !empty($row['post_img'])) {
+        // Step 2: Build full path
+        $image_path = $_SERVER['DOCUMENT_ROOT'] . "/fancyshop/uploads/" . $image_name;
+
+        // Step 3: Delete image if it exists
+        if (file_exists($image_path)) {
             unlink($image_path);
         }
 
-        // Delete the post from the database
-        $sql = "DELETE FROM post WHERE post_id = {$post_id}";
-        if (mysqli_query($conn, $sql)) {
-            header("Location: {$hostname}/post.php");
-            exit();
-        } else {
-            echo "Error deleting post.";
-        }
-    } else {
-        echo "Post not found.";
+        // Step 4: Delete post from DB
+        $delete_sql = "DELETE FROM post WHERE post_id = {$post_id}";
+        mysqli_query($conn, $delete_sql);
     }
+    
+    // Redirect after deletion
+    header("Location: {$hostname}/post.php");
+    exit();
 } else {
-    echo "Invalid request.";
+    // Invalid request, redirect anyway
+    header("Location: {$hostname}/post.php");
+    exit();
 }
 ?>
