@@ -1,7 +1,7 @@
 <?php include "header.php"; ?>
 <?php 
 include "config.php";
-$limit = 3;
+$limit = 10;
 
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
@@ -43,6 +43,7 @@ $result = mysqli_query($conn , $sql) or die("Query failed");
           <tbody>
           <?php
             if (mysqli_num_rows($result) > 0) {
+                $serialNo = $offset + 1; // Start serial number for the current page
                 while ($row = mysqli_fetch_assoc($result)) {
                     $imagePath = $row['post_img'];
                     if (strpos($imagePath, 'uploads/') === 0) {
@@ -50,7 +51,7 @@ $result = mysqli_query($conn , $sql) or die("Query failed");
                     }
           ?>
             <tr>
-              <td><?php echo $row['post_id']; ?></td>
+              <td><?php echo $serialNo++; ?></td>  <!-- Updated serial number -->
               <td><?php echo $row['title']; ?></td>
               <td><?php echo $row['category']; ?></td>
               <td><?php echo $row['post_date']; ?></td>
@@ -72,6 +73,7 @@ $result = mysqli_query($conn , $sql) or die("Query failed");
               $total_page = ceil($total_records / $limit);
 
               echo "<ul class='pagination admin-pagination'>";
+
               if ($page > 1) {
                   echo '<li><a href="post.php?page=' . ($page - 1) . '">Prev</a></li>';
               }

@@ -2,31 +2,29 @@
 include "config.php";
 $hostname = "http://localhost/fancyshop";
 
-if(isset($_GET['id']) && isset($_GET['catid'])){
-    $post_id = intval($_GET['id']);  // Secure ID
-    $cat_id = intval($_GET['catid']);  // Secure Category ID
+if (isset($_GET['id'])) {
+    $post_id = intval($_GET['id']);  // Secure post ID
 
-    // Fetch post details before deletion
+    // Get post image filename
     $sql1 = "SELECT post_img FROM post WHERE post_id = {$post_id}";
-    $result = mysqli_query($conn, $sql1) or die("Query Failed : Select");
+    $result = mysqli_query($conn, $sql1) or die("Query Failed: Select post image");
 
-    if(mysqli_num_rows($result) > 0){
+    if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $image_path = "upload/" . $row['post_img'];
+        $image_path = "uploads/" . $row['post_img'];
 
-        // Check if file exists before deleting
-        if(file_exists($image_path) && !empty($row['post_img'])){
+        // Delete the image file if it exists
+        if (file_exists($image_path) && !empty($row['post_img'])) {
             unlink($image_path);
         }
 
-        // Delete post and update category count
-        $sql = "DELETE FROM post WHERE post_id = {$post_id};";
-        $sql .= "UPDATE category SET post = post - 1 WHERE category_id = {$cat_id}";
-
-        if(mysqli_multi_query($conn, $sql)){
+        // Delete the post from the database
+        $sql = "DELETE FROM post WHERE post_id = {$post_id}";
+        if (mysqli_query($conn, $sql)) {
             header("Location: {$hostname}/post.php");
+            exit();
         } else {
-            echo "Query Failed";
+            echo "Error deleting post.";
         }
     } else {
         echo "Post not found.";
@@ -34,20 +32,4 @@ if(isset($_GET['id']) && isset($_GET['catid'])){
 } else {
     echo "Invalid request.";
 }
-
-?>
-<?php
-// include "config.php";
-
-// // Debugging: Print GET variables
-// echo "Post ID: " . $_GET['id'] . "<br>";
-// echo "Category ID: " . $_GET['catid'] . "<br>";
-
-// if(isset($_GET['id']) && isset($_GET['catid'])){
-//     $post_id = intval($_GET['id']);  
-//     $cat_id = intval($_GET['catid']);  
-
-//     echo "Post ID after sanitization: " . $post_id . "<br>";
-//     echo "Category ID after sanitization: " . $cat_id . "<br>";
-// }
 ?>

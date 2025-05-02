@@ -23,27 +23,33 @@
       </div>
       <div class="col-md-offset-3 col-md-6">
           <form action="save-post.php" method="POST" enctype="multipart/form-data" autocomplete="off">
-              <div class="form-group">
-                  <input type="hidden" name="post_id" value="<?php echo $row['post_id']; ?>">
-              </div>
+              <input type="hidden" name="post_id" value="<?php echo $row['post_id']; ?>">
+
               <div class="form-group">
                   <label for="exampleInputTitle">Title</label>
-                  <input type="text" name="post_title" class="form-control" value="<?php echo $row['title']; ?>">
+                  <input type="text" name="post_title" class="form-control" value="<?php echo $row['title']; ?>" required>
               </div>
+
               <div class="form-group">
                   <label for="exampleInputDescription">Description</label>
-                  <textarea name="postdesc" class="form-control" rows="5"><?php echo $row['description']; ?></textarea>
+                  <textarea name="postdesc" class="form-control" rows="5" required><?php echo $row['description']; ?></textarea>
               </div>
+
               <div class="form-group">
                   <label for="exampleInputCategory">Category</label>
-                  <input type="text" name="category" class="form-control" value="<?php echo $row['category']; ?>">
+                  <select name="category" class="form-control" required>
+                      <option value="For Rent" <?php if($row['category'] == 'For Rent') echo 'selected'; ?>>For Rent</option>
+                      <option value="For Sale" <?php if($row['category'] == 'For Sale') echo 'selected'; ?>>For Sale</option>
+                  </select>
               </div>
+
               <div class="form-group">
                   <label for="">Post image</label>
                   <input type="file" name="new-image">
                   <img src="uploads/<?php echo $row['post_img']; ?>" height="150px" alt="Post Image">
                   <input type="hidden" name="old-image" value="<?php echo $row['post_img']; ?>">
               </div>
+
               <input type="submit" name="submit" class="btn btn-primary" value="Update" />
           </form>
       </div>

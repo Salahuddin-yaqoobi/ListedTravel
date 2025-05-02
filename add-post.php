@@ -21,19 +21,12 @@ include "header.php";
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Category</label>
-                        <select name="category" class="form-control">
-                            <option disabled selected>Select Category</option>
-                            <?php
-                            include "config.php";
-                            $sql = "SELECT * FROM category";
-                            $result = mysqli_query($conn, $sql) or die("Query Failed");
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<option value='{$row['category_id']}'>{$row['category_name']}</option>";
-                                }
-                            }
-                            ?>
+                        <select name="category" class="form-control" required>
+                           <option disabled selected>Select Category</option>
+                           <option value="For Rent">For Rent</option>
+                           <option value="For Sale">For Sale</option>
                         </select>
+
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Post image</label>
@@ -70,8 +63,8 @@ if (isset($_POST['submit'])) {
     $author = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0; // 0 if not logged in (fail-safe)
     date_default_timezone_set('Asia/Karachi');
     $date = date('d M, Y');
-    $sql = "INSERT INTO post (title, description, category, author, post_img, post_date)
-    VALUES ('$post_title', '$postdesc', '$category', '$author', '$target_file', '$date')";
+    $sql = "INSERT INTO post (title, description, category, post_img, post_date)
+    VALUES ('$post_title', '$postdesc', '$category', '$target_file', '$date')";    
 
 
     if (mysqli_query($conn, $sql)) {
