@@ -13,19 +13,29 @@ if (isset($_POST['submit'])) {
         $parts = explode('.', $file_name);
         $file_ext = strtolower(end($parts));
 
-        $extensions = array("jpg", "jpeg", "png");
+        $extensions = array("jpg", "jpeg", "png", "webp");
 
         if (!in_array($file_ext, $extensions)) {
-            $error[] = "This extension is not allowed. Please choose a JPG, JPEG, or PNG file.";
+            $error[] = "This extension is not allowed. Please choose a JPG, JPEG, PNG, or WEBP file.";
         }
 
-        if ($file_size > 2097152) {
+        if ($file_size > 2097152) { // File size check: limit to 2MB
             $error[] = "File size must be 2MB or lower.";
         }
 
         if (empty($error)) {
+            // If updating an existing post, delete the old image
+            if (isset($_POST['old-image']) && !empty($_POST['old-image'])) {
+                $old_image_path = $_POST['old-image'];
+                if (file_exists($old_image_path)) {
+                    unlink($old_image_path);  // Delete old image if exists
+                }
+            }
+
+            // Move the new image to the uploads directory
             move_uploaded_file($file_tmp, "uploads/" . $file_name);
         } else {
+            // Handle errors
             print_r($error);
             die();
         }
@@ -34,7 +44,8 @@ if (isset($_POST['submit'])) {
         if (isset($_POST['old-image']) && !empty($_POST['old-image'])) {
             $file_name = $_POST['old-image'];
         } else {
-            echo "<div class='alert alert-danger'>No image provided.</div>";
+            // If no image provided, throw an error
+            echo "<div class='alert alert-danger'>No image provided. Please upload an image.</div>";
             die();
         }
     }
@@ -57,13 +68,16 @@ if (isset($_POST['submit'])) {
                 WHERE post_id = {$post_id}";
 
         if (mysqli_query($conn, $sql)) {
+            // Redirect to posts page
             header("Location: post.php");
             exit;
         } else {
+            // Query failed, show error message
             echo "<div class='alert alert-danger'>Query Failed: " . mysqli_error($conn) . "</div>";
             die();
         }
     } else {
+        // If form data is missing
         echo "<div class='alert alert-danger'>Form data missing.</div>";
         die();
     } 

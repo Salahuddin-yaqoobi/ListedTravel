@@ -24,6 +24,7 @@
       <div class="col-md-offset-3 col-md-6">
           <form action="save-post.php" method="POST" enctype="multipart/form-data" autocomplete="off">
               <input type="hidden" name="post_id" value="<?php echo $row['post_id']; ?>">
+              <input type="hidden" name="old-image" value="<?php echo $row['post_img']; ?>">
 
               <div class="form-group">
                   <label for="exampleInputTitle">Title</label>
@@ -45,9 +46,10 @@
 
               <div class="form-group">
                   <label for="">Post image</label>
-                  <input type="file" name="new-image">
-                  <img src="uploads/<?php echo $row['post_img']; ?>" height="150px" alt="Post Image">
-                  <input type="hidden" name="old-image" value="<?php echo $row['post_img']; ?>">
+                  <input type="file" name="new-image" id="imageInput" onchange="previewImage(event)">
+                  <br>
+                  <!-- Image preview section -->
+                  <img id="imagePreview" src="<?php echo $row['post_img']; ?>" height="150px" alt="Post Image" style="display: block; margin-top: 10px;">
               </div>
 
               <input type="submit" name="submit" class="btn btn-primary" value="Update" />
@@ -57,3 +59,15 @@
   </div>
 </div>
 <?php include "footer.php"; ?>
+
+<script>
+  // Function to show image preview when the file is selected
+  function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function(){
+          var output = document.getElementById('imagePreview');
+          output.src = reader.result;  // Update image preview with selected file
+      };
+      reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
