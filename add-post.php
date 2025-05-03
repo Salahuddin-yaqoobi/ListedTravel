@@ -26,8 +26,11 @@ include "header.php";
                            <option value="For Rent">For Rent</option>
                            <option value="For Sale">For Sale</option>
                         </select>
-
                     </div>
+
+                    <!-- Dynamic fields based on category selection -->
+                    <div id="dynamic-fields"></div> <!-- Placeholder for dynamic fields -->
+
                     <div class="form-group">
                         <label for="exampleInputPassword1">Post image</label>
                         <input type="file" name="fileToUpload" required>
@@ -59,21 +62,67 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    // ✅ Get author from session
-    $author = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0; // 0 if not logged in (fail-safe)
+    // Price and duration logic based on category
+    if ($category == 'For Rent') {
+        $price = $_POST['price'];
+        $duration = $_POST['duration'] ? $_POST['duration'] : null; // Set to null if duration is not selected
+    } elseif ($category == 'For Sale') {
+        $price = $_POST['price'];
+        $duration = null; // Not applicable for 'For Sale'
+    }
+
+    // Date logic
     date_default_timezone_set('Asia/Karachi');
     $date = date('d M, Y');
-    $sql = "INSERT INTO post (title, description, category, post_img, post_date)
-    VALUES ('$post_title', '$postdesc', '$category', '$target_file', '$date')";    
 
+    // Insert query (No author field)
+    $sql = "INSERT INTO post (title, description, category, post_img, post_date, price, duration)
+    VALUES ('$post_title', '$postdesc', '$category', '$target_file', '$date', '$price', '$duration')";    
 
     if (mysqli_query($conn, $sql)) {
-        header("Location: http://localhost/fancyshop/post.php");
+        header("Location: post.php");
         exit();
     } else {
         echo "Error: " . mysqli_error($conn);
     }
 }
 ?>
+
+<script>
+  // JavaScript to dynamically show fields based on category selection
+  const categorySelect = document.querySelector('select[name="category"]');
+  const dynamicFields = document.getElementById('dynamic-fields');
+
+  categorySelect.addEventListener('change', function() {
+    const category = this.value;
+    dynamicFields.innerHTML = ''; // Clear any existing fields
+
+    if (category === 'For Rent') {
+      // Show price and duration fields with default null value for duration
+      dynamicFields.innerHTML = `
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" name="price" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="duration">Duration</label>
+          <select name="duration" class="form-control">
+            <option value="" selected>Choose Duration</option> <!-- Default to null -->
+            <option value="per_day">Per Day</option>
+            <option value="per_month">Per Month</option>
+          </select>
+        </div>
+      `;
+    } else if (category === 'For Sale') {
+      // Show price field only for "For Sale"
+      dynamicFields.innerHTML = `
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" name="price" class="form-control" required>
+        </div>
+      `;
+    }
+  });
+</script>
 
 <?php include "footer.php"; ?>

@@ -38,9 +38,24 @@
 
               <div class="form-group">
                   <label for="exampleInputCategory">Category</label>
-                  <select name="category" class="form-control" required>
+                  <select name="category" class="form-control" id="category" required>
                       <option value="For Rent" <?php if($row['category'] == 'For Rent') echo 'selected'; ?>>For Rent</option>
                       <option value="For Sale" <?php if($row['category'] == 'For Sale') echo 'selected'; ?>>For Sale</option>
+                  </select>
+              </div>
+
+              <!-- Price Field -->
+              <div class="form-group" id="price-group">
+                  <label for="price">Price</label>
+                  <input type="number" name="price" class="form-control" value="<?php echo $row['price']; ?>" required>
+              </div>
+
+              <!-- Duration Field for For Rent Category -->
+              <div class="form-group" id="duration-group" style="display: <?php echo ($row['category'] == 'For Rent' ? 'block' : 'none'); ?>;">
+                  <label for="duration">Duration</label>
+                  <select name="duration" class="form-control">
+                      <option value="per day" <?php if($row['duration'] == 'per day') echo 'selected'; ?>>Per Day</option>
+                      <option value="per month" <?php if($row['duration'] == 'per month') echo 'selected'; ?>>Per Month</option>
                   </select>
               </div>
 
@@ -70,4 +85,24 @@
       };
       reader.readAsDataURL(event.target.files[0]);
   }
+
+  // Show/hide duration field based on category selection
+  document.getElementById('category').addEventListener('change', function() {
+      var category = this.value;
+      if (category === 'For Rent') {
+          document.getElementById('duration-group').style.display = 'block';
+      } else {
+          document.getElementById('duration-group').style.display = 'none';
+      }
+  });
+
+  // Initialize category selection
+  window.onload = function() {
+      var category = document.getElementById('category').value;
+      if (category === 'For Rent') {
+          document.getElementById('duration-group').style.display = 'block';
+      } else {
+          document.getElementById('duration-group').style.display = 'none';
+      }
+  };
 </script>

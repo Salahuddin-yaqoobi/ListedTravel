@@ -51,11 +51,13 @@ if (isset($_POST['submit'])) {
     }
 
     // Sanitize and retrieve other POST data
-    if (isset($_POST['post_id'], $_POST['post_title'], $_POST['postdesc'], $_POST['category'])) {
+    if (isset($_POST['post_id'], $_POST['post_title'], $_POST['postdesc'], $_POST['category'], $_POST['price'])) {
         $post_id = mysqli_real_escape_string($conn, $_POST['post_id']);
         $title = mysqli_real_escape_string($conn, $_POST['post_title']);
         $description = mysqli_real_escape_string($conn, $_POST['postdesc']);
         $category = mysqli_real_escape_string($conn, $_POST['category']);
+        $price = mysqli_real_escape_string($conn, $_POST['price']);
+        $duration = isset($_POST['duration']) ? mysqli_real_escape_string($conn, $_POST['duration']) : ''; // If duration exists
         $date = date("d M, Y");
 
         // Update the post
@@ -63,6 +65,8 @@ if (isset($_POST['submit'])) {
                 SET title = '{$title}', 
                     description = '{$description}', 
                     category = '{$category}', 
+                    price = '{$price}', 
+                    duration = '{$duration}', 
                     post_date = '{$date}', 
                     post_img = '{$file_name}' 
                 WHERE post_id = {$post_id}";
