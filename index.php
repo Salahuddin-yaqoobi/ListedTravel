@@ -154,7 +154,7 @@
 			<nav style="background-color: #f9fafb; border-top: 1px solid #e5e7eb;">
 			  <ul style="display: flex; justify-content: center; align-items: center; gap: 40px; padding: 12px 0; margin: 0; list-style: none; font-weight: 500; font-size: 16px;">
 				<li><a href="index.html" style="color: #111827; text-decoration: none;">Home</a></li>
-				<li><a href="rent.html" style="color: #111827; text-decoration: none;">For Rent</a></li>
+				<li><a href="rent.php" style="color: #111827; text-decoration: none;">For Rent</a></li>
 				<li><a href="shop.html" style="color: #111827; text-decoration: none;">New for Sale</a></li>
 				<li><a href="used-products.html" style="color: #111827; text-decoration: none;">Used for Sale</a></li>
 				<li><a href="admin.php" style="color: #111827; text-decoration: none;">Admin panel</a></li>
