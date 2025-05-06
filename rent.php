@@ -140,8 +140,7 @@
 			  </ul>
 			</nav>
 		  </header>
-		<!--  End Header  -->
-		
+		<!--  End Header  -->		
 
 		<!-- Page item Area -->
 		<div id="page_item_area">
@@ -163,11 +162,10 @@
 					
 				</div>
 			</div>
-		</div>
-		
+		</div>		
 		
 <!-- Shop Product Area -->
-<div class="shop_page_area">
+        <div class="shop_page_area">
     <div class="container">
         <!-- Shop Bar -->
         <div class="shop_bar_tp fix mb-4">
@@ -196,77 +194,77 @@
             </div>
         </div>
 
-        <!-- Shop Product Display -->
-        <div class="shop_details text-center">
-            <div class="row">
-                <?php
-                include 'config.php';
+			<!-- Shop Product Display -->
+			<div class="shop_details text-center">
+				<div class="row">
+					<?php
+					include 'config.php';
 
-                $sort = $_GET['sort'] ?? 'name_desc';
-                $limit = $_GET['limit'] ?? 8;
+					$sort = $_GET['sort'] ?? 'name_desc';
+					$limit = $_GET['limit'] ?? 8;
 
-                // Sorting Logic: Order by the most recent post
-                switch ($sort) {
-                    case 'price_asc':
-                        $order_by = "ORDER BY price ASC"; // Sort by price ascending
-                        break;
-                    case 'price_desc':
-                        $order_by = "ORDER BY price DESC"; // Sort by price descending
-                        break;
-                    case 'date_asc':
-                        $order_by = "ORDER BY post_date ASC"; // Sort by date ascending
-                        break;
-                    case 'date_desc':
-                        $order_by = "ORDER BY post_date DESC"; // Sort by date descending
-                        break;
-                    case 'name_asc':
-                        $order_by = "ORDER BY title ASC"; // Sort by name ascending
-                        break;
-                    case 'name_desc':
-                    default:
-                        $order_by = "ORDER BY title DESC"; // Sort by name descending
-                        break;
-                }
+					// Sorting Logic: Order by the most recent post
+					switch ($sort) {
+						case 'price_asc':
+							$order_by = "ORDER BY price ASC"; // Sort by price ascending
+							break;
+						case 'price_desc':
+							$order_by = "ORDER BY price DESC"; // Sort by price descending
+							break;
+						case 'date_asc':
+							$order_by = "ORDER BY post_date ASC"; // Sort by date ascending
+							break;
+						case 'date_desc':
+							$order_by = "ORDER BY post_date DESC"; // Sort by date descending
+							break;
+						case 'name_asc':
+							$order_by = "ORDER BY title ASC"; // Sort by name ascending
+							break;
+						case 'name_desc':
+						default:
+							$order_by = "ORDER BY title DESC"; // Sort by name descending
+							break;
+					}
 
-                // Pagination Logic
-                $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-                $limit = 12; // Limit to 3 products per page
-                $offset = ($page - 1) * $limit;
+					// Pagination Logic
+					$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+					$limit = 12; // Limit to 3 products per page
+					$offset = ($page - 1) * $limit;
 
-                // Query for fetching products with limit and offset
-                $query = "SELECT * FROM post $order_by LIMIT $limit OFFSET $offset";
-                $result = mysqli_query($conn, $query);
+					// Query for fetching products with limit and offset
+					$query = "SELECT * FROM post $order_by LIMIT $limit OFFSET $offset";
+					$result = mysqli_query($conn, $query);
 
-                // Check if the query executed successfully
-                if (!$result) {
-                    echo "Error executing query: " . mysqli_error($conn);
-                } else {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $title = htmlspecialchars($row['title'] ?? 'Untitled');
-                        $price = htmlspecialchars($row['price'] ?? '0');
-                        $description = htmlspecialchars($row['description'] ?? 'No description available.');
-                        $image = !empty($row['post_img']) ?  $row['post_img'] : 'img/top-1.jpg';  
-                ?>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
-                        <div class="single_product">
-                            <div class="product_image">
-                                <img src="<?= $image ?>" alt="<?= $title ?>" class="img-fluid product-img" />
-                            </div>
-                            <div class="product_btm_text">
-                                <span class="product_category"><?= htmlspecialchars($row['category']) ?></span>
-                                <h4><a href="#"><?= $title ?></a></h4>
-                                <span class="price">$<?= $price ?></span>
-                                <p class="product_description"><?= $description ?></p>
-                                <a href="#" class="read_more">Read More <i class="fa fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                <?php 
-                    }
-                }
-                ?>
-            </div>
-        </div>
+					// Check if the query executed successfully
+					if (!$result) {
+						echo "Error executing query: " . mysqli_error($conn);
+					} else {
+						while ($row = mysqli_fetch_assoc($result)) {
+							$title = htmlspecialchars($row['title'] ?? 'Untitled');
+							$price = htmlspecialchars($row['price'] ?? '0');
+							$description = htmlspecialchars($row['description'] ?? 'No description available.');
+							$image = !empty($row['post_img']) ?  $row['post_img'] : 'img/top-1.jpg';  
+					?>
+						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
+							<div class="single_product">
+								<div class="product_image">
+									<img src="<?= $image ?>" alt="<?= $title ?>" class="img-fluid product-img" />
+								</div>
+								<div class="product_btm_text">
+									<span class="product_category"><?= htmlspecialchars($row['category']) ?></span>
+									<h4><a href="#"><?= $title ?></a></h4>
+									<span class="price">$<?= $price ?></span>
+									<p class="product_description"><?= $description ?></p>
+									<a href="product-details.php?post_id=<?= $row['post_id'] ?>" class="read_more">Read More <i class="fa fa-arrow-right"></i></a>
+									</div>
+							</div>
+						</div>
+					<?php 
+						}
+					}
+					?>
+				</div>
+			</div>
 
         <!-- Blog Pagination -->
         <div class="col-xs-12">
@@ -303,7 +301,7 @@
         </div>
 
     </div>
-</div>
+        </div>
 
 
 
@@ -495,12 +493,6 @@
     }
 }
 </style>
-
-
-
-
-
-
 
 		<!--  FOOTER START  -->
 		<footer class="footer_area">
