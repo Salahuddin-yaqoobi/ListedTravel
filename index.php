@@ -150,7 +150,7 @@
   <ul style="display: flex; align-items: center; gap: 24px; margin: 0; padding: 0; list-style: none; font-weight: 600; font-size: 16px;">
     <li><a href="index.html" style="color: #ffffff; text-decoration: none; position: relative;">Home</a></li>
     <li><a href="rent.php" style="color: #ffffff; text-decoration: none; position: relative;">For Rent</a></li>
-    <li><a href="shop.html" style="color: #ffffff; text-decoration: none; position: relative;">New for Sale</a></li>
+    <li><a href="product.html" style="color: #ffffff; text-decoration: none; position: relative;">New for Sale</a></li>
 
     <!-- Uncomment for future use -->
     <!-- <li><a href="used-products.html" style="color: #ffffff; text-decoration: none; position: relative;">Used for Sale</a></li>
@@ -972,9 +972,9 @@
 						<div class="single_ftr">
 							<h4 class="sf_title">Contacts</h4>
 							<ul>
-								<li>4060 Reppert Coal Road Jackson, MS 39201 USA</li>
-								<li>(+123) 685 78 <br> (+064) 987 245</li>
-								<li>Contact@yourcompany.com</li>
+								<li>Jarn Yafour, Mafraq Industrial AreaAbu Dhabi, UAE</li>
+								<li>058-9948428 <br> 055-8118758</li>
+								<li>listed.transport@yahoo.com <br> listedgeneraltransport@gmail.com </li>
 							</ul>
 						</div>
 					</div> <!--  End Col -->
@@ -1138,6 +1138,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const filterButtons = document.querySelectorAll('.product_filter .filter');

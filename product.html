@@ -1,292 +1,589 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heavy Equipment Marketplace</title>
-    
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-        .product-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 20px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .product-card img {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            aspect-ratio: 16/9; /* Maintain image aspect ratio */
-            object-fit: cover;
-        }
-        .product-card h3 {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-            color: #333;
-        }
-        .product-card p {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        .product-card .details-link {
-            color: #0078d7;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-        .product-card .details-link:hover {
-            text-decoration: underline;
-        }
-        .product-card .favorite-icon {
-            float: right;
-            font-size: 1.2em;
-            color: #888;
-            cursor: pointer;
-        }
-        .product-card .favorite-icon:hover {
-            color: #e53e3e; /* Change color on hover, e.g., to red */
-        }
-        .product-card .ref-number {
-            font-size: 0.8em;
-            color: #888;
-            margin-top: 10px;
-        }
-
-        .for-sale-tag {
-            background-color: #f0c300; /* Example yellow color */
-            color: #1a202c;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-bottom: 8px;
-            display: inline-block;
-        }
-
-        .condition-tag {
-            background-color: #48bb78;  /* Example green for "New" */
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-right: 8px;
-            display: inline-block;
-        }
-        .condition-tag.used {
-            background-color: #a0aec0; /* Example gray for "Used" */
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"/> 
+	<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">	
+	<link rel="stylesheet" href="css/animate.css" />
+	<link rel="stylesheet" href="css/owl.theme.default.min.css" />
+	<link rel="stylesheet" href="css/owl.carousel.min.css" />
+	<link rel="stylesheet" href="css/meanmenu.min.css" />
+	<link rel="stylesheet" href="css/venobox.css" />
+	<link rel="stylesheet" href="css/font-awesome.css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" />	
+	<link rel="stylesheet" href="style.css?v=123" />
+	<link rel="stylesheet" href="css/responsive.css" />	
+  <title>Heavy Equipment Marketplace</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    .product-card .favorite-icon {
+      float: right;
+      font-size: 1.2em;
+      color: #888;
+      cursor: pointer;
+    }
+    .product-card .favorite-icon:hover {
+      color: #e53e3e;
+    }
+    .for-sale-tag {
+      background-color: #f0c300;
+      color: #1a202c;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+    .condition-tag {
+      background-color: #48bb78;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+    .condition-tag.used {
+      background-color: #a0aec0;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 p-4">
-    <div class="container mx-auto">
-        <h1 class="text-2xl font-semibold text-gray-800 mb-6">Heavy Equipment</h1>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div class="filter-section md:col-span-1">
-                <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Filters</h2>
-                    <div class="space-y-4">
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Condition</h3>
-                            <select class="w-full border border-gray-300 rounded-md p-2">
-                                <option>All</option>
-                                <option>New</option>
-                                <option>Used</option>
-                            </select>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Sales Method</h3>
-                            <select class="w-full border border-gray-300 rounded-md p-2">
-                                <option>All</option>
-                                <option>Auction</option>
-                                <option>Fixed Price</option>
-                            </select>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Industry</h3>
-                            <select class="w-full border border-gray-300 rounded-md p-2">
-                                <option>All</option>
-                                <option>Construction</option>
-                                <option>Mining</option>
-                                <option>Agriculture</option>
-                            </select>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Availability</h3>
-                            <select class="w-full border border-gray-300 rounded-md p-2">
-                                <option>All</option>
-                                <option>In Stock</option>
-                                <option>Coming Soon</option>
-                            </select>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Category</h3>
-                            <select class="w-full border border-gray-300 rounded-md p-2">
-                                 <option>All</option>
-                                 <option>Excavators</option>
-                                 <option>Loaders</option>
-                                 <option>Bulldozers</option>
-                            </select>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Equipment Type</h3>
-                            <select class="w-full border border-gray-300 rounded-md p-2">
-                                <option>All</option>
-                                <option>Crawler Excavators</option>
-                                <option>Mini Excavators</option>
-                            </select>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Brand</h3>
-                            <select class="w-full border border-gray-300 rounded-md p-2">
-                                <option>All</option>
-                                <option>Kobelco</option>
-                                <option>Caterpillar</option>
-                                <option>Komatsu</option>
-                            </select>
-                        </div>
-                         <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Model</h3>
-                            <select class="w-full border border-gray-300 rounded-md p-2">
-                                <option>All</option>
-                                <option>SK850LC</option>
-                                 <option>SK210LC</option>
-                            </select>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Price (USD)</h3>
-                            <div class="flex space-x-2">
-                                <input type="number" placeholder="Min" class="w-1/2 border border-gray-300 rounded-md p-2">
-                                <input type="number" placeholder="Max" class="w-1/2 border border-gray-300 rounded-md p-2">
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-600 mb-2">Year of Manufacture</h3>
-                             <div class="flex space-x-2">
-                                <input type="number" placeholder="From" class="w-1/2 border border-gray-300 rounded-md p-2">
-                                <input type="number" placeholder="To" class="w-1/2 border border-gray-300 rounded-md p-2">
-                            </div>
-                        </div>
+<body class="bg-gray-100">
+    <header id="header_area" style="background: linear-gradient(90deg, #003566, #00509d); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <!-- Top Section: Logo, Search, Navigation -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; flex-wrap: wrap; gap: 20px;">
+          
+          <!-- Logo -->
+          <div style="flex-shrink: 0;">
+            <a href="index.php" style="display: inline-block; padding: 6px 10px; border-radius: 8px; transition: all 0.3s ease;">
+              <img src="img/logo.png" alt="Logo" style="height: 60px; filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.8)); transition: all 0.3s ease; animation: pulseGlow 1.5s infinite;">
+            </a>
+          </div>
+      <style>
+        @keyframes pulseGlow {
+          0% {
+            filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.6));
+          }
+          50% {
+            filter: drop-shadow(0 0 20px rgba(255, 106, 24, 1));
+          }
+          100% {
+            filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.6));
+          }
+        }
+      
+        /* Hover effect to scale the logo */
+        a:hover img {
+          transform: scale(1.1);
+          filter: drop-shadow(0 0 25px rgba(255, 106, 24, 1));
+        }
+      </style>
+          <!-- Search Bar -->
+          <form id="searchForm" onsubmit="return handleSearch(event)" style="flex: 1; max-width: 600px;">
+        <div style="position: relative;">
+          <input 
+            type="text" 
+            id="searchInput"
+            name="query"
+            placeholder="Search for equipment..." 
+            autocomplete="off"
+            style="
+              width: 100%; 
+              padding: 10px 16px 10px 40px; 
+              border: 1px solid #d1d5db; 
+              border-radius: 9999px; 
+              outline: none; 
+              font-size: 16px;
+              transition: all 0.3s ease;
+              background-color: #ffffff; /* Ensure white background */
+            "
+            onfocus="this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.5)'; this.style.borderColor='transparent';"
+            onblur="this.style.boxShadow='none'; this.style.borderColor='#d1d5db';"
+          />
+          
+          <div id="suggestions" style="position: absolute; top: 100%; margin-top: 4px; left: 0; right: 0; background: white; border: 1px solid #d1d5db; border-top: none; max-height: 200px; overflow-y: auto; display: none;"></div>
+          
+          <!-- Search Icon -->
+          <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af;">
+            <svg xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+            </svg>
+          </div>
+        </div>
+      </form>
+      
+      
+       <!-- Navigation Menu -->
+      <nav style="flex-shrink: 0;">
+        <ul style="display: flex; align-items: center; gap: 24px; margin: 0; padding: 0; list-style: none; font-weight: 600; font-size: 16px;">
+          <li><a href="index.php" style="color: #ffffff; text-decoration: none; position: relative;">Home</a></li>
+          <li><a href="rent.php" style="color: #ffffff; text-decoration: none; position: relative;">For Rent</a></li>
+          <li><a href="product.html" style="color: #ffffff; text-decoration: none; position: relative;">New for Sale</a></li>
+      
+          <!-- Uncomment for future use -->
+          <!-- <li><a href="used-products.html" style="color: #ffffff; text-decoration: none; position: relative;">Used for Sale</a></li>
+          <li><a href="admin.php" style="color: #ffffff; text-decoration: none; position: relative;">Admin Panel</a></li> -->
+      
+          <li><a href="contact.html" style="color: #ffffff; text-decoration: none; position: relative;">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <style>
+        /* Basic styles for the link */
+        nav a {
+          position: relative;
+          color: #ffffff;
+          text-decoration: none;
+          display: inline-block;
+        }
+      
+        /* Underline styles */
+        nav a::after {
+          content: '';
+          position: absolute;
+          bottom: -5px; /* Positioning it below the link */
+          left: 50%; /* Start at the center */
+          transform: translateX(-50%); /* Center it horizontally */
+          width: 0; /* Initially the width is zero */
+          height: 3px; /* Line thickness */
+          background-color: #ffffff; /* Underline color */
+          transition: width 0.3s ease, left 0.3s ease;
+          border-radius: 5px; /* Rounded corners for the underline */
+        }
+      
+        /* On hover, expand the underline to the full width of the element */
+        nav a:hover::after {
+          width: 100%; /* Expand the underline to full width */
+        }
+      </style>
+        </div>
+      
+        <!-- Suggestions Styling -->
+        <style>
+          #suggestions {
+            position: absolute;
+            top: 100%;
+            margin-top: 4px;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+            padding: 4px 0;
+          }
+      
+          .suggestion-item {
+            padding: 10px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #374151;
+            transition: background 0.2s, color 0.2s;
+          }
+      
+          .suggestion-item:hover {
+            background-color: #f3f4f6;
+            color: #2563eb;
+          }
+        </style>
+      </header>
+      
+
+  <div class="w-full max-w-[1400px] mx-auto px-4 py-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Heavy Equipment Marketplace</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <!-- Filter Sidebar -->
+      <aside class="md:col-span-1 bg-white p-4 rounded-lg shadow">
+        <h2 class="text-lg font-semibold mb-4">Filters</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Condition</label>
+            <select class="w-full border p-2 rounded">
+              <option>All</option>
+              <option>New</option>
+              <option>Used</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Sales Method</label>
+            <select class="w-full border p-2 rounded">
+              <option>All</option>
+              <option>Auction</option>
+              <option>Fixed Price</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Industry</label>
+            <select class="w-full border p-2 rounded">
+              <option>All</option>
+              <option>Construction</option>
+              <option>Mining</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Price (USD)</label>
+            <div class="flex gap-2">
+              <input type="number" placeholder="Min" class="w-1/2 border p-2 rounded" />
+              <input type="number" placeholder="Max" class="w-1/2 border p-2 rounded" />
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Product Grid -->
+      <section class="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Product Card Example -->
+        <div class="bg-white rounded-lg shadow p-4 product-card">
+          <img src="img/all-1.webp" alt="Equipment Image 1" />
+          <div class="mt-2">
+            <span class="for-sale-tag">For Sale</span>
+            <span class="condition-tag">New</span>
+          </div>
+          <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+          <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+          <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+          <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+          <span class="favorite-icon">&#9825;</span>
+          <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4 product-card">
+          <img src="img/all-2.webp" alt="Equipment Image 2" />
+          <div class="mt-2">
+            <span class="for-sale-tag">For Sale</span>
+            <span class="condition-tag used">Used</span>
+          </div>
+          <h3 class="text-lg font-semibold mt-2">Komatsu PC210LC</h3>
+          <p class="text-sm text-gray-600">3,200 hrs | 22,000 kg | 158 hp</p>
+          <p class="text-sm text-gray-500 mt-1">Great condition, ready to ship</p>
+          <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+          <span class="favorite-icon">&#9825;</span>
+          <p class="text-xs text-gray-400 mt-2">Ref. No. KOM210</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4 product-card">
+          <img src="img/all-3.webp" alt="Equipment Image 3" />
+          <div class="mt-2">
+            <span class="for-sale-tag">For Sale</span>
+            <span class="condition-tag">New</span>
+          </div>
+          <h3 class="text-lg font-semibold mt-2">Caterpillar 320D2</h3>
+          <p class="text-sm text-gray-600">New | 21,000 kg | 148 hp</p>
+          <p class="text-sm text-gray-500 mt-1">Available with warranty</p>
+          <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+          <span class="favorite-icon">&#9825;</span>
+          <p class="text-xs text-gray-400 mt-2">Ref. No. CAT320</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4 product-card">
+            <img src="img/all-1.webp" alt="Equipment Image 1" />
+            <div class="mt-2">
+              <span class="for-sale-tag">For Sale</span>
+              <span class="condition-tag">New</span>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+            <span class="favorite-icon">&#9825;</span>
+            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4 product-card">
+            <img src="img/all-4.webp" alt="Equipment Image 1" />
+            <div class="mt-2">
+              <span class="for-sale-tag">For Sale</span>
+              <span class="condition-tag">New</span>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+            <span class="favorite-icon">&#9825;</span>
+            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4 product-card">
+            <img src="img/all-5.webp" alt="Equipment Image 1" />
+            <div class="mt-2">
+              <span class="for-sale-tag">For Sale</span>
+              <span class="condition-tag">New</span>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+            <span class="favorite-icon">&#9825;</span>
+            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4 product-card">
+            <img src="img/all-6.png" alt="Equipment Image 1" />
+            <div class="mt-2">
+              <span class="for-sale-tag">For Sale</span>
+              <span class="condition-tag">New</span>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+            <span class="favorite-icon">&#9825;</span>
+            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4 product-card">
+            <img src="img/all-7.webp" alt="Equipment Image 1" />
+            <div class="mt-2">
+              <span class="for-sale-tag">For Sale</span>
+              <span class="condition-tag">New</span>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+            <span class="favorite-icon">&#9825;</span>
+            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4 product-card">
+            <img src="img/all-8.webp" alt="Equipment Image 1" />
+            <div class="mt-2">
+              <span class="for-sale-tag">For Sale</span>
+              <span class="condition-tag">New</span>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+            <span class="favorite-icon">&#9825;</span>
+            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4 product-card">
+            <img src="img/featured-1.webp" alt="Equipment Image 1" />
+            <div class="mt-2">
+              <span class="for-sale-tag">For Sale</span>
+              <span class="condition-tag">New</span>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+            <span class="favorite-icon">&#9825;</span>
+            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4 product-card">
+            <img src="img/featured-2.webp" alt="Equipment Image 1" />
+            <div class="mt-2">
+              <span class="for-sale-tag">For Sale</span>
+              <span class="condition-tag">New</span>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
+            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
+            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
+            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+            <span class="favorite-icon">&#9825;</span>
+            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
+          </div>
+
+        <!-- You can add more cards here following the same structure -->
+      </section>
+    </div>
+  </div>
+  <footer class="footer_area">
+    <div class="container">
+        <div class="row">				
+            <div class="col-md-3 col-sm-6">
+                <div class="single_ftr">
+                    <h4 class="sf_title">Contacts</h4>
+                    <ul>
+                        <li>Jarn Yafour, Mafraq Industrial AreaAbu Dhabi, UAE</li>
+                        <li>058-9948428 <br> 055-8118758</li>
+                        <li>listed.transport@yahoo.com <br> listedgeneraltransport@gmail.com </li>
+                    </ul>
+                </div>
+            </div> <!--  End Col -->
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="single_ftr">
+                    <h4 class="sf_title">Information</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div> <!--  End Col -->
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="single_ftr">
+                    <h4 class="sf_title">Services</h4>
+                    <ul>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Site Map</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Order History</a></li>
+                    </ul>
+                </div>
+            </div> <!--  End Col -->	
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="single_ftr">
+                    <h4 class="sf_title">Newsletter</h4>
+                    <div class="newsletter_form">
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have </p>
+                        <form method="post" class="form-inline">				
+                            <input name="EMAIL" id="email" placeholder="Enter Your Email" class="form-control" type="email">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
                 </div>
-            </div>
-
-            <div class="product-listing md:col-span-3">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="product-card">
-                        <img src="img/all-1.webp" alt="Equipment 1">
-                        <span class="for-sale-tag">For Sale</span>
-                        <span class="condition-tag">New</span>
-                        <h3>2025 Kobelco SK850LC Track...</h3>
-                        <p>0 hrs | 81,700 kg | 490 hp</p>
-                        <p>Get more info about availability, price and delivery</p>
-                        <a href="#" class="details-link">View Details</a>
-                        <span class="favorite-icon">&#9825;</span>
-                        <p class="ref-number">Ref. No. AMH007</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/all-2.webp" alt="Equipment 2">
-                         <span class="for-sale-tag">For Sale</span>
-                        <span class="condition-tag used">Used</span>
-                        <h3>2024 Caterpillar D8K Dozer</h3>
-                        <p>5,285 hrs | 29,484 kg | 300 hp</p>
-                        <p>Used Caterpillar D8K for sale.  Good condition.</p>
-                        <a href="#" class="details-link">View Details</a>
-                        <span class="favorite-icon">&#9825;</span>
-                        <p class="ref-number">Ref. No. AMH008</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/all-3.webp" alt="Equipment 3">
-                        <span class="for-sale-tag">For Sale</span>
-                        <span class="condition-tag">New</span>
-                        <h3>2025 Komatsu WA600-8 Loader</h3>
-                        <p>10 hrs | 31,650 kg | 356 hp</p>
-                        <p>Brand new Komatsu loader.  Available now.</p>
-                        <a href="#" class="details-link">View Details</a>
-                        <span class="favorite-icon">&#9825;</span>
-                        <p class="ref-number">Ref. No. AMH009</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/all-4.webp" alt="Equipment 3">
-                        <span class="for-sale-tag">For Sale</span>
-                        <span class="condition-tag">New</span>
-                        <h3>2025 Komatsu WA600-8 Loader</h3>
-                        <p>10 hrs | 31,650 kg | 356 hp</p>
-                        <p>Brand new Komatsu loader.  Available now.</p>
-                        <a href="#" class="details-link">View Details</a>
-                        <span class="favorite-icon">&#9825;</span>
-                        <p class="ref-number">Ref. No. AMH009</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/all-5.webp" alt="Equipment 3">
-                        <span class="for-sale-tag">For Sale</span>
-                        <span class="condition-tag">New</span>
-                        <h3>2025 Komatsu WA600-8 Loader</h3>
-                        <p>10 hrs | 31,650 kg | 356 hp</p>
-                        <p>Brand new Komatsu loader.  Available now.</p>
-                        <a href="#" class="details-link">View Details</a>
-                        <span class="favorite-icon">&#9825;</span>
-                        <p class="ref-number">Ref. No. AMH009</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/all-6.png" alt="Equipment 3">
-                        <span class="for-sale-tag">For Sale</span>
-                        <span class="condition-tag">New</span>
-                        <h3>2025 Komatsu WA600-8 Loader</h3>
-                        <p>10 hrs | 31,650 kg | 356 hp</p>
-                        <p>Brand new Komatsu loader.  Available now.</p>
-                        <a href="#" class="details-link">View Details</a>
-                        <span class="favorite-icon">&#9825;</span>
-                        <p class="ref-number">Ref. No. AMH009</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/all-7.webp" alt="Equipment 3">
-                        <span class="for-sale-tag">For Sale</span>
-                        <span class="condition-tag">New</span>
-                        <h3>2025 Komatsu WA600-8 Loader</h3>
-                        <p>10 hrs | 31,650 kg | 356 hp</p>
-                        <p>Brand new Komatsu loader.  Available now.</p>
-                        <a href="#" class="details-link">View Details</a>
-                        <span class="favorite-icon">&#9825;</span>
-                        <p class="ref-number">Ref. No. AMH009</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/all-8.webp" alt="Equipment 3">
-                        <span class="for-sale-tag">For Sale</span>
-                        <span class="condition-tag">New</span>
-                        <h3>2025 Komatsu WA600-8 Loader</h3>
-                        <p>10 hrs | 31,650 kg | 356 hp</p>
-                        <p>Brand new Komatsu loader.  Available now.</p>
-                        <a href="#" class="details-link">View Details</a>
-                        <span class="favorite-icon">&#9825;</span>
-                        <p class="ref-number">Ref. No. AMH009</p>
-                    </div>
-                    </div>
-            </div>
+            </div> <!--  End Col -->
+            
         </div>
     </div>
 
-    <script>
-        // You can add JavaScript here for interactive features,
-        // such as filtering, sorting, or handling the favorite icon click.
 
-        // Example:  Favorite icon click handler
-        document.querySelectorAll('.favorite-icon').forEach(icon => {
-            icon.addEventListener('click', function() {
-                if (this.innerHTML === '♥') {
-                    this.innerHTML = '&#9825;'; // Change to empty heart
-                } else {
-                    this.innerHTML = '♥'; // Change to filled heart
-                }
-                //  You would also likely want to send an update to a server here
-                //  to save the user's favorite.
-                console.log('Favorite clicked!');
-            });
-        });
+    <div class="ftr_btm_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="ftr_social_icon">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <p class="copyright_text text-center">&copy; 2024 All Rights Reserved FancyShop</p>
+                </div>
+                
+                <div class="col-sm-4">
+                    <div class="payment_mthd_icon text-right">
+                        <ul>
+                            <li><i class="fa fa-cc-paypal"></i></li>
+                            <li><i class="fa fa-cc-visa"></i></li>
+                            <li><i class="fa fa-cc-discover"></i></li>
+                            <li><i class="fa fa-cc-mastercard"></i></li>
+                            <li><i class="fa fa-cc-amex"></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <script>
+    document.querySelectorAll('.favorite-icon').forEach(icon => {
+      icon.addEventListener('click', function () {
+        this.textContent = this.textContent === '♥' ? '♡' : '♥';
+      });
+    });
+  </script>
+  	<script>
+        document.addEventListener('DOMContentLoaded', function () {
+const searchInput = document.getElementById('searchInput');
+const suggestionsContainer = document.getElementById('suggestions');
+
+// Handle search submit
+document.getElementById('searchForm').addEventListener('submit', async function (event) {
+event.preventDefault();
+const query = searchInput.value.trim().toLowerCase();
+
+// Redirect to specific pages based on keywords
+if (query === 'rent') {
+  window.location.href = 'rent.php';
+  return;
+} else if (query === 'sale') {
+  window.location.href = 'sale.php';
+  return;
+}
+
+try {
+  const response = await fetch('get-product-id.php?query=' + encodeURIComponent(query));
+  const data = await response.json();
+
+  if (data.success && data.post_id) {
+    window.location.href = 'product-details.php?post_id=' + data.post_id;
+  } else {
+    alert('Product not found.');
+  }
+} catch (error) {
+  console.error('Search error:', error);
+  alert('Something went wrong.');
+}
+});
+
+// Fetch suggestions on input
+searchInput.addEventListener('input', async function () {
+const query = searchInput.value.trim();
+
+if (query.length === 0) {
+  suggestionsContainer.innerHTML = '';
+  suggestionsContainer.style.display = 'none';  // Hide suggestions if query is empty
+  return;
+}
+
+try {
+  const response = await fetch('get-suggestions.php?query=' + encodeURIComponent(query));
+  const suggestions = await response.json();
+
+  suggestionsContainer.innerHTML = '';  // Clear previous suggestions
+  if (suggestions.length > 0) {
+    suggestionsContainer.style.display = 'block';  // Show suggestions if any
+    suggestions.forEach(item => {
+      const li = document.createElement('div'); // Changed to div for styling purpose
+      li.textContent = item.name;
+      li.classList.add('suggestion-item'); // Add the suggestion-item class
+      li.addEventListener('click', () => {
+        window.location.href = 'product-details.php?post_id=' + item.post_id;
+      });
+      suggestionsContainer.appendChild(li);
+    });
+  } else {
+    suggestionsContainer.style.display = 'none';  // Hide if no suggestions
+  }
+} catch (error) {
+  console.error('Suggestion error:', error);
+}
+});
+
+// Hide suggestions when clicking outside
+document.addEventListener('click', function (event) {
+if (
+  !searchInput.contains(event.target) &&
+  !suggestionsContainer.contains(event.target)
+) {
+  suggestionsContainer.innerHTML = '';  // Clear suggestions
+  suggestionsContainer.style.display = 'none';  // Hide suggestions container
+}
+});
+});
+
     </script>
 </body>
 </html>
