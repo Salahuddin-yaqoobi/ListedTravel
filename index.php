@@ -188,14 +188,6 @@
     width: 100%; /* Expand the underline to full width */
   }
 </style>
-
-
-
-
-
-
-
-
   </div>
 
   <!-- Suggestions Styling -->
@@ -417,10 +409,7 @@
     </div>
   </div>
 </section>
-
 		<!--  Promo ITEM END -->	
-		
-
 		<!-- Start product Area -->
 		<section id="product_area" class="section_padding">
 			<div class="container">		
@@ -434,17 +423,17 @@
 				</div>
 			
 				<?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+					ini_set('display_errors', 1);
+					error_reporting(E_ALL);
 
-// Database connection
-$mysqli = new mysqli("localhost", "root", "", "news-site");
-if ($mysqli->connect_errno) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
-?>
+					// Database connection
+					$mysqli = new mysqli("localhost", "root", "", "news-site");
+                     if ($mysqli->connect_errno) {
+					    die("Connection failed: " . $mysqli->connect_error);
+					}
+					?>
 
-<div class="text-center">
+				<div class="text-center">
     <div class="product_filter text-center">
         <ul>
             <li class="active filter" data-filter="all">ALL</li>
@@ -491,49 +480,7 @@ if ($mysqli->connect_errno) {
             <?php endwhile; ?>
         </div>
     </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const filterButtons = document.querySelectorAll('.product_filter .filter');
-    const allItems = document.querySelectorAll('.product-item');
-    
-    // Initially, show all items
-    allItems.forEach(item => item.classList.add('visible'));
-    
-    filterButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            const filterValue = this.getAttribute('data-filter');
-            
-            // Set the active class on the clicked filter
-            filterButtons.forEach(function(el) {
-                el.classList.remove('active');
-            });
-            this.classList.add('active');
-            
-            // Animate items based on the selected category
-            allItems.forEach(function(item) {
-                if (filterValue === 'all') {
-                    item.classList.remove('hidden');
-                    item.classList.add('visible');
-                } else {
-                    if (item.classList.contains(filterValue)) {
-                        item.classList.remove('hidden');
-                        item.classList.add('visible');
-                    } else {
-                        item.classList.remove('visible');
-                        item.classList.add('hidden');
-                    }
-                }
-            });
-        });
-    });
-});
-
-</script>
-
-
-
+				</div>
 			</div>
 		</section>
 		
@@ -546,15 +493,14 @@ document.addEventListener("DOMContentLoaded", function() {
 					<div class="col-md-5">
 						<div class="special_img text-left">
 							<img src="img/single-1.webp" width="370" alt="" class="img-responsive">
-							<span class="off_baudge text-center">30% <br /> Off</span>
 						</div>
 					</div>			
 
 					<div class="col-md-7 text-left">
 						<div class="special_info">			
-							<h1 style="margin-bottom: 5px;">Pioneering Digital Machinery Solutions</h1>
+							<h1 style="margin-bottom: 15px; font-weight: bolder; font-size: x-large;">Pioneering Digital Machinery Solutions</h1>
 							<p style="font-size: large;">Founded in 1978, Al Marwan has established itself as a trusted partner in the heavy equipment supply industry. We have introduced the region’s first e-commerce platform to better meet MENA’s growing demand for heavy equipment.</p>							
-							<a href="#" class="btn main_btn">Explore</a>					
+							<a href="product.html" class="btn main_btn">Explore</a>					
 						</div>
 					</div>
 				</div>
@@ -573,201 +519,150 @@ document.addEventListener("DOMContentLoaded", function() {
 						</div>
 					</div>
 				</div>
+<style>
+	/* Ensure that all product blocks are of equal height and adjust according to image sizes */
+.single_product {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-				<div class="row text-center">					
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/featured-1.webp" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
+/* Ensure images fit without distortion */
+.product_image img {
+    width: 100%;
+    height: 200px; /* Set a fixed height for uniformity */
+    object-fit: cover; /* Make sure the images cover the area without distortion */
+    border-radius: 5px;
+}
 
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<span class="price">$123.00</span>
-							</div>
-						</div>								
-					</div> <!-- End Col -->	
+/* If you want to ensure consistent height for product items, you can adjust this */
+.product_btm_text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/featured-2.webp" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
-						
-							<div class="product_btm_text">										
-								<h4><a href="#">Product Title</a></h4>
-								<div class="p_rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>									
-								<span class="price">$123.00</span>
-							</div>
-						</div>
-					</div> <!-- End Col -->
+.p_rating i {
+    color: #f39c12;
+}
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/featured-3.webp" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
-						
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<div class="p_rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>									
-								<span class="price">$123.00</span>
-							</div>
-						</div>
-					</div> <!-- End Col -->	
+.price {
+    font-size: 18px;
+    color: #333;
+}
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/featured-4.webp" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
-						
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<div class="p_rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>									
-								<span class="price">$123.00</span>
-							</div>
-						</div>
-					</div> <!-- End Col -->					
+/* Additional margin below each item */
+.mb-4 {
+    margin-bottom: 30px;
+}
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/featured-5.webp" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
-						
-							<div class="product_btm_text">										
-								<h4><a href="#">Product Title</a></h4>
-								<div class="p_rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>									
-								<span class="price">$123.00</span>
-							</div>
-						</div>
-					</div> <!-- End Col -->
+</style>
+				<div class="container">
+    <div class="row text-center d-flex flex-wrap justify-content-between">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="single_product">
+                <div class="product_image">
+                    <img src="img/featured-1.webp" alt=""/>
+                    <div class="box-content">
+                        <a href="#"><i class="fa fa-heart-o"></i></a>
+                        <a href="#"><i class="fa fa-cart-plus"></i></a>
+                        <a href="#"><i class="fa fa-search"></i></a>
+                    </div>                                         
+                </div>
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/featured-6.webp" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
-						
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<div class="p_rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>									
-								<span class="price">$123.00</span>
-							</div>
-						</div>
-					</div> <!-- End Col -->							
+                <div class="product_btm_text">
+                    <h4><a href="#">Product Title</a></h4>
+                    <span class="price">$123.00</span>
+                </div>
+            </div>                                
+        </div> <!-- End Col -->
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/featured-7.webp" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
-						
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<div class="p_rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>									
-								<span class="price">$123.00</span>
-							</div>
-						</div>
-					</div> <!-- End Col -->								
-					
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/featured-8.webp" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
-						
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<div class="p_rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>									
-								<span class="price">$123.00</span>
-							</div>
-						</div>
-					</div> <!-- End Col -->					
-				</div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="single_product">
+                <div class="product_image">
+                    <img src="img/featured-2.webp" alt=""/>
+                    <div class="box-content">
+                        <a href="#"><i class="fa fa-heart-o"></i></a>
+                        <a href="#"><i class="fa fa-cart-plus"></i></a>
+                        <a href="#"><i class="fa fa-search"></i></a>
+                    </div>                                         
+                </div>
+            
+                <div class="product_btm_text">                                         
+                    <h4><a href="#">Product Title</a></h4>
+                    <div class="p_rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>                                     
+                    <span class="price">$123.00</span>
+                </div>
+            </div>
+        </div> <!-- End Col -->
+		
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="single_product">
+                <div class="product_image">
+                    <img src="img/all-1.webp" alt=""/>
+                    <div class="box-content">
+                        <a href="#"><i class="fa fa-heart-o"></i></a>
+                        <a href="#"><i class="fa fa-cart-plus"></i></a>
+                        <a href="#"><i class="fa fa-search"></i></a>
+                    </div>                                         
+                </div>
+            
+                <div class="product_btm_text">                                         
+                    <h4><a href="#">Product Title</a></h4>
+                    <div class="p_rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>                                     
+                    <span class="price">$123.00</span>
+                </div>
+            </div>
+        </div> <!-- End Col -->
+		
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="single_product">
+                <div class="product_image">
+                    <img src="img/all-2.webp" alt=""/>
+                    <div class="box-content">
+                        <a href="#"><i class="fa fa-heart-o"></i></a>
+                        <a href="#"><i class="fa fa-cart-plus"></i></a>
+                        <a href="#"><i class="fa fa-search"></i></a>
+                    </div>                                         
+                </div>
+            
+                <div class="product_btm_text">                                         
+                    <h4><a href="#">Product Title</a></h4>
+                    <div class="p_rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>                                     
+                    <span class="price">$123.00</span>
+                </div>
+            </div>
+        </div> <!-- End Col -->
+		
+
+        <!-- Repeat the above block for all other products -->
+    </div> <!-- End Row -->
+</div> <!-- End Container -->
+
 			</div>
 		</section>
 		<!-- End Featured Products Area -->
@@ -852,7 +747,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 							<div class="col-md-7 text-left">
 								<div class="special_info">			
-									<h1 style="margin-bottom: 5px;">Pioneering Digital Machinery Solutions</h1>
+									<h1 style="margin-bottom: 15px; font-weight: bolder; font-size: x-large;">Pioneering Digital Machinery Solutions</h1>
 									<p style="font-size: large;">Founded in 1978, Al Marwan has established itself as a trusted partner in the heavy equipment supply industry. We have introduced the region’s first e-commerce platform to better meet MENA’s growing demand for heavy equipment.</p>							
 									<a href="#" class="btn main_btn">Explore</a>					
 								</div>
@@ -860,7 +755,6 @@ document.addEventListener("DOMContentLoaded", function() {
 							<div class="col-md-5">
 								<div class="special_img text-left">
 									<img src="img/special-offer.webp" width="370" alt="" class="img-responsive">
-									<span class="off_baudge text-center">30% <br /> Off</span>
 								</div>
 							</div>
 						</div>
@@ -1245,43 +1139,45 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-</script>
-<!-- MixItUp JS -->
-<script src="https://cdn.jsdelivr.net/npm/mixitup@3/dist/mixitup.min.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    var mixer = mixitup('#mix-container', {
-        selectors: {
-            target: '.mix'
-        },
-        animation: {
-            duration: 300
-        }
-    });
-
-    // Handle active class change
-    document.querySelectorAll('.product_filter .filter').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            document.querySelectorAll('.product_filter .filter').forEach(function (el) {
+document.addEventListener("DOMContentLoaded", function() {
+    const filterButtons = document.querySelectorAll('.product_filter .filter');
+    const allItems = document.querySelectorAll('.product-item');
+    
+    // Initially, show all items
+    allItems.forEach(item => item.classList.add('visible'));
+    
+    filterButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Set the active class on the clicked filter
+            filterButtons.forEach(function(el) {
                 el.classList.remove('active');
             });
             this.classList.add('active');
+            
+            // Animate items based on the selected category
+            allItems.forEach(function(item) {
+                if (filterValue === 'all') {
+                    item.classList.remove('hidden');
+                    item.classList.add('visible');
+                } else {
+                    if (item.classList.contains(filterValue)) {
+                        item.classList.remove('hidden');
+                        item.classList.add('visible');
+                    } else {
+                        item.classList.remove('visible');
+                        item.classList.add('hidden');
+                    }
+                }
+            });
         });
     });
 });
+
 </script>
 
-
-
-
-
-
-
-
 </html>
-
-			
 			
 		<script src="js/vendor/jquery-1.12.4.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>

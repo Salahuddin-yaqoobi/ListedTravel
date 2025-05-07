@@ -316,8 +316,8 @@ input:focus, textarea:focus {
 /* -------- Buttton css -------- */
 
 .main_btn {
-	background: #33d286;
-	border: 1px solid #33d286;
+	background:#003566;
+	border: 1px solid white;
 	color: #fff;
 	padding: 12px 30px;
 	text-transform: capitalize;
@@ -329,8 +329,8 @@ input:focus, textarea:focus {
 .main_btn:hover,
 .main_btn:focus{
 	color: #fff;
-	background: #33d286;
-	border-color: #33d286;
+	background: #012a50;
+	border-color: white;
 	opacity: .8;
 }
 
