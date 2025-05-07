@@ -1347,12 +1347,12 @@ input:focus, textarea:focus {
 	letter-spacing: 6px;
 }
 .section_title span {
-	color: #33d286;
+	color: #003566;
 }
 .section_title .divider {
 	position: relative;
 	display: inline-block;
-	background: #33d286;
+	background: #003566;
 	width: 10px;
 	height: 10px;
 	border-radius:50%;
@@ -1362,7 +1362,7 @@ input:focus, textarea:focus {
 	content: '';
 	top: 5px;
 	right: 20px;	
-	background:#33d286;
+	background:#003566;
 	width: 30px;
 	height: 1px;
 }
@@ -1371,7 +1371,7 @@ input:focus, textarea:focus {
 	content: '';
 	top: 5px;
 	left: 20px;
-	background:#33d286;
+	background:#003566;
 	width: 30px;
 	height: 1px;
 }
@@ -1399,7 +1399,7 @@ input:focus, textarea:focus {
 	list-style: none;
 }
 .product_filter ul li {
-	font-weight: 400;
+	font-weight: 600;
 	text-transform: uppercase;
 	display: inline-block;
 	cursor: pointer;
@@ -1410,12 +1410,12 @@ input:focus, textarea:focus {
 	letter-spacing: 1px;
 	border-radius: 20px;
 	margin:0px;
-	color:#777;
+	color:#003566;
 	line-height: 1;
 }
 .product_filter .filter.active {
-	color: #33d286;
-	border-color: #33d286;
+	color: #003566;
+	border-color: #003566;
 }
 
 .single_product{
@@ -1455,7 +1455,7 @@ input:focus, textarea:focus {
     transition: all 0.6s ease 0s;
 	overflow: hidden;
 	opacity: 0;
-	background: rgba(51, 210, 134, .9);
+	background:#003566;
 	
 }
 .single_product:hover .box-content{
@@ -1498,7 +1498,7 @@ input:focus, textarea:focus {
 
 .new_badge {
 	display: inline-block;
-	background: #33d286;
+	background:#1C91C5;
 	color: #fff;
 	padding: 3px 12px;
 	font-size: 14px;
@@ -1508,7 +1508,7 @@ input:focus, textarea:focus {
 	border-radius: 2px;
 }
 .single_product span.price{
-	color: #33d286;
+	color:#003566;
 	font-size: 16px;
 }
 .no-padding{

@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="css/venobox.css" />
 	<link rel="stylesheet" href="css/font-awesome.css" />
 	<link rel="stylesheet" href="css/bootstrap.min.css" />	
-	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="style.css?v=123" />
 	<link rel="stylesheet" href="css/responsive.css" />	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,19 +81,37 @@
 
 		
 		<!--  Start Header  -->
-		<header id="header_area" style="background-color: #ffffff; border-bottom: 1px solid #e5e7eb;">
-			<!-- Top Section: Logo, Search, Icons -->
-			<div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 32px;">
-			  
-			  <!-- Logo -->
-			  <div>
-				<a href="index.php">
-				  <img src="img/logo.png" alt="Logo" style="height: 50px;">
-				</a>
-			  </div>
-		  
-             <!-- Search Bar -->
-			<form id="searchForm" onsubmit="return handleSearch(event)" style="flex: 1; max-width: 500px; margin: 0 32px;">
+<header id="header_area" style="background: linear-gradient(90deg, #003566, #00509d); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <!-- Top Section: Logo, Search, Navigation -->
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; flex-wrap: wrap; gap: 20px;">
+    
+    <!-- Logo -->
+	<div style="flex-shrink: 0;">
+      <a href="index.php" style="display: inline-block; padding: 6px 10px; border-radius: 8px; transition: all 0.3s ease;">
+        <img src="img/logo.png" alt="Logo" style="height: 60px; filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.8)); transition: all 0.3s ease; animation: pulseGlow 1.5s infinite;">
+      </a>
+    </div>
+<style>
+  @keyframes pulseGlow {
+    0% {
+      filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.6));
+    }
+    50% {
+      filter: drop-shadow(0 0 20px rgba(255, 106, 24, 1));
+    }
+    100% {
+      filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.6));
+    }
+  }
+
+  /* Hover effect to scale the logo */
+  a:hover img {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 25px rgba(255, 106, 24, 1));
+  }
+</style>
+    <!-- Search Bar -->
+	<form id="searchForm" onsubmit="return handleSearch(event)" style="flex: 1; max-width: 600px;">
   <div style="position: relative;">
     <input 
       type="text" 
@@ -109,177 +127,297 @@
         outline: none; 
         font-size: 16px;
         transition: all 0.3s ease;
+        background-color: #ffffff; /* Ensure white background */
       "
       onfocus="this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.5)'; this.style.borderColor='transparent';"
       onblur="this.style.boxShadow='none'; this.style.borderColor='#d1d5db';"
     />
-    <div id="suggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #d1d5db; border-top: none; max-height: 200px; overflow-y: auto; display: none;"></div>
+    
+    <div id="suggestions" style="position: absolute; top: 100%; margin-top: 4px; left: 0; right: 0; background: white; border: 1px solid #d1d5db; border-top: none; max-height: 200px; overflow-y: auto; display: none;"></div>
+    
+    <!-- Search Icon -->
     <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af;">
       <svg xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
       </svg>
     </div>
   </div>
- 
-			</form>
-			<style>
-/* Suggestions container */
-#suggestions {
-  position: absolute;
-  top: 100%;
-  margin-top: 4px;
-  left: 0;
-  right: 0;
-  background: white;
-  border: 1px solid #d1d5db;
-  border-top: none;
-  border-radius: 0 0 12px 12px;
-  max-height: 200px;
-  overflow-y: auto;
-  display: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  z-index: 10;
-  padding: 4px 0;
-}
+</form>
 
-/* Each suggestion item */
-.suggestion-item {
-  padding: 10px 16px;
-  font-size: 16px;
-  cursor: pointer;
-  color: #374151; /* Tailwind gray-700 */
-  transition: background 0.2s, color 0.2s;
 
-}
+ <!-- Navigation Menu -->
+<nav style="flex-shrink: 0;">
+  <ul style="display: flex; align-items: center; gap: 24px; margin: 0; padding: 0; list-style: none; font-weight: 600; font-size: 16px;">
+    <li><a href="index.html" style="color: #ffffff; text-decoration: none; position: relative;">Home</a></li>
+    <li><a href="rent.php" style="color: #ffffff; text-decoration: none; position: relative;">For Rent</a></li>
+    <li><a href="shop.html" style="color: #ffffff; text-decoration: none; position: relative;">New for Sale</a></li>
 
-/* Hover effect */
-.suggestion-item:hover {
-  background-color: #f3f4f6; /* Tailwind gray-100 */
-  color: #2563eb; /* Tailwind blue-600 */
-}
-			</style>
-		  
-			<!-- Bottom Section: Navigation Menu -->
-			<nav style="background-color: #f9fafb; border-top: 1px solid #e5e7eb;">
-			  <ul style="display: flex; justify-content: center; align-items: center; gap: 40px; padding: 12px 0; margin: 0; list-style: none; font-weight: 500; font-size: 16px;">
-				<li><a href="index.html" style="color: #111827; text-decoration: none;">Home</a></li>
-				<li><a href="rent.php" style="color: #111827; text-decoration: none;">For Rent</a></li>
-				<li><a href="shop.html" style="color: #111827; text-decoration: none;">New for Sale</a></li>
-				<li><a href="used-products.html" style="color: #111827; text-decoration: none;">Used for Sale</a></li>
-				<li><a href="admin.php" style="color: #111827; text-decoration: none;">Admin panel</a></li>
-				<li><a href="contact.html" style="color: #111827; text-decoration: none;">Contact</a></li>
-			  </ul>
-			</nav>
-		  </header>
-		  
-		<!--  End Header  -->
+    <!-- Uncomment for future use -->
+    <!-- <li><a href="used-products.html" style="color: #ffffff; text-decoration: none; position: relative;">Used for Sale</a></li>
+    <li><a href="admin.php" style="color: #ffffff; text-decoration: none; position: relative;">Admin Panel</a></li> -->
+
+    <li><a href="contact.html" style="color: #ffffff; text-decoration: none; position: relative;">Contact</a></li>
+  </ul>
+</nav>
+
+<style>
+  /* Basic styles for the link */
+  nav a {
+    position: relative;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  /* Underline styles */
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Positioning it below the link */
+    left: 50%; /* Start at the center */
+    transform: translateX(-50%); /* Center it horizontally */
+    width: 0; /* Initially the width is zero */
+    height: 3px; /* Line thickness */
+    background-color: #ffffff; /* Underline color */
+    transition: width 0.3s ease, left 0.3s ease;
+    border-radius: 5px; /* Rounded corners for the underline */
+  }
+
+  /* On hover, expand the underline to the full width of the element */
+  nav a:hover::after {
+    width: 100%; /* Expand the underline to full width */
+  }
+</style>
+
+
+
+
+
+
+
+
+  </div>
+
+  <!-- Suggestions Styling -->
+  <style>
+    #suggestions {
+      position: absolute;
+      top: 100%;
+      margin-top: 4px;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #d1d5db;
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      z-index: 10;
+      padding: 4px 0;
+    }
+
+    .suggestion-item {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #374151;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .suggestion-item:hover {
+      background-color: #f3f4f6;
+      color: #2563eb;
+    }
+  </style>
+</header>
+
 		
 	<div id="dynamicContent">	
 		<!-- Start Slider Area -->
-		<section id="slider_area" class="text-center">
-			<div class="slider_active owl-carousel">
-				<div class="single_slide" style="background-image: url(img/top-1.jpg); background-size: cover; background-position: center; opacity: 1;">
-					<div class="container">	
-						<div class="single-slide-item-table">
-							<div class="single-slide-item-tablecell">
-								<div class="slider_content text-left slider-animated-1">						
-									<p class="animated">   Listed Travel</p>
-									<h1 class="animated">  Koeblco distribution</h1>
-									<h4 class="animated">  Authorized dealer for Japanese tecnology, built to last</h4>
-									<a href="product.html" class="exploreInventoryBtn btn main_btn animated">Explore inventory</a>
-								</div>
-							</div>
-						</div>						
-					</div>
-				</div>
-				
-				<div class="single_slide" style="background-image: url(img/Banner_image_-_english_3.jpg); background-size: cover; background-position: center ; opacity: 1;">
-					<div class="container">		
-						<div class="single-slide-item-table">
-							<div class="single-slide-item-tablecell">
-								<div class="slider_content text-center slider-animated-2">						
-									<p class="animated">Listed Travel</p>
-									<h1 class="animated">Skip the upfront cost</h1>
-									<h4 class="animated">Discover equipment rentals with certified operators</h4>
-									<a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
-								</div>
-							</div>
-						</div>	
-					</div>
-				</div>
-				
-				<div class="single_slide" style="background-image: url(img/Banner_image_-_english_4.jpg); background-size: cover; background-position: center ; opacity: 1;">
-					<div class="container">
-						<div class="single-slide-item-table">
-							<div class="single-slide-item-tablecell">
-								<div class="slider_content text-right slider-animated-3">						
-									<p class="animated">Listed Travel</p>
-									<h1 class="animated">Low-hours used machinary</h1>
-									<h4 class="animated">Trusted brands. Top quality. Well-maintained.</h4>
-									<a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+<style>
+	/* Professional slider text styling */
+.slider_content p {
+  color: #f0f0f0;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.slider_content h1 {
+  color: #003566 !important;
+  font-size: 48px;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  margin-bottom: 10px;
+}
+
+.slider_content h4 {
+  color: #f5f5f5;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.exploreInventoryBtn.btn.main_btn {
+  background-color: #003566 !important;
+  color: #ffffff !important;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.exploreInventoryBtn.btn.main_btn:hover {
+  background-color: #ffffff !important;
+  color: #003566 !important;
+  border: 2px solid #003566 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.owl-dots .owl-dot span {
+  width: 12px;
+  height: 12px;
+  background: #ccc !important;
+  display: block;
+  border-radius: 50%;
+  margin: 5px;
+  transition: background 0.3s ease;
+}
+
+.owl-dots .owl-dot.active span {
+  background: #003566 !important; /* Your brand blue */
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+  transform: scale(1.2);
+}
+
+.owl-dots .owl-dot:hover span {
+  background: #003566 !important;
+}
+
+.owl-nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+</style>
+<section id="slider_area" class="text-center">
+  <div class="slider_active owl-carousel">
+
+    <div class="single_slide" style="background-image: url(img/top-1.jpg); background-size: cover; background-position: center; opacity: 1;">
+      <div class="container">  
+        <div class="single-slide-item-table">
+          <div class="single-slide-item-tablecell">
+            <div class="slider_content text-left slider-animated-1">           
+              <p class="animated">Listed Travel</p>
+              <h1 class="animated">Koeblco distribution</h1>
+              <h4 class="animated">Authorized dealer for Japanese technology, built to last</h4>
+              <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Explore inventory</a>
+            </div>
+          </div>
+        </div>            
+      </div>
+    </div>
+
+    <div class="single_slide" style="background-image: url(img/Banner_image_-_english_3.jpg); background-size: cover; background-position: center ; opacity: 1;">
+      <div class="container">    
+        <div class="single-slide-item-table">
+          <div class="single-slide-item-tablecell">
+            <div class="slider_content text-center slider-animated-2">           
+              <p class="animated">Listed Travel</p>
+              <h1 class="animated">Skip the upfront cost</h1>
+              <h4 class="animated">Discover equipment rentals with certified operators</h4>
+              <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
+            </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+
+    <div class="single_slide" style="background-image: url(img/Banner_image_-_english_4.jpg); background-size: cover; background-position: center ; opacity: 1;">
+      <div class="container">
+        <div class="single-slide-item-table">
+          <div class="single-slide-item-tablecell">
+            <div class="slider_content text-right slider-animated-3">           
+              <p class="animated">Listed Travel</p>
+              <h1 class="animated">Low-hours used machinery</h1>
+              <h4 class="animated">Trusted brands. Top quality. Well-maintained.</h4>
+              <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 		<!-- End Slider Area -->		
 	
 		<!--  Promo ITEM STRAT  -->
 		<section id="promo_area" class="section_padding">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-6 col-sm-12">	
-						<a href="#">
-							<div class="single_promo">
-								<img src="img/Adobe Express - file.webp" alt="">
-								<div class="box-content">
-									<h3 class="title">Rental</h3>
-									<span class="post">2024 Collection</span>
-								</div>
-							</div>
-						</a>						
-					</div><!--  End Col -->						
-					
-					<div class="col-lg-4 col-md-6 col-sm-12">	
-						<a href="#">
-							<div class="single_promo">
-								<img src="img/after-banner-2.webp" alt="">
-								<div class="box-content">
-									<h3 class="title">New for sale</h3>
-									<span class="post">2024 Collection</span>
-								</div>
-							</div>	
-						</a>	
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <a href="#">
+          <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; background-color: #003566; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+            <img src="img/Adobe Express - file.webp" alt="" style="width: 100%; height: auto;">
+            <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
+              <h3 class="title" style="background-color: #003566; border-radius: 10px; font: bolder; font-weight: 900;">Rental</h3>
+              <span class="post">2024 Collection</span>
+            </div>
+          </div>
+        </a>
+      </div><!-- End Col -->
 
-						<a href="#">
-							<div class="single_promo">
-								<img src="img/after-banner-3.webp" alt="">
-								<div class="box-content">
-									<h3 class="title">Used for sale</h3>
-									<span class="post">2024 Collection</span>
-								</div>
-							</div>	
-						</a>	
-						
-					</div><!--  End Col -->					
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <a href="#">
+          <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; background-color: #003566; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+            <img src="img/after-banner-2.webp" alt="" style="width: 100%; height: auto;">
+            <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
+              <h3 class="title" style="background-color: #003566; border-radius: 10px; font: bolder; font-weight: 900;">New for sale</h3>
+              <span class="post">2024 Collection</span>
+            </div>
+          </div>
+        </a>
 
-					<div class="col-lg-4 col-md-6 col-sm-12">
-						<a href="#">
-							<div class="single_promo">
-								<img src="img/after-banner-4.webp" alt="">
-								<div class="box-content">
-									<h3 class="title">New</h3>
-									<span class="post">2024 Collection</span>
-								</div>
-							</div>
-						</a>	
-					</div><!--  End Col -->					
-				
-				</div>			
-			</div>		
-		</section>
+        <a href="#">
+          <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; background-color: #003566; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+            <img src="img/after-banner-3.webp" alt="" style="width: 100%; height: auto;">
+            <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
+              <h3 class="title" style="background-color: #003566; border-radius: 10px; font: bolder; font-weight: 900;">Used for sale</h3>
+              <span class="post">2024 Collection</span>
+            </div>
+          </div>
+        </a>
+      </div><!-- End Col -->
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <a href="#">
+          <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; background-color: #003566; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+            <img src="img/after-banner-4.webp" alt="" style="width: 100%; height: auto;">
+            <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
+              <h3 class="title" style="background-color: #003566; border-radius: 10px; font: bolder; font-weight: 900;">New</h3>
+              <span class="post">2024 Collection</span>
+            </div>
+          </div>
+        </a>
+      </div><!-- End Col -->
+    </div>
+  </div>
+</section>
+
 		<!--  Promo ITEM END -->	
 		
 
@@ -289,213 +427,113 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="section_title">						
-							<h2>Our <span>Products</span></h2>
+							<h2>Our <span style="color: #003566;">Products</span></h2>
 							<div class="divider"></div>							
 						</div>
 					</div>
 				</div>
 			
-				<div class="text-center">
-					<div class="product_filter">
-						<ul>
-							<li class="active filter" data-filter="all">ALL</li>
-							<li class="filter" data-filter=".sale">Sale</li>
-							<li class="filter" data-filter=".bslr">Bestseller</li>
-							<li class="filter" data-filter=".ftrd">Featured</li>
-						</ul>
-					</div>
-					
-					<div class="product_item">
-						<div class="row">					
-							<!-- Product 1 -->
-							<div class="col-lg-3 col-md-4 col-sm-6 mix sale">
-								<div class="single_product">
-									<div class="product_image">
-										<img src="img/all-1.webp" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
-										<div class="new_badge">New</div>
-										<div class="box-content">
-											<a href="#"><i class="fa fa-heart-o"></i></a>
-											<a href="#"><i class="fa fa-cart-plus"></i></a>
-											<a href="#"><i class="fa fa-search"></i></a>
-										</div>										
-									</div>
-									<div class="product_btm_text">
-										<h4><a href="#">Product Title</a></h4>
-										<div class="p_rating">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>										
-										<span class="price">$123.00</span>
-									</div>
-								</div>
-							</div>
-		
-							<!-- Product 2 -->
-							<div class="col-lg-3 col-md-4 col-sm-6 mix ftrd">
-								<div class="single_product">
-									<div class="product_image">
-										<img src="img/all-2.webp" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
-										<div class="new_badge">New</div>
-										<div class="box-content">
-											<a href="#"><i class="fa fa-heart-o"></i></a>
-											<a href="#"><i class="fa fa-cart-plus"></i></a>
-											<a href="#"><i class="fa fa-search"></i></a>
-										</div>										
-									</div>
-									<div class="product_btm_text">										
-										<h4><a href="#">Product Title</a></h4>
-										<div class="p_rating">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>											
-										<span class="price">$123.00</span>
-									</div>
-								</div>
-							</div>
-		
-							<!-- Product 3 -->
-							<div class="col-lg-3 col-md-4 col-sm-6 mix">
-								<div class="single_product">
-									<div class="product_image">
-										<img src="img/all-3.webp" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
-										<div class="new_badge">New</div>
-										<div class="box-content">
-											<a href="#"><i class="fa fa-heart-o"></i></a>
-											<a href="#"><i class="fa fa-cart-plus"></i></a>
-											<a href="#"><i class="fa fa-search"></i></a>
-										</div>										
-									</div>
-									<div class="product_btm_text">
-										<h4><a href="#">Product Title</a></h4>
-										<div class="p_rating">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>											
-										<span class="price">$123.00</span>
-									</div>
-								</div>
-							</div>
-		
-							<!-- Product 4 -->
-							<div class="col-lg-3 col-md-4 col-sm-6 mix sale bslr">
-								<div class="single_product">
-									<div class="product_image">
-										<img src="img/all-4.webp" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
-										<div class="box-content">
-											<a href="#"><i class="fa fa-heart-o"></i></a>
-											<a href="#"><i class="fa fa-cart-plus"></i></a>
-											<a href="#"><i class="fa fa-search"></i></a>
-										</div>										
-									</div>
-									<div class="product_btm_text">
-										<h4><a href="#">Product Title</a></h4>
-										<div class="p_rating">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>											
-										<span class="price">$123.00</span>
-									</div>
-								</div>
-							</div>
-		
-							<!-- Product 5 -->
-							<div class="col-lg-3 col-md-4 col-sm-6 mix ftrd">
-								<div class="single_product">
-									<div class="product_image">
-										<img src="img/all-5.webp" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
-										<div class="box-content">
-											<a href="#"><i class="fa fa-heart-o"></i></a>
-											<a href="#"><i class="fa fa-cart-plus"></i></a>
-											<a href="#"><i class="fa fa-search"></i></a>
-										</div>										
-									</div>
-									<div class="product_btm_text">										
-										<h4><a href="#">Product Title</a></h4>
-										<div class="p_rating">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>											
-										<span class="price">$123.00</span>
-									</div>
-								</div>
-							</div>
-		
-							<!-- Product 6 -->
-							<div class="col-lg-3 col-md-4 col-sm-6 mix sale bslr">
-								<div class="single_product">
-									<div class="product_image">
-										<img src="img/all-6.png" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
-										<div class="box-content">
-											<a href="#"><i class="fa fa-heart-o"></i></a>
-											<a href="#"><i class="fa fa-cart-plus"></i></a>
-											<a href="#"><i class="fa fa-search"></i></a>
-										</div>										
-									</div>
-									<div class="product_btm_text">
-										<h4><a href="#">Product Title</a></h4>
-										<div class="p_rating">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>											
-										<span class="price">$123.00</span>
-									</div>
-								</div>
-							</div>
-		
-							<!-- Product 7 -->
-							<div class="col-lg-3 col-md-4 col-sm-6 mix sale bslr">
-								<div class="single_product">
-									<div class="product_image">
-										<img src="img/all-7.webp" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
-										<div class="box-content">
-											<a href="#"><i class="fa fa-heart-o"></i></a>
-											<a href="#"><i class="fa fa-cart-plus"></i></a>
-											<a href="#"><i class="fa fa-search"></i></a>
-										</div>										
-									</div>
-									<div class="product_btm_text">
-										<h4><a href="#">Product Title</a></h4>
-										<div class="p_rating">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>											
-										<span class="price">$123.00</span>
-									</div>
-								</div>
-							</div>
-		
-							<!-- Product 8 -->
-							<div class="col-lg-3 col-md-4 col-sm-6 mix sale bslr">
-								<div class="single_product">
-									<div class="product_image">
-										<img src="img/all-8.webp" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
-										<div class="box-content">
-											<a href="#"><i class="fa fa-heart-o"></i></a>
-											<a href="#"><i class="fa fa-cart-plus"></i></a>
-											<a href="#"><i class="fa fa-search"></i></a>
-										</div>										
-									</div>
-									<div class="product_btm_text">
-										<h4><a href="#">Product Title</a></h4>
-										<div class="p_rating">
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>											
-										<span class="price">$123.00</span>
-									</div>
-								</div>
-							</div>					
-						</div>
-					</div>
-				</div>
+				<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Database connection
+$mysqli = new mysqli("localhost", "root", "", "news-site");
+if ($mysqli->connect_errno) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+?>
+
+<div class="text-center">
+    <div class="product_filter text-center">
+        <ul>
+            <li class="active filter" data-filter="all">ALL</li>
+            <li class="filter" data-filter="sale">Sale</li>
+            <li class="filter" data-filter="bslr">Rent</li>
+        </ul>
+    </div>
+
+    <div class="product_item">
+        <div class="row" id="product-container">
+            <?php
+            $sql = "SELECT * FROM post ORDER BY post_id DESC LIMIT 8";
+            $result = $mysqli->query($sql);
+
+            while ($row = $result->fetch_assoc()):
+                $cat_class = '';
+                if (strtolower($row['category']) === 'for sale') {
+                    $cat_class = 'sale';
+                } elseif (strtolower($row['category']) === 'for rent') {
+                    $cat_class = 'bslr';
+                }
+            ?>
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item <?= $cat_class ?> mb-4">
+                <div class="single_product">
+                    <div class="product_image">
+                        <img src="<?= htmlspecialchars($row['post_img']) ?>" alt="" style="width: 100%; height: 300px; object-fit: cover;" />
+                        <div class="box-content">
+                            <a href="#"><i class="fa fa-heart-o"></i></a>
+                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                            <a href="#"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="product_btm_text">
+                        <h4><a href="#"><?= htmlspecialchars($row['title']) ?></a></h4>
+                        <div class="p_rating">
+                            <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <span class="price">$<?= number_format($row['price'], 2) ?></span>
+                    </div>
+                </div>
+            </div>
+            <?php endwhile; ?>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const filterButtons = document.querySelectorAll('.product_filter .filter');
+    const allItems = document.querySelectorAll('.product-item');
+    
+    // Initially, show all items
+    allItems.forEach(item => item.classList.add('visible'));
+    
+    filterButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Set the active class on the clicked filter
+            filterButtons.forEach(function(el) {
+                el.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Animate items based on the selected category
+            allItems.forEach(function(item) {
+                if (filterValue === 'all') {
+                    item.classList.remove('hidden');
+                    item.classList.add('visible');
+                } else {
+                    if (item.classList.contains(filterValue)) {
+                        item.classList.remove('hidden');
+                        item.classList.add('visible');
+                    } else {
+                        item.classList.remove('visible');
+                        item.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    });
+});
+
+</script>
+
+
+
 			</div>
 		</section>
 		
@@ -1206,7 +1244,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
 </script>
+<!-- MixItUp JS -->
+<script src="https://cdn.jsdelivr.net/npm/mixitup@3/dist/mixitup.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var mixer = mixitup('#mix-container', {
+        selectors: {
+            target: '.mix'
+        },
+        animation: {
+            duration: 300
+        }
+    });
+
+    // Handle active class change
+    document.querySelectorAll('.product_filter .filter').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.product_filter .filter').forEach(function (el) {
+                el.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+
+
 
 
 
