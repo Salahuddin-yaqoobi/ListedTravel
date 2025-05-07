@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>FancyShop - Ecommerce Bootstrap Template</title>
+	<title>Listed Travel</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"> 
 	<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">	
 	<link rel="stylesheet" href="css/animate.css" />
@@ -18,6 +18,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -27,19 +28,57 @@
 </head>
 	<body>
 	
-		<!--  Preloader  -->
-		
-		<div class="preloader">
-			<div class="status-mes">
-				<div class="bigSqr">
-					<div class="square first"></div>
-					<div class="square second"></div>
-					<div class="square third"></div>
-					<div class="square fourth"></div>
-				</div>
-				<div class="text_loading text-center">loading</div>
-			</div>
+	<!-- New Preloader (Skeleton Loader) -->
+		<div class="preloader bg-white">
+  <header class="bg-white border-b border-gray-200">
+    <div class="flex items-center justify-between p-4">
+      <div class="animate-pulse">
+        <div class="h-12 w-32 bg-gray-300 rounded"></div>
+      </div>
+      <form class="flex-1 max-w-md mx-8">
+        <div class="relative">
+          <input type="text" class="w-full h-10 bg-gray-300 rounded-full pl-10" aria-label="Search input" />
+          <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+            <div class="h-5 w-5 bg-gray-300 rounded-full"></div>
+          </div>
+        </div>
+      </form>
+      <div class="flex items-center gap-6">
+        <div class="animate-pulse h-14 w-14 bg-gray-300 rounded-full"></div>
+        <div class="animate-pulse h-14 w-14 bg-gray-300 rounded-full"></div>
+        <div class="animate-pulse h-16 w-16 bg-gray-300 rounded-full"></div>
+      </div>
+    </div>
+    <nav class="bg-gray-100 border-t border-gray-200">
+      <ul class="flex justify-center items-center gap-10 py-3">
+        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
+        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
+        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
+        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
+        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
+        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="dynamicContent">
+    <section id="slider_area" class="text-center p-4 flex gap-4 justify-center">
+      <div class="animate-pulse h-64 w-64 bg-gray-300 rounded"></div>
+      <div class="animate-pulse h-64 w-64 bg-gray-300 rounded"></div>
+      <div class="animate-pulse h-64 w-64 bg-gray-300 rounded"></div>
+    </section>
+
+    <section id="promo_area" class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
+      <div class="space-y-4">
+        <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
+        <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
+      </div>
+      <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
+    </section>
+  </div>
 		</div>
+
 		
 		<!--  Start Header  -->
 		<header id="header_area" style="background-color: #ffffff; border-bottom: 1px solid #e5e7eb;">
@@ -48,107 +87,77 @@
 			  
 			  <!-- Logo -->
 			  <div>
-				<a href="index.html">
+				<a href="index.php">
 				  <img src="img/logo.png" alt="Logo" style="height: 50px;">
 				</a>
 			  </div>
 		  
-			  <!-- Search Bar -->
-			  <div style="flex: 1; max-width: 500px; margin: 0 32px;">
-				<div style="position: relative;">
-				  <input 
-					type="text" 
-					placeholder="Search for equipment..." 
-					style="
-					  width: 100%; 
-					  padding: 10px 16px 10px 40px; 
-					  border: 1px solid #d1d5db; 
-					  border-radius: 9999px; 
-					  outline: none; 
-					  font-size: 16px;
-					  transition: all 0.3s ease;
-					"
-					onfocus="this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.5)'; this.style.borderColor='transparent';"
-					onblur="this.style.boxShadow='none'; this.style.borderColor='#d1d5db';"
-				  />
-				  <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af;">
-					<svg xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-					</svg>
-				  </div>
-				</div>
-			  </div>
-		  
-			  <!-- Icons -->
-			  <div style="display: flex; align-items: center; gap: 24px;">
-				<a href="wishlist.html" style="position: relative; display: flex; align-items: center;">
-				  <img src="img/heart.png" alt="Wishlist" style="height: 54px; width: 54px; object-fit: cover;">
-				</a>
-			  
-				<a href="cart.html" style="position: relative; display: flex; align-items: center;">
-				  <img src="img/cart.jpg" alt="Cart" style="height: 54px; width: 54px; object-fit: cover;">
-				</a>
-			  
-				<a class="profile-btn" onclick="openSidebar()" style="position: relative; display: flex; align-items: center;">
-				  <img src="img/contact.jpg" alt="User" style="height: 74px; width: 74px; border-radius: 50%; object-fit: cover;">
-				</a>
-			  
-				<div id="sidebar" class="sidebar">
-				  <button class="close-btn" onclick="closeSidebar()">×</button>
-				  <h2>John Doe</h2>
-			  
-				  <div class="contact-item">
-					<span>Email</span>
-					<p>johndoe@example.com</p>
-				  </div>
-			  
-				  <div class="contact-item">
-					<span>Phone</span>
-					<p>+1 234 567 8901</p>
-				  </div>
-			  
-				  <div class="contact-item">
-					<span>Address</span>
-					<p>1234 Elm Street, NY, USA</p>
-				  </div>
-			  
-				  <div class="contact-item">
-					<span>Website</span>
-					<p>www.johndoe.com</p>
-				  </div>
-				</div>
-			  </div>
-			  
-			  
-			  <!-- Sidebar (keep outside of flex div) -->
-			  <div id="sidebar" class="sidebar">
-				<button class="close-btn" onclick="closeSidebar()">×</button>
-				<h2>John Doe</h2>
-			  
-				<div class="contact-item">
-				  <span>Email</span>
-				  <p>johndoe@example.com</p>
-				</div>
-			  
-				<div class="contact-item">
-				  <span>Phone</span>
-				  <p>+1 234 567 8901</p>
-				</div>
-			  
-				<div class="contact-item">
-				  <span>Address</span>
-				  <p>1234 Elm Street, NY, USA</p>
-				</div>
-			  
-				<div class="contact-item">
-				  <span>Website</span>
-				  <p>www.johndoe.com</p>
-				</div>
-			  </div>
-			  
-			  </div>
-		  
-			</div>
+             <!-- Search Bar -->
+			<form id="searchForm" onsubmit="return handleSearch(event)" style="flex: 1; max-width: 500px; margin: 0 32px;">
+  <div style="position: relative;">
+    <input 
+      type="text" 
+      id="searchInput"
+      name="query"
+      placeholder="Search for equipment..." 
+      autocomplete="off"
+      style="
+        width: 100%; 
+        padding: 10px 16px 10px 40px; 
+        border: 1px solid #d1d5db; 
+        border-radius: 9999px; 
+        outline: none; 
+        font-size: 16px;
+        transition: all 0.3s ease;
+      "
+      onfocus="this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.5)'; this.style.borderColor='transparent';"
+      onblur="this.style.boxShadow='none'; this.style.borderColor='#d1d5db';"
+    />
+    <div id="suggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #d1d5db; border-top: none; max-height: 200px; overflow-y: auto; display: none;"></div>
+    <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af;">
+      <svg xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+      </svg>
+    </div>
+  </div>
+ 
+			</form>
+			<style>
+/* Suggestions container */
+#suggestions {
+  position: absolute;
+  top: 100%;
+  margin-top: 4px;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  padding: 4px 0;
+}
+
+/* Each suggestion item */
+.suggestion-item {
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #374151; /* Tailwind gray-700 */
+  transition: background 0.2s, color 0.2s;
+
+}
+
+/* Hover effect */
+.suggestion-item:hover {
+  background-color: #f3f4f6; /* Tailwind gray-100 */
+  color: #2563eb; /* Tailwind blue-600 */
+}
+			</style>
 		  
 			<!-- Bottom Section: Navigation Menu -->
 			<nav style="background-color: #f9fafb; border-top: 1px solid #e5e7eb;">
@@ -158,7 +167,7 @@
 				<li><a href="shop.html" style="color: #111827; text-decoration: none;">New for Sale</a></li>
 				<li><a href="used-products.html" style="color: #111827; text-decoration: none;">Used for Sale</a></li>
 				<li><a href="admin.php" style="color: #111827; text-decoration: none;">Admin panel</a></li>
-				<li><a href="#" onclick="openSidebar()" style="color: #111827; text-decoration: none;">Contact</a></li>
+				<li><a href="contact.html" style="color: #111827; text-decoration: none;">Contact</a></li>
 			  </ul>
 			</nav>
 		  </header>
@@ -174,9 +183,9 @@
 						<div class="single-slide-item-table">
 							<div class="single-slide-item-tablecell">
 								<div class="slider_content text-left slider-animated-1">						
-									<p class="animated">Al marwan</p>
-									<h1 class="animated">Koeblco distribution</h1>
-									<h4 class="animated">Authorized dealer for Japanese tecnology, built to last</h4>
+									<p class="animated">   Listed Travel</p>
+									<h1 class="animated">  Koeblco distribution</h1>
+									<h4 class="animated">  Authorized dealer for Japanese tecnology, built to last</h4>
 									<a href="product.html" class="exploreInventoryBtn btn main_btn animated">Explore inventory</a>
 								</div>
 							</div>
@@ -189,7 +198,7 @@
 						<div class="single-slide-item-table">
 							<div class="single-slide-item-tablecell">
 								<div class="slider_content text-center slider-animated-2">						
-									<p class="animated">Al marwan</p>
+									<p class="animated">Listed Travel</p>
 									<h1 class="animated">Skip the upfront cost</h1>
 									<h4 class="animated">Discover equipment rentals with certified operators</h4>
 									<a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
@@ -204,7 +213,7 @@
 						<div class="single-slide-item-table">
 							<div class="single-slide-item-tablecell">
 								<div class="slider_content text-right slider-animated-3">						
-									<p class="animated">Al marwan</p>
+									<p class="animated">Listed Travel</p>
 									<h1 class="animated">Low-hours used machinary</h1>
 									<h4 class="animated">Trusted brands. Top quality. Well-maintained.</h4>
 									<a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
@@ -1118,6 +1127,92 @@
 
 <!-- End of website -->
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('searchInput');
+  const suggestionsContainer = document.getElementById('suggestions');
+  
+  // Handle search submit
+  document.getElementById('searchForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const query = searchInput.value.trim().toLowerCase();
+
+    // Redirect to specific pages based on keywords
+    if (query === 'rent') {
+      window.location.href = 'rent.php';
+      return;
+    } else if (query === 'sale') {
+      window.location.href = 'sale.php';
+      return;
+    }
+
+    try {
+      const response = await fetch('get-product-id.php?query=' + encodeURIComponent(query));
+      const data = await response.json();
+
+      if (data.success && data.post_id) {
+        window.location.href = 'product-details.php?post_id=' + data.post_id;
+      } else {
+        alert('Product not found.');
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      alert('Something went wrong.');
+    }
+  });
+
+  // Fetch suggestions on input
+  searchInput.addEventListener('input', async function () {
+    const query = searchInput.value.trim();
+
+    if (query.length === 0) {
+      suggestionsContainer.innerHTML = '';
+      suggestionsContainer.style.display = 'none';  // Hide suggestions if query is empty
+      return;
+    }
+
+    try {
+      const response = await fetch('get-suggestions.php?query=' + encodeURIComponent(query));
+      const suggestions = await response.json();
+
+      suggestionsContainer.innerHTML = '';  // Clear previous suggestions
+      if (suggestions.length > 0) {
+        suggestionsContainer.style.display = 'block';  // Show suggestions if any
+        suggestions.forEach(item => {
+          const li = document.createElement('div'); // Changed to div for styling purpose
+          li.textContent = item.name;
+          li.classList.add('suggestion-item'); // Add the suggestion-item class
+          li.addEventListener('click', () => {
+            window.location.href = 'product-details.php?post_id=' + item.post_id;
+          });
+          suggestionsContainer.appendChild(li);
+        });
+      } else {
+        suggestionsContainer.style.display = 'none';  // Hide if no suggestions
+      }
+    } catch (error) {
+      console.error('Suggestion error:', error);
+    }
+  });
+
+  // Hide suggestions when clicking outside
+  document.addEventListener('click', function (event) {
+    if (
+      !searchInput.contains(event.target) &&
+      !suggestionsContainer.contains(event.target)
+    ) {
+      suggestionsContainer.innerHTML = '';  // Clear suggestions
+      suggestionsContainer.style.display = 'none';  // Hide suggestions container
+    }
+  });
+});
+</script>
+
+
+
+
+
+
 </html>
 
 			
