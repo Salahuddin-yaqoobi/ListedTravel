@@ -2,7 +2,7 @@
 
 session_start();
 if(!isset($_SESSION['username'])){
-    header("Location: http://localhost/fancyshop/admin/");
+    header("Location: http://localhost/listedtravel/admin/");
     exit();
 }
 // var_dump($_SESSION);

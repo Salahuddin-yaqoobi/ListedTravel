@@ -1,5 +1,5 @@
 /*
-Template Name: FancyShop - Bootstrap eCommerce Template
+Template Name: listedtravel - Bootstrap eCommerce Template
 Template URI: http://themesvila.com
 Description: Responsive Bootstrap eCommerce Template
 Author: ThemesVila
@@ -1016,6 +1016,7 @@ input:focus, textarea:focus {
     position: absolute;
     content: "";
     height: 100%;
+	display: none;
     width: 100%;
     top: 0;
     left: 0;
