@@ -5,6 +5,6 @@ session_unset();   //it remove the values which we have added in it
 
 session_destroy();
 
-header("Location: http://localhost/fancyshop");
+header("Location: http://localhost/listedtravel");
 
 ?>

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>FancyShop - Ecommerce Bootstrap Template</title>
+		<title>listedtravel - Ecommerce Bootstrap Template</title>
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"> 
 		<link rel="stylesheet" href="css/animate.css" />
 		<link rel="stylesheet" href="css/owl.theme.default.min.css" />
@@ -392,7 +392,7 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2024 All Rights Reserved FancyShop</p>
+							<p class="copyright_text text-center">&copy; 2024 All Rights Reserved listedtravel</p>
 						</div>
 						
 						<div class="col-sm-4">

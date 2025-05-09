@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+
+?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
@@ -29,8 +34,8 @@
 	<body>
 	
 	<!-- New Preloader (Skeleton Loader) -->
-		<div class="preloader bg-white">
-  <header class="bg-white border-b border-gray-200">
+		<!-- <div class="preloader bg-white">
+  <!-- <header class="bg-white border-b border-gray-200">
     <div class="flex items-center justify-between p-4">
       <div class="animate-pulse">
         <div class="h-12 w-32 bg-gray-300 rounded"></div>
@@ -59,8 +64,8 @@
         <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
       </ul>
     </nav>
-  </header>
-
+  </header> -->
+<!-- 
   <div id="dynamicContent">
     <section id="slider_area" class="text-center p-4 flex gap-4 justify-center">
       <div class="animate-pulse h-64 w-64 bg-gray-300 rounded"></div>
@@ -77,7 +82,7 @@
       <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
     </section>
   </div>
-		</div>
+		</div> --> 
 
 		
 		<!--  Start Header  -->
@@ -157,6 +162,9 @@
     <li><a href="admin.php" style="color: #ffffff; text-decoration: none; position: relative;">Admin Panel</a></li> -->
 
     <li><a href="contact.html" style="color: #ffffff; text-decoration: none; position: relative;">Contact</a></li>
+    <?php if(isset($_SESSION['username'])) { ?>
+    <li><a href="post.php" style="color: #ffffff; text-decoration: none; position: relative;">Dashboard</a></li>
+    <?php } ?>
   </ul>
 </nav>
 
@@ -295,6 +303,7 @@
 
 .owl-nav {
   position: absolute;
+  display: none !important;
   top: 50%;
   width: 100%;
   display: flex;
@@ -427,7 +436,7 @@
 					error_reporting(E_ALL);
 
 					// Database connection
-					$mysqli = new mysqli("localhost", "root", "", "news-site");
+					$mysqli = new mysqli("localhost", "root", "", "travel");
                      if ($mysqli->connect_errno) {
 					    die("Connection failed: " . $mysqli->connect_error);
 					}
@@ -1037,7 +1046,7 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2024 All Rights Reserved FancyShop</p>
+							<p class="copyright_text text-center">&copy; 2024 All Rights Reserved listedtravel</p>
 						</div>
 						
 						<div class="col-sm-4">

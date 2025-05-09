@@ -1,3 +1,3 @@
 <?php 
-   $conn = mysqli_connect("localhost","root","","news-site") or die("connection failed");
+   $conn = mysqli_connect("localhost","root","","travel") or die("connection failed");
 ?>

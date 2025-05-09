@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 
-$hostname = "http://localhost/fancyshop";
+$hostname = "http://localhost/listedtravel";
 
 if (isset($_GET['id'])) {
     $post_id = intval($_GET['id']);
@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
         $image_name = basename($row['post_img']); // Clean file name
 
         // Step 2: Build full path
-        $image_path = $_SERVER['DOCUMENT_ROOT'] . "/fancyshop/uploads/" . $image_name;
+        $image_path = $_SERVER['DOCUMENT_ROOT'] . "/listedtravel/uploads/" . $image_name;
 
         // Step 3: Delete image if it exists
         if (file_exists($image_path)) {
