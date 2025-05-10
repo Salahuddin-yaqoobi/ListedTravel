@@ -16,7 +16,7 @@ if (isset($_GET['page'])) {
 $offset = ($page - 1) * $limit;
 
 $sql = "SELECT p.post_id, p.title, p.description, p.post_date, p.category, 
-        p.post_img, p.price, p.duration, 
+        p.post_img, p.price, p.duration, p.product_status,
         COALESCE(vc.category_name, 'Not Specified') as category_name 
         FROM post p 
         LEFT JOIN vehicle_category vc ON p.vehicle_cat = vc.category_id 
@@ -96,6 +96,7 @@ if (!$result) {
                             <th>Vehicle Type</th>
                             <th>Price</th>
                             <th>Date</th>
+                            <th>Status</th>
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -123,6 +124,14 @@ if (!$result) {
                             <td><?php echo $row['category_name']; ?></td>
                             <td><?php echo $price; ?></td>
                             <td><?php echo $row['post_date']; ?></td>
+                            <td>
+                                <?php 
+                                $status = isset($row['product_status']) && $row['product_status'] === 'sold' ? 'sold' : 'available';
+                                ?>
+                                <span class="status-badge <?php echo $status; ?>">
+                                    <?php echo ucfirst($status); ?>
+                                </span>
+                            </td>
                             <td class="image-cell">
                                 <img src="uploads/<?php echo $imagePath; ?>" alt="Post Image">
                             </td>
@@ -442,6 +451,34 @@ th {
         width: 50px;
         height: 40px;
     }
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px;
+}
+
+.status-badge.available {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.status-badge.sold {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Adjust table column widths */
+table th:nth-child(7), /* Status column */
+table td:nth-child(7) {
+    width: 100px;
+    text-align: center;
 }
 </style>
 

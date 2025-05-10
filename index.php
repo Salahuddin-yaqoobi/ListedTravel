@@ -86,150 +86,158 @@ session_start();
 
 		
 		<!--  Start Header  -->
-<header id="header_area" style="background: linear-gradient(90deg, #003566, #00509d); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <!-- Top Section: Logo, Search, Navigation -->
-  <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; flex-wrap: wrap; gap: 20px;">
-    
+<header id="header_area">
+    <!-- Top Bar with Logo, Search, and Icons -->
+    <div class="top-bar" style="background-color:#F3F4F6; padding: 15px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
     <!-- Logo -->
-	<div style="flex-shrink: 0;">
-      <a href="index.php" style="display: inline-block; padding: 6px 10px; border-radius: 8px; transition: all 0.3s ease;">
-        <img src="img/logo.png" alt="Logo" style="height: 60px; filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.8)); transition: all 0.3s ease; animation: pulseGlow 1.5s infinite;">
+                <div class="logo-container" style="flex: 0 0 200px;">
+                    <a href="index.php">
+                        <img src="img/logo.png" alt="Listed General Transport" style="max-width: 200px; height: auto;">
       </a>
     </div>
-<style>
-  @keyframes pulseGlow {
-    0% {
-      filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.6));
-    }
-    50% {
-      filter: drop-shadow(0 0 20px rgba(255, 106, 24, 1));
-    }
-    100% {
-      filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.6));
-    }
-  }
 
-  /* Hover effect to scale the logo */
-  a:hover img {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 25px rgba(255, 106, 24, 1));
-  }
-</style>
-    <!-- Search Bar -->
-	<form id="searchForm" onsubmit="return handleSearch(event)" style="flex: 1; max-width: 600px;">
-  <div style="position: relative;">
-    <input 
-      type="text" 
-      id="searchInput"
-      name="query"
-      placeholder="Search for equipment..." 
-      autocomplete="off"
-      style="
-        width: 100%; 
-        padding: 10px 16px 10px 40px; 
-        border: 1px solid #d1d5db; 
-        border-radius: 9999px; 
-        outline: none; 
-        font-size: 16px;
-        transition: all 0.3s ease;
-        background-color: #ffffff; /* Ensure white background */
-      "
-      onfocus="this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.5)'; this.style.borderColor='transparent';"
-      onblur="this.style.boxShadow='none'; this.style.borderColor='#d1d5db';"
-    />
-    
-    <div id="suggestions" style="position: absolute; top: 100%; margin-top: 4px; left: 0; right: 0; background: white; border: 1px solid #d1d5db; border-top: none; max-height: 200px; overflow-y: auto; display: none;"></div>
-    
-    <!-- Search Icon -->
-    <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af;">
-      <svg xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-      </svg>
+    <!-- Updated Search Bar with new icon color -->
+                <div class="search-container" style="flex: 1;">
+                    <form id="searchForm" onsubmit="return handleSearch(event)">
+                        <div style="position: relative;">
+                            <input 
+                                type="text" 
+                                id="searchInput"
+                                placeholder="Search for equipment..." 
+                                style="
+                                    width: 100%; 
+                                    padding: 10px 45px 10px 20px;
+                                    border: 1px solid #f39c12;
+                                    border-radius: 5px;
+                                    background: #ffffff;
+                                    font-size: 14px;
+                                    height: 42px;
+                                "
+                            >
+                            <button type="button" 
+                                onclick="document.getElementById('searchInput').focus();"
+                                style="
+                                    position: absolute;
+                                    right: 10px;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                    background: none;
+                                    border: none;
+                                    color: #f39c12;
+                                    cursor: pointer;
+                                "
+                            >
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <div id="suggestions" style="
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                right: 0;
+                                background: #ffffff;
+                                border: 1px solid #f39c12;
+                                border-top: none;
+                                border-radius: 0 0 5px 5px;
+                                max-height: 200px;
+                                overflow-y: auto;
+                                z-index: 1000;
+                                display: none;
+                            ">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Icons -->
+                <div class="header-icons" style="display: flex; gap: 20px; align-items: center;">
+        <a href="#" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-heart-o"></i></a>
+        <a href="#" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-shopping-cart"></i></a>
+        <a href="contact.php" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-user"></i></a>
     </div>
   </div>
-</form>
+        </div>
+    </div>
 
-
- <!-- Navigation Menu -->
-<nav style="flex-shrink: 0;">
-  <ul style="display: flex; align-items: center; gap: 24px; margin: 0; padding: 0; list-style: none; font-weight: 600; font-size: 16px;">
-    <li><a href="index.html" style="color: #ffffff; text-decoration: none; position: relative;">Home</a></li>
-    <li><a href="rent.php" style="color: #ffffff; text-decoration: none; position: relative;">For Rent</a></li>
-    <li><a href="product.html" style="color: #ffffff; text-decoration: none; position: relative;">New for Sale</a></li>
-
-    <!-- Uncomment for future use -->
-    <!-- <li><a href="used-products.html" style="color: #ffffff; text-decoration: none; position: relative;">Used for Sale</a></li>
-    <li><a href="admin.php" style="color: #ffffff; text-decoration: none; position: relative;">Admin Panel</a></li> -->
-
-    <li><a href="contact.html" style="color: #ffffff; text-decoration: none; position: relative;">Contact</a></li>
+ <!-- Navigation Menu with centered container -->
+    <div class="nav-bar" style="background: linear-gradient(to right, #f39c12, #e67e22); box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-left: 95px; margin-right: 95px; margin-bottom: 10px; border-radius: 10px;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <nav style="padding: 8px 0;">
+                <ul style="
+                    display: flex;
+                    justify-content: center;
+                    gap: 40px;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                ">
+                    <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
+                    <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
+                    <li><a href="product.html" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
+                    <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
-    <li><a href="post.php" style="color: #ffffff; text-decoration: none; position: relative;">Dashboard</a></li>
+                    <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
     <?php } ?>
   </ul>
 </nav>
+        </div>
+    </div>
 
 <style>
-  /* Basic styles for the link */
-  nav a {
+        /* Hover effects for nav links */
+        .nav-bar a {
     position: relative;
-    color: #ffffff;
-    text-decoration: none;
-    display: inline-block;
-  }
+            transition: color 0.3s ease;
+        }
 
-  /* Underline styles */
-  nav a::after {
+        .nav-bar a:hover {
+            color: #ffffff !important;
+        }
+
+        .nav-bar a::after {
     content: '';
     position: absolute;
-    bottom: -5px; /* Positioning it below the link */
-    left: 50%; /* Start at the center */
-    transform: translateX(-50%); /* Center it horizontally */
-    width: 0; /* Initially the width is zero */
-    height: 3px; /* Line thickness */
-    background-color: #ffffff; /* Underline color */
-    transition: width 0.3s ease, left 0.3s ease;
-    border-radius: 5px; /* Rounded corners for the underline */
-  }
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ffffff;
+            transition: width 0.3s ease;
+        }
 
-  /* On hover, expand the underline to the full width of the element */
-  nav a:hover::after {
-    width: 100%; /* Expand the underline to full width */
-  }
-</style>
-  </div>
+        .nav-bar a:hover::after {
+            width: 100%;
+        }
 
-  <!-- Suggestions Styling -->
-  <style>
-    #suggestions {
-      position: absolute;
-      top: 100%;
-      margin-top: 4px;
-      left: 0;
-      right: 0;
-      background: white;
-      border: 1px solid #d1d5db;
-      border-top: none;
-      border-radius: 0 0 12px 12px;
-      max-height: 200px;
-      overflow-y: auto;
-      display: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      z-index: 10;
-      padding: 4px 0;
-    }
+        /* Hover effects for icons */
+        .header-icons a {
+            transition: transform 0.3s ease;
+        }
 
-    .suggestion-item {
-      padding: 10px 16px;
-      font-size: 16px;
-      cursor: pointer;
-      color: #374151;
-      transition: background 0.2s, color 0.2s;
-    }
+        .header-icons a:hover {
+            transform: scale(1.2);
+        }
 
-    .suggestion-item:hover {
-      background-color: #f3f4f6;
-      color: #2563eb;
-    }
+        /* Search input focus effect */
+        #searchInput:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item {
+            padding: 8px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item:hover {
+            background-color: rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
   </style>
 </header>
 
@@ -239,11 +247,13 @@ session_start();
 <style>
 	/* Professional slider text styling */
 .slider_content p {
-  color: #f0f0f0;
+  color: #1D576F;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 10px;
+  text-shadow: 0 0 1px black;
+  
 }
 
 .slider_content h1 {
@@ -255,10 +265,12 @@ session_start();
 }
 
 .slider_content h4 {
-  color: #f5f5f5;
+  color: #0084BD;
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 25px;
+
+
 }
 
 .exploreInventoryBtn.btn.main_btn {
@@ -313,54 +325,56 @@ session_start();
 }
 
 </style>
-<section id="slider_area" class="text-center">
-  <div class="slider_active owl-carousel">
+<section id="slider_area" class="text-center" style="border-radius: 20px; overflow: hidden; margin-top:30px;">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="slider_active owl-carousel" >
 
-    <div class="single_slide" style="background-image: url(img/top-1.jpg); background-size: cover; background-position: center; opacity: 1;">
-      <div class="container">  
-        <div class="single-slide-item-table">
-          <div class="single-slide-item-tablecell">
-            <div class="slider_content text-left slider-animated-1">           
-              <p class="animated">Listed Travel</p>
-              <h1 class="animated">Koeblco distribution</h1>
-              <h4 class="animated">Authorized dealer for Japanese technology, built to last</h4>
-              <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Explore inventory</a>
+      <div class="single_slide" style="border-radius: 20px; background-image: url(img/top-1.jpg); background-size: cover; background-position: center; opacity: 1;">
+        <div class="container">  
+          <div class="single-slide-item-table">
+            <div class="single-slide-item-tablecell">
+              <div class="slider_content text-left slider-animated-1">           
+                <p class="animated">Listed Travel</p>
+                <h1 class="animated">Koeblco distribution</h1>
+                <h4 class="animated">Authorized dealer for Japanese technology, built to last</h4>
+                <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Explore inventory</a>
+              </div>
             </div>
-          </div>
-        </div>            
+          </div>            
+        </div>
       </div>
-    </div>
 
-    <div class="single_slide" style="background-image: url(img/Banner_image_-_english_3.jpg); background-size: cover; background-position: center ; opacity: 1;">
-      <div class="container">    
-        <div class="single-slide-item-table">
-          <div class="single-slide-item-tablecell">
-            <div class="slider_content text-center slider-animated-2">           
-              <p class="animated">Listed Travel</p>
-              <h1 class="animated">Skip the upfront cost</h1>
-              <h4 class="animated">Discover equipment rentals with certified operators</h4>
-              <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
+      <div class="single_slide" style="border-radius: 20px; background-image: url(img/Banner_image_-_english_3.jpg); background-size: cover; background-position: center ; opacity: 1;">
+        <div class="container">    
+          <div class="single-slide-item-table">
+            <div class="single-slide-item-tablecell">
+              <div class="slider_content text-center slider-animated-2">           
+                <p class="animated">Listed Travel</p>
+                <h1 class="animated">Skip the upfront cost</h1>
+                <h4 class="animated">Discover equipment rentals with certified operators</h4>
+                <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
+              </div>
             </div>
-          </div>
-        </div>  
+          </div>  
+        </div>
       </div>
-    </div>
 
-    <div class="single_slide" style="background-image: url(img/Banner_image_-_english_4.jpg); background-size: cover; background-position: center ; opacity: 1;">
-      <div class="container">
-        <div class="single-slide-item-table">
-          <div class="single-slide-item-tablecell">
-            <div class="slider_content text-right slider-animated-3">           
-              <p class="animated">Listed Travel</p>
-              <h1 class="animated">Low-hours used machinery</h1>
-              <h4 class="animated">Trusted brands. Top quality. Well-maintained.</h4>
-              <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
+      <div class="single_slide" style="border-radius: 20px; background-image: url(img/Banner_image_-_english_4.jpg); background-size: cover; background-position: center ; opacity: 1;">
+        <div class="container">
+          <div class="single-slide-item-table">
+            <div class="single-slide-item-tablecell">
+              <div class="slider_content text-right slider-animated-3">           
+                <p class="animated">Listed Travel</p>
+                <h1 class="animated">Low-hours used machinery</h1>
+                <h4 class="animated">Trusted brands. Top quality. Well-maintained.</h4>
+                <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
 
@@ -368,7 +382,7 @@ session_start();
 	
 		<!--  Promo ITEM STRAT  -->
 		<section id="promo_area" class="section_padding">
-  <div class="container">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     <div class="row">
       <div class="col-lg-4 col-md-6 col-sm-12">
         <a href="#">
@@ -472,7 +486,6 @@ session_start();
                         <div class="box-content">
                             <a href="#"><i class="fa fa-heart-o"></i></a>
                             <a href="#"><i class="fa fa-cart-plus"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="product_btm_text">
@@ -508,262 +521,8 @@ session_start();
 					<div class="col-md-7 text-left">
 						<div class="special_info">			
 							<h1 style="margin-bottom: 15px; font-weight: bolder; font-size: x-large;">Pioneering Digital Machinery Solutions</h1>
-							<p style="font-size: large;">Founded in 1978, Al Marwan has established itself as a trusted partner in the heavy equipment supply industry. We have introduced the region’s first e-commerce platform to better meet MENA’s growing demand for heavy equipment.</p>							
+							<p style="font-size: large;">Founded in 1978, Al Marwan has established itself as a trusted partner in the heavy equipment supply industry. We have introduced the region's first e-commerce platform to better meet MENA's growing demand for heavy equipment.</p>							
 							<a href="product.html" class="btn main_btn">Explore</a>					
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div> <!-- End Special Offer Area -->
-
-		<!-- Start Featured product Area -->
-		<section id="featured_product" class="featured_product_area section_padding">
-			<div class="container">		
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="section_title">						
-							<h2>Brand -  <span> new arrivals</span></h2>
-							<div class="divider"></div>							
-						</div>
-					</div>
-				</div>
-<style>
-	/* Ensure that all product blocks are of equal height and adjust according to image sizes */
-.single_product {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border: 1px solid #ddd;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Ensure images fit without distortion */
-.product_image img {
-    width: 100%;
-    height: 200px; /* Set a fixed height for uniformity */
-    object-fit: cover; /* Make sure the images cover the area without distortion */
-    border-radius: 5px;
-}
-
-/* If you want to ensure consistent height for product items, you can adjust this */
-.product_btm_text {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.p_rating i {
-    color: #f39c12;
-}
-
-.price {
-    font-size: 18px;
-    color: #333;
-}
-
-/* Additional margin below each item */
-.mb-4 {
-    margin-bottom: 30px;
-}
-
-</style>
-				<div class="container">
-    <div class="row text-center d-flex flex-wrap justify-content-between">
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div class="single_product">
-                <div class="product_image">
-                    <img src="img/featured-1.webp" alt=""/>
-                    <div class="box-content">
-                        <a href="#"><i class="fa fa-heart-o"></i></a>
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>                                         
-                </div>
-
-                <div class="product_btm_text">
-                    <h4><a href="#">Product Title</a></h4>
-                    <span class="price">$123.00</span>
-                </div>
-            </div>                                
-        </div> <!-- End Col -->
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div class="single_product">
-                <div class="product_image">
-                    <img src="img/featured-2.webp" alt=""/>
-                    <div class="box-content">
-                        <a href="#"><i class="fa fa-heart-o"></i></a>
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>                                         
-                </div>
-            
-                <div class="product_btm_text">                                         
-                    <h4><a href="#">Product Title</a></h4>
-                    <div class="p_rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>                                     
-                    <span class="price">$123.00</span>
-                </div>
-            </div>
-        </div> <!-- End Col -->
-		
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div class="single_product">
-                <div class="product_image">
-                    <img src="img/all-1.webp" alt=""/>
-                    <div class="box-content">
-                        <a href="#"><i class="fa fa-heart-o"></i></a>
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>                                         
-                </div>
-            
-                <div class="product_btm_text">                                         
-                    <h4><a href="#">Product Title</a></h4>
-                    <div class="p_rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>                                     
-                    <span class="price">$123.00</span>
-                </div>
-            </div>
-        </div> <!-- End Col -->
-		
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div class="single_product">
-                <div class="product_image">
-                    <img src="img/all-2.webp" alt=""/>
-                    <div class="box-content">
-                        <a href="#"><i class="fa fa-heart-o"></i></a>
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>                                         
-                </div>
-            
-                <div class="product_btm_text">                                         
-                    <h4><a href="#">Product Title</a></h4>
-                    <div class="p_rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>                                     
-                    <span class="price">$123.00</span>
-                </div>
-            </div>
-        </div> <!-- End Col -->
-		
-
-        <!-- Repeat the above block for all other products -->
-    </div> <!-- End Row -->
-</div> <!-- End Container -->
-
-			</div>
-		</section>
-		<!-- End Featured Products Area -->
-
-		<!-- Testimonials Area -->
-		<section id="testimonials" class="testimonials_area section_padding" style="background: url(img/cutomer.jpg); background-size: cover; background-attachment: fixed;">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div id="testimonial-slider" class="owl-carousel">
-							<div class="testimonial">
-								<div class="pic">
-									<img src="img/Nakheel.webp" alt="" style="width: 100%; height: 100%; object-fit: cover;">
-								</div>
-								<div class="testimonial-content">
-									<p class="description">
-										We're happy to have partnered with Al Marwan knowing they have the capacity to complete the project effectively....
-									</p>
-									<h3 class="testimonial-title">Nakheel</h3>
-									<small class="post"> - Developer</small>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>			
-								</div>
-							</div>
-			 
-							<div class="testimonial">
-								<div class="pic">
-									<img src="img/record-2.png" alt="">
-								</div>
-								<div class="testimonial-content">
-									<p class="description">
-										We appreciate the coordinated efforts of Al Marwan for the success and timely completion of this project....
-									</p>
-									<h3 class="testimonial-title">
-										Hamriyah Freezone Authority</h3>
-									<small class="post"> - Government</small>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>	
-								</div>
-							</div>	 
-							
-							
-							<div class="testimonial">
-								<div class="pic">
-									<img src="img/record-3.png" alt="">
-								</div>
-								<div class="testimonial-content">
-									<p class="description">
-										We are immensely proud to have worked with Al Marwan to bring this iconic hotel to life....
-									</p>
-									<h3 class="testimonial-title">DoubleTree by Hilton									</h3>
-									<small class="post"> - Hotel</small>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>	
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section> <!-- End STestimonials Area -->		
-	
-				<!-- Special Offer Area -->
-				<div class="special_offer_area gray_section" style="margin-top: 70px;">
-					<div class="container">
-						<div class="row">
-
-							<div class="col-md-7 text-left">
-								<div class="special_info">			
-									<h1 style="margin-bottom: 15px; font-weight: bolder; font-size: x-large;">Pioneering Digital Machinery Solutions</h1>
-									<p style="font-size: large;">Founded in 1978, Al Marwan has established itself as a trusted partner in the heavy equipment supply industry. We have introduced the region’s first e-commerce platform to better meet MENA’s growing demand for heavy equipment.</p>							
-									<a href="#" class="btn main_btn">Explore</a>					
-								</div>
-							</div>
-							<div class="col-md-5">
-								<div class="special_img text-left">
-									<img src="img/special-offer.webp" width="370" alt="" class="img-responsive">
 								</div>
 							</div>
 						</div>
@@ -1189,7 +948,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </script>
 
-</html>
+
+
 			
 		<script src="js/vendor/jquery-1.12.4.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>

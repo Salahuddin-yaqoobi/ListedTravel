@@ -35,9 +35,12 @@ if (isset($_POST['submit'])) {
     // Current date
     $date = date('d M, Y');
 
+    // Add product_status
+    $product_status = isset($_POST['product_status']) ? 'sold' : 'available';
+
     // Insert query with duration always having a value
-    $sql = "INSERT INTO post (title, description, category, vehicle_cat, post_img, post_date, price, duration) 
-            VALUES ('{$post_title}', '{$postdesc}', '{$category}', {$vehicle_cat}, '{$target_file}', '{$date}', {$price}, '{$duration}')";
+    $sql = "INSERT INTO post (title, description, category, vehicle_cat, post_img, post_date, price, duration, product_status) 
+            VALUES ('{$post_title}', '{$postdesc}', '{$category}', {$vehicle_cat}, '{$target_file}', '{$date}', {$price}, '{$duration}', '{$product_status}')";
 
     // Execute query and redirect
     if(mysqli_query($conn, $sql)) {
@@ -175,6 +178,15 @@ if (!$test_result) {
                     </div>
                 </div>
 
+                <!-- Replace the existing status-toggle div with this new one -->
+                <div class="form-group status-toggle">
+                    <label class="status-label">Product Status</label>
+                    <button type="button" id="statusButton" class="status-btn available" onclick="toggleStatus(this)">
+                        <span class="status-text">Available</span>
+                        <input type="hidden" name="product_status" id="product_status" value="available">
+                    </button>
+                </div>
+
                 <div class="form-actions">
                     <button type="submit" name="submit" class="btn-submit">
                         <i class="fa fa-save"></i> Save Post
@@ -227,6 +239,20 @@ document.getElementById('fileToUpload').addEventListener('change', function(e) {
         message.textContent = file.name;
     }
 });
+
+function toggleStatus(button) {
+    if (button.classList.contains('available')) {
+        button.classList.remove('available');
+        button.classList.add('sold');
+        button.querySelector('.status-text').textContent = 'Sold';
+        document.getElementById('product_status').value = 'sold';
+    } else {
+        button.classList.remove('sold');
+        button.classList.add('available');
+        button.querySelector('.status-text').textContent = 'Available';
+        document.getElementById('product_status').value = 'available';
+    }
+}
 </script>
 
 <style>
@@ -515,6 +541,66 @@ textarea.form-control {
         width: 100%;
         justify-content: center;
     }
+}
+
+/* Status Toggle Switch */
+.status-toggle {
+    margin: 20px 0;
+}
+
+.status-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.status-btn {
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+}
+
+.status-btn.available {
+    background-color: #2ecc71;
+    color: white;
+    box-shadow: 0 2px 4px rgba(46, 204, 113, 0.2);
+}
+
+.status-btn.sold {
+    background-color: #e74c3c;
+    color: white;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.2);
+}
+
+.status-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-btn:active {
+    transform: translateY(1px);
+}
+
+.status-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* Remove the old toggle switch styles */
+.toggle-switch, .slider, .labels {
+    display: none;
 }
 </style>
 

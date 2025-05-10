@@ -108,7 +108,7 @@ if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
                     <div class="form-group col-md-6" id="price-group">
                         <label for="price"><i class="fa fa-money"></i> Price</label>
                         <div class="input-group">
-                            <span class="input-group-text">$</span>
+                            <span class="input-group-text">AED</span>
                             <input type="number" name="price" class="form-control" value="<?php echo $row['price']; ?>" required>
                         </div>
                     </div>
@@ -130,6 +130,14 @@ if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
                             <img id="imagePreview" src="<?php echo $row['post_img']; ?>" alt="Post Image">
                         </div>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="product_status"><i class="fa fa-tag"></i> Product Status</label>
+                    <button type="button" id="statusButton" class="status-btn <?php echo $row['product_status'] == 'sold' ? 'sold' : 'available'; ?>" onclick="toggleStatus(this)">
+                        <span class="status-text"><?php echo ucfirst($row['product_status']); ?></span>
+                    </button>
+                    <input type="hidden" name="product_status" id="product_status" value="<?php echo $row['product_status']; ?>">
                 </div>
 
                 <div class="form-actions">
@@ -491,6 +499,41 @@ if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
 .sidebar-nav {
     margin-bottom: 0;
 }
+
+.status-btn {
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-btn.available {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.status-btn.sold {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.status-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.status-btn:active {
+    transform: translateY(1px);
+}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
@@ -580,6 +623,20 @@ if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
           });
       });
   });
+
+  function toggleStatus(button) {
+      if (button.classList.contains('available')) {
+          button.classList.remove('available');
+          button.classList.add('sold');
+          button.querySelector('.status-text').textContent = 'Sold';
+          document.getElementById('product_status').value = 'sold';
+      } else {
+          button.classList.remove('sold');
+          button.classList.add('available');
+          button.querySelector('.status-text').textContent = 'Available';
+          document.getElementById('product_status').value = 'available';
+      }
+  }
 </script>
 
 

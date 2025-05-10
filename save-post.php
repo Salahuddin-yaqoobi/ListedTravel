@@ -75,7 +75,8 @@ if (isset($_POST['submit'])) {
                     price = '{$price}', 
                     duration = '{$duration}', 
                     post_date = '{$date}', 
-                    post_img = '{$file_name}' 
+                    post_img = '{$file_name}',
+                    product_status = '{$_POST['product_status']}'
                 WHERE post_id = {$post_id}";
 
         if (mysqli_query($conn, $sql)) {
