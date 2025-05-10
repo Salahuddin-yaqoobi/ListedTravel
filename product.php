@@ -42,6 +42,8 @@
       font-size: 0.75rem;
       display: inline-block;
       margin-top: 0.5rem;
+      font-weight: 900;
+      height: 20px;
     }
     .condition-tag {
       background-color: #48bb78;
@@ -222,199 +224,123 @@
       <!-- Filter Sidebar -->
       <aside class="md:col-span-1 bg-white p-4 rounded-lg shadow">
         <h2 class="text-lg font-semibold mb-4">Filters</h2>
+        <form id="filterForm" method="GET" action="">
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium mb-1">Condition</label>
-            <select class="w-full border p-2 rounded">
-              <option>All</option>
-              <option>New</option>
-              <option>Used</option>
+                    <label class="block text-sm font-medium mb-1">Category</label>
+                    <select name="category" class="w-full border p-2 rounded">
+                        <option value="">All Categories</option>
+                        <option value="For Sale" <?php echo (isset($_GET['category']) && $_GET['category'] == 'For Sale') ? 'selected' : ''; ?>>For Sale</option>
+                        <option value="For Rent" <?php echo (isset($_GET['category']) && $_GET['category'] == 'For Rent') ? 'selected' : ''; ?>>For Rent</option>
             </select>
           </div>
+                
           <div>
-            <label class="block text-sm font-medium mb-1">Sales Method</label>
-            <select class="w-full border p-2 rounded">
-              <option>All</option>
-              <option>Auction</option>
-              <option>Fixed Price</option>
+                    <label class="block text-sm font-medium mb-1">Vehicle Type</label>
+                    <select name="vehicle_type" class="w-full border p-2 rounded">
+                        <option value="">All Types</option>
+                        <?php
+                        include_once "config.php";
+                        $type_sql = "SELECT * FROM vehicle_category";
+                        $type_result = mysqli_query($conn, $type_sql);
+                        if($type_result) {
+                            while($type = mysqli_fetch_assoc($type_result)) {
+                                $selected = (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] == $type['category_id']) ? 'selected' : '';
+                                echo "<option value='".$type['category_id']."' ".$selected.">".$type['category_name']."</option>";
+                            }
+                        }
+                        ?>
             </select>
           </div>
+
           <div>
-            <label class="block text-sm font-medium mb-1">Industry</label>
-            <select class="w-full border p-2 rounded">
-              <option>All</option>
-              <option>Construction</option>
-              <option>Mining</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Price (USD)</label>
+                    <label class="block text-sm font-medium mb-1">Price Range (AED)</label>
             <div class="flex gap-2">
-              <input type="number" placeholder="Min" class="w-1/2 border p-2 rounded" />
-              <input type="number" placeholder="Max" class="w-1/2 border p-2 rounded" />
+                        <input type="number" name="min_price" placeholder="Min" class="w-1/2 border p-2 rounded" 
+                               value="<?php echo isset($_GET['min_price']) ? $_GET['min_price'] : ''; ?>" />
+                        <input type="number" name="max_price" placeholder="Max" class="w-1/2 border p-2 rounded"
+                               value="<?php echo isset($_GET['max_price']) ? $_GET['max_price'] : ''; ?>" />
             </div>
           </div>
+
+                <div class="space-y-2">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200 font-semibold">
+                        Apply Filters
+                    </button>
+                    <a href="product.php" class="w-full bg-gray-200 text-gray-700 py-2 px-4 rounded hover:bg-gray-300 transition duration-200 font-semibold text-center block">
+                        Clear Filters
+                    </a>
+                </div>
         </div>
+        </form>
       </aside>
 
       <!-- Product Grid -->
       <section class="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Product Card Example -->
-        <div class="bg-white rounded-lg shadow p-4 product-card">
-          <img src="img/all-1.webp" alt="Equipment Image 1" />
-          <div class="mt-2">
-            <span class="for-sale-tag">For Sale</span>
-            <span class="condition-tag">New</span>
-          </div>
-          <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-          <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-          <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-          <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-          <span class="favorite-icon">&#9825;</span>
-          <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
-        </div>
+        <?php
+        include "config.php";
+        
+        $where_conditions = array();
 
-        <div class="bg-white rounded-lg shadow p-4 product-card">
-          <img src="img/all-2.webp" alt="Equipment Image 2" />
-          <div class="mt-2">
-            <span class="for-sale-tag">For Sale</span>
-            <span class="condition-tag used">Used</span>
-          </div>
-          <h3 class="text-lg font-semibold mt-2">Komatsu PC210LC</h3>
-          <p class="text-sm text-gray-600">3,200 hrs | 22,000 kg | 158 hp</p>
-          <p class="text-sm text-gray-500 mt-1">Great condition, ready to ship</p>
-          <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-          <span class="favorite-icon">&#9825;</span>
-          <p class="text-xs text-gray-400 mt-2">Ref. No. KOM210</p>
-        </div>
+        if(isset($_GET['category']) && !empty($_GET['category'])) {
+            $category = mysqli_real_escape_string($conn, $_GET['category']);
+            $where_conditions[] = "p.category = '$category'";
+        }
 
-        <div class="bg-white rounded-lg shadow p-4 product-card">
-          <img src="img/all-3.webp" alt="Equipment Image 3" />
-          <div class="mt-2">
-            <span class="for-sale-tag">For Sale</span>
-            <span class="condition-tag">New</span>
-          </div>
-          <h3 class="text-lg font-semibold mt-2">Caterpillar 320D2</h3>
-          <p class="text-sm text-gray-600">New | 21,000 kg | 148 hp</p>
-          <p class="text-sm text-gray-500 mt-1">Available with warranty</p>
-          <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-          <span class="favorite-icon">&#9825;</span>
-          <p class="text-xs text-gray-400 mt-2">Ref. No. CAT320</p>
-        </div>
+        if(isset($_GET['vehicle_type']) && !empty($_GET['vehicle_type'])) {
+            $vehicle_type = mysqli_real_escape_string($conn, $_GET['vehicle_type']);
+            $where_conditions[] = "p.vehicle_cat = '$vehicle_type'";
+        }
 
-        <div class="bg-white rounded-lg shadow p-4 product-card">
-            <img src="img/all-1.webp" alt="Equipment Image 1" />
-            <div class="mt-2">
-              <span class="for-sale-tag">For Sale</span>
-              <span class="condition-tag">New</span>
-            </div>
-            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-            <span class="favorite-icon">&#9825;</span>
-            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
-          </div>
+        if(isset($_GET['min_price']) && !empty($_GET['min_price'])) {
+            $min_price = mysqli_real_escape_string($conn, $_GET['min_price']);
+            $where_conditions[] = "p.price >= '$min_price'";
+        }
 
+        if(isset($_GET['max_price']) && !empty($_GET['max_price'])) {
+            $max_price = mysqli_real_escape_string($conn, $_GET['max_price']);
+            $where_conditions[] = "p.price <= '$max_price'";
+        }
+
+        $where_clause = '';
+        if(!empty($where_conditions)) {
+            $where_clause = "WHERE " . implode(" AND ", $where_conditions);
+        }
+
+        $sql = "SELECT p.*, vc.category_name 
+                FROM post p 
+                LEFT JOIN vehicle_category vc ON p.vehicle_cat = vc.category_id 
+                $where_clause 
+                ORDER BY p.post_id DESC";
+        
+        $result = mysqli_query($conn, $sql);
+        
+        if(mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+        ?>
           <div class="bg-white rounded-lg shadow p-4 product-card">
-            <img src="img/all-4.webp" alt="Equipment Image 1" />
+                <img src="<?php echo $row['post_img']; ?>" alt="<?php echo $row['title']; ?>" />
             <div class="mt-2">
-              <span class="for-sale-tag">For Sale</span>
-              <span class="condition-tag">New</span>
+                    <span class="for-sale-tag"><?php echo $row['category']; ?></span>
+                    <span class="condition-tag"><?php echo $row['category_name']; ?></span>
             </div>
-            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
+                <h3 class="text-xlg font-semibold mt-2"><?php echo $row['title']; ?></h3>
+                <p class="text-lg font-bold text-gray-900 mt-1">
+                    AED <?php echo number_format($row['price']); ?>
+                    <?php if($row['category'] == 'For Rent'): ?>
+                        <span class="text-sm">/ <?php echo $row['duration']; ?></span>
+                    <?php endif; ?>
+                </p>
+                <p class="text-md text-gray-500 mt-1 line-clamp-2"><?php echo $row['description']; ?></p>
+                <a href="product-details.php?post_id=<?php echo $row['post_id']; ?>" class="text-blue-600 text-sm mt-2 inline-block font-bold">View Details</a>
             <span class="favorite-icon">&#9825;</span>
-            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
           </div>
-
-          <div class="bg-white rounded-lg shadow p-4 product-card">
-            <img src="img/all-5.webp" alt="Equipment Image 1" />
-            <div class="mt-2">
-              <span class="for-sale-tag">For Sale</span>
-              <span class="condition-tag">New</span>
-            </div>
-            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-            <span class="favorite-icon">&#9825;</span>
-            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
-          </div>
-
-          <div class="bg-white rounded-lg shadow p-4 product-card">
-            <img src="img/all-6.png" alt="Equipment Image 1" />
-            <div class="mt-2">
-              <span class="for-sale-tag">For Sale</span>
-              <span class="condition-tag">New</span>
-            </div>
-            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-            <span class="favorite-icon">&#9825;</span>
-            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
-          </div>
-
-          <div class="bg-white rounded-lg shadow p-4 product-card">
-            <img src="img/all-7.webp" alt="Equipment Image 1" />
-            <div class="mt-2">
-              <span class="for-sale-tag">For Sale</span>
-              <span class="condition-tag">New</span>
-            </div>
-            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-            <span class="favorite-icon">&#9825;</span>
-            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
-          </div>
-
-          <div class="bg-white rounded-lg shadow p-4 product-card">
-            <img src="img/all-8.webp" alt="Equipment Image 1" />
-            <div class="mt-2">
-              <span class="for-sale-tag">For Sale</span>
-              <span class="condition-tag">New</span>
-            </div>
-            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-            <span class="favorite-icon">&#9825;</span>
-            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
-          </div>
-
-          <div class="bg-white rounded-lg shadow p-4 product-card">
-            <img src="img/featured-1.webp" alt="Equipment Image 1" />
-            <div class="mt-2">
-              <span class="for-sale-tag">For Sale</span>
-              <span class="condition-tag">New</span>
-            </div>
-            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-            <span class="favorite-icon">&#9825;</span>
-            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
-          </div>
-
-          <div class="bg-white rounded-lg shadow p-4 product-card">
-            <img src="img/featured-2.webp" alt="Equipment Image 1" />
-            <div class="mt-2">
-              <span class="for-sale-tag">For Sale</span>
-              <span class="condition-tag">New</span>
-            </div>
-            <h3 class="text-lg font-semibold mt-2">2025 Kobelco SK850LC</h3>
-            <p class="text-sm text-gray-600">0 hrs | 81,700 kg | 490 hp</p>
-            <p class="text-sm text-gray-500 mt-1">Availability, price & delivery info</p>
-            <a href="#" class="text-blue-600 text-sm mt-2 inline-block">View Details</a>
-            <span class="favorite-icon">&#9825;</span>
-            <p class="text-xs text-gray-400 mt-2">Ref. No. AMH007</p>
-          </div>
-
-        <!-- You can add more cards here following the same structure -->
+        <?php 
+            }
+        } else {
+            echo "<div class='text-center py-4'>No products found</div>";
+        }
+        ?>
       </section>
     </div>
   </div>
