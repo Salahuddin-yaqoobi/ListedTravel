@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+
+?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
@@ -157,6 +162,9 @@
     <li><a href="admin.php" style="color: #ffffff; text-decoration: none; position: relative;">Admin Panel</a></li> -->
 
     <li><a href="contact.html" style="color: #ffffff; text-decoration: none; position: relative;">Contact</a></li>
+    <?php if(isset($_SESSION['username'])) { ?>
+    <li><a href="post.php" style="color: #ffffff; text-decoration: none; position: relative;">Dashboard</a></li>
+    <?php } ?>
   </ul>
 </nav>
 
@@ -295,6 +303,7 @@
 
 .owl-nav {
   position: absolute;
+  display: none !important;
   top: 50%;
   width: 100%;
   display: flex;
@@ -427,7 +436,7 @@
 					error_reporting(E_ALL);
 
 					// Database connection
-					$mysqli = new mysqli("localhost", "root", "", "news-site");
+					$mysqli = new mysqli("localhost", "root", "", "travel");
                      if ($mysqli->connect_errno) {
 					    die("Connection failed: " . $mysqli->connect_error);
 					}
@@ -1037,7 +1046,7 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2024 All Rights Reserved FancyShop</p>
+							<p class="copyright_text text-center">&copy; 2024 All Rights Reserved listedtravel</p>
 						</div>
 						
 						<div class="col-sm-4">

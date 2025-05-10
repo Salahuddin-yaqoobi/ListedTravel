@@ -1,6 +1,6 @@
 <?php
 // DB connection
-$conn = new mysqli("localhost", "root", "", "news-site");
+$conn = new mysqli("localhost", "root", "", "travel");
 if ($conn->connect_error) {
     echo json_encode(['success' => false]);
     exit;
