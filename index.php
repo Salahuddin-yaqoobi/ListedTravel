@@ -542,61 +542,53 @@ session_start();
 					</div>
 				</div>			
 				
-				<div class="row">	
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="single_blog">
-							<div class="single_blog_img">
-								<img src="img/news-1.png" alt="">
-							</div>
-												
-							<div class="blog_content">	
-								<div class="date">
-									<p style="color: #9BA5CD;">22 Apr, 2025 By <span style="color: #FF6A18; font-weight: bold;">Reef Halaseh</span></p>
-								</div>
-								<h4 class="post_title"><a href="#">20 Years of Kobelco and Al Marwan</a> </h4>						
-								<p>A Legacy in the Making In the fast-
-									evolving world of construction
-									machinery, true partnerships stan...</p>
-							</div>
-						</div>
-					</div> <!--  End Col -->				
+				<div class="row">
+					<?php
+					// Include database connection
+					include "config.php";
 					
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="single_blog">
-							<div class="single_blog_img">
-								<img src="img/news-2.png" alt="">
-							</div>
-												
-							<div class="blog_content">	
-								<div class="date">
-									<p style="color: #9BA5CD;">22 Apr, 2025 By <span style="color: #FF6A18; font-weight: bold;">Reef Halaseh</span></p>
-								</div>
-								<h4 class="post_title"><a href="#">20 Years of Kobelco and Al Marwan</a> </h4>						
-								<p>A Legacy in the Making In the fast-
-									evolving world of construction
-									machinery, true partnerships stan...</p>
-							</div>
-						</div>
-					</div> <!--  End Col -->				
+					// Fetch 3 most recent blogs with 'main' location
+					$sql = "SELECT * FROM blogs WHERE blog_location = 'main' ORDER BY blog_date DESC LIMIT 3";
+					$result = mysqli_query($conn, $sql);
 					
+					if(mysqli_num_rows($result) > 0) {
+						while($row = mysqli_fetch_assoc($result)) {
+							// Limit description to 100 characters
+							$short_desc = strlen($row['blog_description']) > 100 ? 
+										substr($row['blog_description'], 0, 100) . '...' : 
+										$row['blog_description'];
+					?>
 					<div class="col-lg-4 col-md-6 col-sm-6">
 						<div class="single_blog">
 							<div class="single_blog_img">
-								<img src="img/news-3.png" alt="">
+								<img src="uploads/<?php echo $row['blog_img']; ?>" alt="<?php echo $row['blog_title']; ?>">
 							</div>
-												
+													
 							<div class="blog_content">	
 								<div class="date">
-									<p style="color: #9BA5CD;">22 Apr, 2025 By <span style="color: #FF6A18; font-weight: bold;">Reef Halaseh</span></p>
+									<p style="color: #9BA5CD;">
+										<?php echo date('d M, Y', strtotime($row['blog_date'])); ?> 
+										By <span style="color: #FF6A18; font-weight: bold;">Listed Travel</span>
+									</p>
 								</div>
-								<h4 class="post_title"><a href="#">20 Years of Kobelco and Al Marwan</a> </h4>						
-								<p>A Legacy in the Making In the fast-
-									evolving world of construction
-									machinery, true partnerships stan...</p>
+								<h4 class="post_title">
+									<a href="blog.php?id=<?php echo $row['blog_id']; ?>">
+										<?php echo $row['blog_title']; ?>
+									</a>
+								</h4>						
+								<p><?php echo $short_desc; ?></p>
+								<a href="blog.php?id=<?php echo $row['blog_id']; ?>" class="read_more" style="color: #003566; font-weight: bold;">
+									Read More <i class="fa fa-arrow-right"></i>
+								</a>
 							</div>
 						</div>
 					</div> <!--  End Col -->
-
+					<?php
+						}
+					} else {
+						echo "<div class='col-12 text-center'><p>No blogs found</p></div>";
+					}
+					?>
 				</div>
             </div>
         </section>
