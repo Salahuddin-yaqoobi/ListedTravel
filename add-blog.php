@@ -33,75 +33,45 @@ if (isset($_POST['submit'])) {
         $row = mysqli_fetch_assoc($count_result);
         
         if ($row['count'] >= 3) {
-            // Don't redirect, just show the alert
-            echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        title: 'Limit Reached!',
-                        text: 'Maximum of 3 blogs can be displayed on main page. Please set as regular page.',
-                        icon: 'warning',
-                        confirmButtonColor: '#3498db'
-                    }).then((result) => {
-                        const locationButton = document.getElementById('locationButton');
-                        if (locationButton.classList.contains('main')) {
-                            toggleLocation(locationButton);
-                        }
-                    });
-                });
-            </script>";
-            // Continue with the rest of the page load
-        } else {
-            // Continue with file upload and database insertion
-            // File upload handling
-            if(isset($_FILES['blog_img'])) {
-                $errors = array();
-                $file_name = $_FILES['blog_img']['name'];
-                $file_size = $_FILES['blog_img']['size'];
-                $file_tmp = $_FILES['blog_img']['tmp_name'];
-                $file_type = $_FILES['blog_img']['type'];
-                $tmp = explode('.', $file_name);
-                $file_ext = strtolower(end($tmp));
-                $extensions = array("jpeg", "jpg", "png");
+            // Store the alert in a session variable
+            $_SESSION['show_alert'] = true;
+            header("Location: add-blog.php");
+            exit();
+        }
+    }
 
-                if(in_array($file_ext, $extensions) === false) {
-                    $errors[] = "Please choose a JPEG or PNG file.";
-                }
+    // File upload handling
+    if(isset($_FILES['blog_img'])) {
+        $errors = array();
+        $file_name = $_FILES['blog_img']['name'];
+        $file_size = $_FILES['blog_img']['size'];
+        $file_tmp = $_FILES['blog_img']['tmp_name'];
+        $file_type = $_FILES['blog_img']['type'];
+        $tmp = explode('.', $file_name);
+        $file_ext = strtolower(end($tmp));
+        $extensions = array("jpeg", "jpg", "png", "gif", "webp"); // Added more image formats
 
-                if($file_size > 2097152) {
-                    $errors[] = "File size must be less than 2 MB";
-                }
+        if(!in_array($file_ext, $extensions)) {
+            $errors[] = "Please choose an image file (JPEG, JPG, PNG, GIF, WEBP).";
+        }
 
-                if(empty($errors)) {
-                    $img_name = time() . "_" . $file_name;
-                    move_uploaded_file($file_tmp, "upload/" . $img_name);
-                    
-                    // Insert into database
-                    $sql = "INSERT INTO blogs (blog_title, blog_description, blog_date, blog_img, blog_location) 
-                            VALUES ('$title', '$description', '$date', '$img_name', '$blog_location')";
-                    
-                    if(mysqli_query($conn, $sql)) {
-                        header("Location: all-blogs.php");
-                        exit();
-                    } else {
-                        echo "<script>
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Failed to save blog post.',
-                                icon: 'error',
-                                confirmButtonColor: '#3498db'
-                            });
-                        </script>";
-                    }
-                } else {
-                    $error_message = implode("<br>", $errors);
-                    echo "<script>
-                        Swal.fire({
-                            title: 'Error!',
-                            html: '$error_message',
-                            icon: 'error',
-                            confirmButtonColor: '#3498db'
-                        });
-                    </script>";
+        if($file_size > 2097152) {
+            $errors[] = "File size must be less than 2 MB";
+        }
+
+        if(empty($errors)) {
+            $img_name = $file_name;
+            
+            if(move_uploaded_file($file_tmp, "uploads/" . $img_name)) {
+                $sql = "INSERT INTO blogs (blog_title, blog_description, blog_date, blog_img, blog_location) 
+                        VALUES (?, ?, ?, ?, ?)";
+                
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_bind_param($stmt, "sssss", $title, $description, $date, $img_name, $blog_location);
+                
+                if(mysqli_stmt_execute($stmt)) {
+                    header("Location: all-blogs.php");
+                    exit();
                 }
             }
         }
@@ -113,6 +83,26 @@ $test_query = "SELECT * FROM vehicle_category";
 $test_result = mysqli_query($conn, $test_query);
 if (!$test_result) {
     die("Query Error: " . mysqli_error($conn));
+}
+
+// Add this code right after the PHP opening tag of your file
+if (isset($_SESSION['show_alert'])) {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Limit Reached!',
+                text: 'Maximum of 3 blogs can be displayed on main page. Please set as regular page.',
+                icon: 'warning',
+                confirmButtonColor: '#3498db'
+            }).then((result) => {
+                const locationButton = document.getElementById('locationButton');
+                if (locationButton && locationButton.classList.contains('main')) {
+                    toggleLocation(locationButton);
+                }
+            });
+        });
+    </script>";
+    unset($_SESSION['show_alert']);
 }
 ?>
 <!DOCTYPE html>
@@ -262,11 +252,8 @@ categorySelect.addEventListener('change', function() {
 document.getElementById('blog_img').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (file) {
-        const message = document.querySelector('.file-upload-message');
-        message.innerHTML = `
-            <i class="fa fa-file"></i>
-            <span>${file.name}</span>
-        `;
+        const message = document.querySelector('.file-upload-message span');
+        message.textContent = file.name;
     }
 });
 
@@ -298,14 +285,11 @@ function toggleLocation(button) {
     }
 }
 
-// Replace the form submission event listener in your JavaScript section
 document.querySelector('.post-form').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Prevent default form submission
-
-    // Check if main location is selected
     if (document.getElementById('blog_location').value === 'main') {
+        e.preventDefault();
+        
         try {
-            // Check main blog count
             const response = await fetch('check_main_blogs.php');
             const data = await response.json();
             
@@ -317,20 +301,17 @@ document.querySelector('.post-form').addEventListener('submit', async function(e
                     confirmButtonColor: '#3498db'
                 });
                 
-                // Toggle to regular page
                 const locationButton = document.getElementById('locationButton');
                 if (locationButton.classList.contains('main')) {
                     toggleLocation(locationButton);
                 }
-                return;
+                return false;
             }
         } catch (error) {
             console.error('Error checking main blog count:', error);
         }
     }
-    
-    // If all checks pass, submit the form
-    this.submit();
+    return true;
 });
 </script>
 
