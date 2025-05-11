@@ -72,40 +72,40 @@ if(isset($_POST['submit'])) {
 <div class="dashboard-container">
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-header">
-            <img src="img/logo.png" alt="Logo" class="logo">
-        </div>
-        <nav class="sidebar-nav">
-            <ul>
-                <li>
-                    <a href="post.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                </li>
-                <li>
-                    <a href="all-posts.php"><i class="fa fa-newspaper-o"></i> <span>All Posts</span></a>
-                </li>
-                <li>
-                    <a href="add-post.php"><i class="fa fa-plus"></i> <span>Add Post</span></a>
-                </li>
-                <?php if($_SESSION['role'] == '1') { ?>
-                <li class="active">
-                    <a href="users.php"><i class="fa fa-users"></i> <span>Profile</span></a>
-                </li>
-                <?php } ?>
-                <li>
-                    <a href="contactforms.php"><i class="fa fa-envelope"></i> <span>Contact Forms</span></a>
-                </li>
-                <!-- <li>
-                    <a href="profile.php"><i class="fa fa-user"></i> <span>Profile</span></a>
-                </li>
-                <li>
-                    <a href="settings.php"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                </li> -->
-                <li class="logout-item">
-                    <a href="logout.php"><i class="fa fa-sign-out"></i> <span>Logout</span></a>
-                </li>
-            </ul>
-        </nav>
+    <div class="sidebar-header">
+        <img src="img/logo.png" alt="Logo" class="logo">
     </div>
+    <nav class="sidebar-nav">
+        <ul>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'post.php') ? 'class="active"' : ''; ?>>
+                <a href="post.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'all-posts.php') ? 'class="active"' : ''; ?>>
+                <a href="all-posts.php"><i class="fa fa-newspaper-o"></i> <span>All Posts</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+                <a href="add-post.php"><i class="fa fa-plus"></i> <span>Add Post</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'all-blogs.php') ? 'class="active"' : ''; ?>>
+                <a href="all-blogs.php"><i class="fa fa-rss"></i> <span>All Blogs</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-blog.php') ? 'class="active"' : ''; ?>>
+                <a href="add-blog.php"><i class="fa fa-pencil"></i> <span>Add Blog</span></a>
+            </li>
+            <?php if(isset($_SESSION['role']) && $_SESSION['role'] == '1') { ?>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'users.php') ? 'class="active"' : ''; ?>>
+                <a href="users.php"><i class="fa fa-users"></i> <span>Profile</span></a>
+            </li>
+            <?php } ?>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'contactforms.php') ? 'class="active"' : ''; ?>>
+                <a href="contactforms.php"><i class="fa fa-envelope"></i> <span>Contact Forms</span></a>
+            </li>
+            <li class="logout-item">
+                <a href="logout.php"><i class="fa fa-sign-out"></i> <span>Logout</span></a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
     <!-- Main Content -->
     <div class="main-content">

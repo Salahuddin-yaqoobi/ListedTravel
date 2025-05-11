@@ -20,147 +20,158 @@
 	<body>
 
 		<!--  Start Header  -->
-		<header id="header_area" style="background: linear-gradient(90deg, #003566, #00509d); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <!-- Top Section: Logo, Search, Navigation -->
-  <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; flex-wrap: wrap; gap: 20px;">
-    
+    <header id="header_area">
+    <!-- Top Bar with Logo, Search, and Icons -->
+    <div class="top-bar" style="background-color:#F3F4F6; padding: 15px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
     <!-- Logo -->
-	<div style="flex-shrink: 0;">
-      <a href="index.php" style="display: inline-block; padding: 6px 10px; border-radius: 8px; transition: all 0.3s ease;">
-        <img src="img/logo.png" alt="Logo" style="height: 60px; filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.8)); transition: all 0.3s ease; animation: pulseGlow 1.5s infinite;">
+                <div class="logo-container" style="flex: 0 0 200px;">
+                    <a href="index.php">
+                        <img src="img/logo.png" alt="Listed General Transport" style="max-width: 200px; height: auto;">
       </a>
     </div>
-<style>
-  @keyframes pulseGlow {
-    0% {
-      filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.6));
-    }
-    50% {
-      filter: drop-shadow(0 0 20px rgba(255, 106, 24, 1));
-    }
-    100% {
-      filter: drop-shadow(0 0 10px rgba(255, 106, 24, 0.6));
-    }
-  }
 
-  /* Hover effect to scale the logo */
-  a:hover img {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 25px rgba(255, 106, 24, 1));
-  }
-</style>
-    <!-- Search Bar -->
-	<form id="searchForm" onsubmit="return handleSearch(event)" style="flex: 1; max-width: 600px;">
-  <div style="position: relative;">
-    <input 
-      type="text" 
-      id="searchInput"
-      name="query"
-      placeholder="Search for equipment..." 
-      autocomplete="off"
-      style="
-        width: 100%; 
-        padding: 10px 16px 10px 40px; 
-        border: 1px solid #d1d5db; 
-        border-radius: 9999px; 
-        outline: none; 
-        font-size: 16px;
-        transition: all 0.3s ease;
-        background-color: #ffffff; /* Ensure white background */
-      "
-      onfocus="this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.5)'; this.style.borderColor='transparent';"
-      onblur="this.style.boxShadow='none'; this.style.borderColor='#d1d5db';"
-    />
-    
-    <div id="suggestions" style="position: absolute; top: 100%; margin-top: 4px; left: 0; right: 0; background: white; border: 1px solid #d1d5db; border-top: none; max-height: 200px; overflow-y: auto; display: none;"></div>
-    
-    <!-- Search Icon -->
-    <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af;">
-      <svg xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-      </svg>
+    <!-- Updated Search Bar with new icon color -->
+                <div class="search-container" style="flex: 1;">
+                    <form id="searchForm" onsubmit="return handleSearch(event)">
+                        <div style="position: relative;">
+                            <input 
+                                type="text" 
+                                id="searchInput"
+                                placeholder="Search for equipment..." 
+                                style="
+                                    width: 100%; 
+                                    padding: 10px 45px 10px 20px;
+                                    border: 1px solid #f39c12;
+                                    border-radius: 5px;
+                                    background: #ffffff;
+                                    font-size: 14px;
+                                    height: 42px;
+                                "
+                            >
+                            <button type="button" 
+                                onclick="document.getElementById('searchInput').focus();"
+                                style="
+                                    position: absolute;
+                                    right: 10px;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                    background: none;
+                                    border: none;
+                                    color: #f39c12;
+                                    cursor: pointer;
+                                "
+                            >
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <div id="suggestions" style="
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                right: 0;
+                                background: #ffffff;
+                                border: 1px solid #f39c12;
+                                border-top: none;
+                                border-radius: 0 0 5px 5px;
+                                max-height: 200px;
+                                overflow-y: auto;
+                                z-index: 1000;
+                                display: none;
+                            ">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Icons -->
+                <div class="header-icons" style="display: flex; gap: 20px; align-items: center;">
+        <a href="#" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-heart-o"></i></a>
+        <a href="#" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-shopping-cart"></i></a>
+        <a href="contact.php" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-user"></i></a>
     </div>
   </div>
-</form>
+        </div>
+    </div>
 
-
- <!-- Navigation Menu -->
-<nav style="flex-shrink: 0;">
-  <ul style="display: flex; align-items: center; gap: 24px; margin: 0; padding: 0; list-style: none; font-weight: 600; font-size: 16px;">
-    <li><a href="index.php" style="color: #ffffff; text-decoration: none; position: relative;">Home</a></li>
-    <li><a href="rent.php" style="color: #ffffff; text-decoration: none; position: relative;">For Rent</a></li>
-    <li><a href="shop.html" style="color: #ffffff; text-decoration: none; position: relative;">New for Sale</a></li>
-
-    <!-- Uncomment for future use -->
-    <!-- <li><a href="used-products.html" style="color: #ffffff; text-decoration: none; position: relative;">Used for Sale</a></li>
-    <li><a href="admin.php" style="color: #ffffff; text-decoration: none; position: relative;">Admin Panel</a></li> -->
-
-    <li><a href="contact.html" style="color: #ffffff; text-decoration: none; position: relative;">Contact</a></li>
+ <!-- Navigation Menu with centered container -->
+    <div class="nav-bar" style="background-color:#F3F4F6;  margin-left: 95px; margin-right: 95px; margin-bottom: 10px; border-radius: 10px;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <nav style="padding: 8px 0;">
+                <ul style="
+                    display: flex;
+                    justify-content: center;
+                    gap: 40px;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                ">
+                    <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
+                    <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
+                    <li><a href="product.html" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
+                    <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
+    <?php if(isset($_SESSION['username'])) { ?>
+                    <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
+    <?php } ?>
   </ul>
 </nav>
+        </div>
+    </div>
 
 <style>
-  /* Basic styles for the link */
-  nav a {
+        /* Hover effects for nav links */
+        .nav-bar a {
     position: relative;
-    color: #ffffff;
-    text-decoration: none;
-    display: inline-block;
-  }
+            transition: color 0.3s ease;
+        }
 
-  /* Underline styles */
-  nav a::after {
+        /* .nav-bar a:hover {
+            color: #ffffff !important;
+        } */
+
+        .nav-bar a::after {
     content: '';
     position: absolute;
-    bottom: -5px; /* Positioning it below the link */
-    left: 50%; /* Start at the center */
-    transform: translateX(-50%); /* Center it horizontally */
-    width: 0; /* Initially the width is zero */
-    height: 3px; /* Line thickness */
-    background-color: #ffffff; /* Underline color */
-    transition: width 0.3s ease, left 0.3s ease;
-    border-radius: 5px; /* Rounded corners for the underline */
-  }
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #1B3C73;
+            transition: width 0.3s ease;
+        }
 
-  /* On hover, expand the underline to the full width of the element */
-  nav a:hover::after {
-    width: 100%; /* Expand the underline to full width */
-  }
-</style>
-  </div>
+        .nav-bar a:hover::after {
+            width: 100%;
+        }
 
-  <!-- Suggestions Styling -->
-  <style>
-    #suggestions {
-      position: absolute;
-      top: 100%;
-      margin-top: 4px;
-      left: 0;
-      right: 0;
-      background: white;
-      border: 1px solid #d1d5db;
-      border-top: none;
-      border-radius: 0 0 12px 12px;
-      max-height: 200px;
-      overflow-y: auto;
-      display: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      z-index: 10;
-      padding: 4px 0;
-    }
+        /* Hover effects for icons */
+        .header-icons a {
+            transition: transform 0.3s ease;
+        }
 
-    .suggestion-item {
-      padding: 10px 16px;
-      font-size: 16px;
-      cursor: pointer;
-      color: #374151;
-      transition: background 0.2s, color 0.2s;
-    }
+        .header-icons a:hover {
+            transform: scale(1.2);
+        }
 
-    .suggestion-item:hover {
-      background-color: #f3f4f6;
-      color: #2563eb;
-    }
+        /* Search input focus effect */
+        #searchInput:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item {
+            padding: 8px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item:hover {
+            background-color: rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
   </style>
 </header>
 		<!--  End Header  -->			
