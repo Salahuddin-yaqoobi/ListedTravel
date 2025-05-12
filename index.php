@@ -18,7 +18,7 @@ session_start();
 	<link rel="stylesheet" href="css/venobox.css" />
 	<link rel="stylesheet" href="css/font-awesome.css" />
 	<link rel="stylesheet" href="css/bootstrap.min.css" />	
-	<link rel="stylesheet" href="style.css?v=123" />
+	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="css/responsive.css" />	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -161,7 +161,7 @@ session_start();
     </div>
 
  <!-- Navigation Menu with centered container -->
-    <div class="nav-bar" style="background: linear-gradient(to right, #f39c12, #e67e22); box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-left: 95px; margin-right: 95px; margin-bottom: 10px; border-radius: 10px;">
+    <div class="nav-bar" style=" margin-left: 95px; margin-right: 95px; margin-bottom: 10px; border-radius: 10px;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <nav style="padding: 8px 0;">
                 <ul style="
@@ -192,7 +192,7 @@ session_start();
         }
 
         .nav-bar a:hover {
-            color: #ffffff !important;
+            color:  #f39c12 !important;
         }
 
         .nav-bar a::after {
@@ -202,7 +202,7 @@ session_start();
             height: 2px;
             bottom: -5px;
             left: 0;
-            background-color: #ffffff;
+            background-color:  #f39c12;
             transition: width 0.3s ease;
         }
 
@@ -221,8 +221,8 @@ session_start();
 
         /* Search input focus effect */
         #searchInput:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
         }
 
         .suggestion-item {
@@ -577,7 +577,7 @@ session_start();
 									</a>
 								</h4>						
 								<p><?php echo $short_desc; ?></p>
-								<a href="blog.php?id=<?php echo $row['blog_id']; ?>" class="read_more" style="color: #003566; font-weight: bold;">
+								<a href="blog-details.php?id=<?php echo $row['blog_id']; ?>" class="read_more" style="color: #003566; font-weight: bold;">
 									Read More <i class="fa fa-arrow-right"></i>
 								</a>
 							</div>
@@ -651,61 +651,31 @@ session_start();
 					<div class="col-sm-12">
 						<div class="brand_slide owl-carousel">
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/ACTCO.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/allullogo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/AD_Ports.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/AVANTI_LOGO-removebg-preview.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/Al_Faris.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/d.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/Al_Jaber.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/KRL.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/Al_Jada.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/logo-footer.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/Al_Rajhi.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/LogoPng.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/Applied_Tech.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/logoV2.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/Arada.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Shirawi-logo-svg.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/AST.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/AUS.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/CCECC.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/dozers.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/Dubai_Municipality.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/Dynapac_Logo.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/Gov_Dubai.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/Gov_Sharjah.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/Gulf_Rock.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/GUNAL.webp" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/clients/HEC.webp" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/tsg-copy-300x294.png" alt="" class="brand-img" /></a>
 							</div>
 						</div>
 						<div class="brand-scroll-indicator text-center mt-3">

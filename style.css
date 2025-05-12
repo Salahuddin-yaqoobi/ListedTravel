@@ -57,12 +57,12 @@ body {
 }
 
 ::-moz-selection {
-    background-color: #33d286;
-    color: #fff;
+    background-color: rgb(231, 229, 229);
+    color: black;
 }
 ::selection {
-    background-color: #33d286;
-    color: #fff;
+    background-color: rgb(231, 229, 229);
+    color: black;
 }
 img {
     height: auto;
@@ -1782,8 +1782,7 @@ input:focus, textarea:focus {
 #brand_area{
 	padding:40px 0;
 }
-.brand_slide{
-}
+
 .brand_slide img{
     opacity: 1;
 }
