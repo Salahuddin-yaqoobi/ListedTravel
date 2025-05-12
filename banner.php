@@ -66,6 +66,12 @@ $banner = array(
                 <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-blog.php') ? 'class="active"' : ''; ?>>
                     <a href="add-blog.php"><i class="fa fa-pencil"></i> <span>Add Blog</span></a>
                 </li>
+                <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+                <a href="all-banners.php"><i class="fa fa-plus"></i> <span>All Banner</span></a>
+                </li>
+                <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+                <a href="banner.php"><i class="fa fa-plus"></i> <span>Add Banner</span></a>
+                </li>
                 <?php if(isset($_SESSION['role']) && $_SESSION['role'] == '1') { ?>
                 <li <?php echo (basename($_SERVER['PHP_SELF']) == 'users.php') ? 'class="active"' : ''; ?>>
                     <a href="users.php"><i class="fa fa-users"></i> <span>Profile</span></a>
@@ -604,6 +610,59 @@ window.onload = function() {
     
     // Reset file input
     document.getElementById('bannerImage').value = '';
+};
+
+// Add this new function for form validation
+function validateForm() {
+    let isValid = true;
+    let errorMessage = '';
+
+    // Check title
+    if (!document.getElementById('bannerTitle').value.trim()) {
+        errorMessage += 'Banner Title is required\n';
+        isValid = false;
+    }
+
+    // Check header
+    if (!document.getElementById('bannerHeader').value.trim()) {
+        errorMessage += 'Banner Header is required\n';
+        isValid = false;
+    }
+
+    // Check subtitle
+    if (!document.getElementById('bannerSubtitle').value.trim()) {
+        errorMessage += 'Banner Subtitle is required\n';
+        isValid = false;
+    }
+
+    // Check button text
+    if (!document.getElementById('bannerButton').value.trim()) {
+        errorMessage += 'Button Text is required\n';
+        isValid = false;
+    }
+
+    // Check image
+    if (!document.getElementById('bannerImage').files[0]) {
+        errorMessage += 'Banner Image is required\n';
+        isValid = false;
+    }
+
+    if (!isValid) {
+        Swal.fire({
+            title: 'Required Fields Missing',
+            text: errorMessage,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return false;
+    }
+
+    return true;
+}
+
+// Modify the form element to include onsubmit validation
+document.querySelector('.banner-form').onsubmit = function(e) {
+    return validateForm();
 };
 </script>
 
