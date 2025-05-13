@@ -98,60 +98,85 @@ session_start();
       </a>
     </div>
 
-    <!-- Updated Search Bar with new icon color -->
-                <div class="search-container" style="flex: 1;">
-                    <form id="searchForm" onsubmit="return handleSearch(event)">
-                        <div style="position: relative;">
-                            <input 
-                                type="text" 
-                                id="searchInput"
-                                placeholder="Search for equipment..." 
-                                style="
-                                    width: 100%; 
-                                    padding: 10px 45px 10px 20px;
-                                    border: 1px solid #f39c12;
-                                    border-radius: 5px;
-                                    background: #ffffff;
-                                    font-size: 14px;
-                                    height: 42px;
-                                "
-                            >
-                            <button type="button" 
-                                onclick="document.getElementById('searchInput').focus();"
-                                style="
-                                    position: absolute;
-                                    right: 10px;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                    background: none;
-                                    border: none;
-                                    color: #f39c12;
-                                    cursor: pointer;
-                                "
-                            >
-                                <i class="fa fa-search"></i>
-                            </button>
-                            <div id="suggestions" style="
-                                position: absolute;
-                                top: 100%;
-                                left: 0;
-                                right: 0;
-                                background: #ffffff;
-                                border: 1px solid #f39c12;
-                                border-top: none;
-                                border-radius: 0 0 5px 5px;
-                                max-height: 200px;
-                                overflow-y: auto;
-                                z-index: 1000;
-                                display: none;
-                            ">
-                            </div>
-                        </div>
-                    </form>
+    <!-- Updated Search Bar -->
+    <div class="search-container" style="flex: 1;">
+        <form id="searchForm" onsubmit="return handleSearch(event)">
+            <div style="position: relative; display: flex; align-items: center; background: white; border-radius: 25px; border: 1px solid #e0e0e0; padding: 5px;">
+                <!-- Toggle Buttons -->
+                <div style="display: flex; margin-left: 10px; gap: 5px;">
+                    <button type="button" class="toggle-btn active" data-type="buy" style="
+                        padding: 8px 20px;
+                        border-radius: 20px;
+                        border: none;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        background-color: #FF6A18;
+                        color: white;
+                    ">Buy</button>
+                    <button type="button" class="toggle-btn" data-type="rent" style="
+                        padding: 8px 20px;
+                        border-radius: 20px;
+                        border: none;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        background-color: transparent;
+                        color: #666;
+                    ">Rent</button>
                 </div>
 
-                <!-- Icons -->
-                <div class="header-icons" style="display: flex; gap: 20px; align-items: center;">
+                <!-- Search Input -->
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="Search by brands, model, ref. no..." 
+                    style="
+                        flex: 1;
+                        border: none;
+                        outline: none;
+                        padding: 8px 15px;
+                        font-size: 14px;
+                        background: transparent;
+                    "
+                >
+                <button type="button" 
+                    onclick="document.getElementById('searchInput').focus();"
+                    style="
+                        padding: 8px 15px;
+                        background: none;
+                        border: none;
+                        color: #666;
+                        cursor: pointer;
+                    "
+                >
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <!-- Suggestions Container (keeping existing styling) -->
+                <div id="suggestions" style="
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: #ffffff;
+                    border: 1px solid #e0e0e0;
+                    border-top: none;
+                    border-radius: 0 0 25px 25px;
+                    max-height: 200px;
+                    overflow-y: auto;
+                    z-index: 1000;
+                    margin-top: -1px; /* Removes gap between search bar and suggestions */
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    display: none;
+                ">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Icons -->
+    <div class="header-icons" style="display: flex; gap: 20px; align-items: center;">
         <a href="#" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-heart-o"></i></a>
         <a href="#" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-shopping-cart"></i></a>
         <a href="contact.php" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-user"></i></a>
@@ -237,6 +262,76 @@ session_start();
 
         .suggestion-item:last-child {
             border-bottom: none;
+        }
+
+        /* Add these styles while keeping existing ones */
+        .toggle-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: transparent;
+            color: #666;
+        }
+
+        .toggle-btn:hover {
+            background-color: rgba(0, 230, 195, 0.1);
+        }
+
+        .toggle-btn.active {
+            background-color: #FF6A18 !important;
+            color: white !important;
+            box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
+        }
+
+        /* Search container and suggestions styling */
+        .search-container {
+            position: relative;
+        }
+
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 25px 25px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            margin-top: -1px; /* Removes gap between search bar and suggestions */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .suggestion-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .suggestion-item:hover {
+            background-color: rgba(0, 230, 195, 0.1);
+        }
+
+        .suggestion-item:last-child {
+            border-radius: 0 0 25px 25px;
+        }
+
+        /* Search input container */
+        .search-container form > div {
+            border-radius: 25px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-container form > div:focus-within {
+            border-color: #00e6c3;
+            box-shadow: 0 0 0 2px rgba(0, 230, 195, 0.1);
         }
   </style>
 </header>
@@ -949,3 +1044,30 @@ document.addEventListener("DOMContentLoaded", function() {
 		<script src="script.js"></script>
 	</body>
 </html>
+
+<script>
+// Add this to your existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            toggleButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = '#666';
+            });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            this.style.backgroundColor = '#FF6A18';
+            this.style.color = 'white';
+            
+            // Store the selected type (buy/rent)
+            const selectedType = this.getAttribute('data-type');
+            // You can use this selectedType value for your search functionality
+        });
+    });
+});
+</script>
