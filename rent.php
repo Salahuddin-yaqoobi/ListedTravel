@@ -20,7 +20,7 @@
 	<body>
 
 		<!--  Start Header  -->
-    <header id="header_area">
+        <header id="header_area">
     <!-- Top Bar with Logo, Search, and Icons -->
     <div class="top-bar" style="background-color:#F3F4F6; padding: 15px 0;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
@@ -28,74 +28,123 @@
     <!-- Logo -->
                 <div class="logo-container" style="flex: 0 0 200px;">
                     <a href="index.php">
-                        <img src="img/logo.png" alt="Listed General Transport" style="max-width: 200px; height: auto;">
+                        <img src="img/logo.png" alt="Listed General Transport" style="max-width: 150px; height: auto;" class="main-logo">
       </a>
     </div>
 
-    <!-- Updated Search Bar with new icon color -->
-                <div class="search-container" style="flex: 1;">
-                    <form id="searchForm" onsubmit="return handleSearch(event)">
-                        <div style="position: relative;">
-                            <input 
-                                type="text" 
-                                id="searchInput"
-                                placeholder="Search for equipment..." 
-                                style="
-                                    width: 100%; 
-                                    padding: 10px 45px 10px 20px;
-                                    border: 1px solid #f39c12;
-                                    border-radius: 5px;
-                                    background: #ffffff;
-                                    font-size: 14px;
-                                    height: 42px;
-                                "
-                            >
-                            <button type="button" 
-                                onclick="document.getElementById('searchInput').focus();"
-                                style="
-                                    position: absolute;
-                                    right: 10px;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                    background: none;
-                                    border: none;
-                                    color: #f39c12;
-                                    cursor: pointer;
-                                "
-                            >
-                                <i class="fa fa-search"></i>
-                            </button>
-                            <div id="suggestions" style="
-                                position: absolute;
-                                top: 100%;
-                                left: 0;
-                                right: 0;
-                                background: #ffffff;
-                                border: 1px solid #f39c12;
-                                border-top: none;
-                                border-radius: 0 0 5px 5px;
-                                max-height: 200px;
-                                overflow-y: auto;
-                                z-index: 1000;
-                                display: none;
-                            ">
-                            </div>
-                        </div>
-                    </form>
+    <!-- Updated Search Bar -->
+    <div class="search-container" style="flex: 1;">
+        <form id="searchForm" onsubmit="return handleSearch(event)">
+            <div style="position: relative; display: flex; align-items: center; background: white; border-radius: 25px; border: 1px solid #e0e0e0; padding: 5px;">
+                <!-- Toggle Buttons -->
+                <div style="display: flex; margin-left: 10px; gap: 5px;">
+                    <button type="button" class="toggle-btn active" data-type="buy" style="
+                        padding: 8px 20px;
+                        border-radius: 20px;
+                        border: none;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        background-color: #FF6A18;
+                        color: white;
+                    ">Buy</button>
+                    <button type="button" class="toggle-btn" data-type="rent" style="
+                        padding: 8px 20px;
+                        border-radius: 20px;
+                        border: none;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        background-color: transparent;
+                        color: #666;
+                    ">Rent</button>
                 </div>
 
-                <!-- Icons -->
-                <div class="header-icons" style="display: flex; gap: 20px; align-items: center;">
+                <!-- Search Input -->
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="Search by brands, model, ref. no..." 
+                    style="
+                        flex: 1;
+                        border: none;
+                        outline: none;
+                        padding: 8px 15px;
+                        font-size: 14px;
+                        background: transparent;
+                    "
+                >
+                <button type="button" 
+                    onclick="document.getElementById('searchInput').focus();"
+                    style="
+                        padding: 8px 15px;
+                        background: none;
+                        border: none;
+                        color: #666;
+                        cursor: pointer;
+                    "
+                >
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <!-- Suggestions Container (keeping existing styling) -->
+                <div id="suggestions" style="
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: #ffffff;
+                    border: 1px solid #e0e0e0;
+                    border-top: none;
+                    border-radius: 0 0 25px 25px;
+                    max-height: 200px;
+                    overflow-y: auto;
+                    z-index: 1000;
+                    margin-top: -1px; /* Removes gap between search bar and suggestions */
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    display: none;
+                ">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Icons -->
+    <div class="header-icons" style="display: flex; gap: 20px; align-items: center;">
         <a href="#" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-heart-o"></i></a>
         <a href="#" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-shopping-cart"></i></a>
         <a href="contact.php" style="color: #2c3e50; font-size: 20px;"><i class="fa fa-user"></i></a>
     </div>
+
+    <!-- Mobile Menu Button (Only shows on mobile) -->
+    <button class="mobile-menu-btn">
+        <i class="fa fa-bars"></i>
+    </button>
   </div>
         </div>
     </div>
 
+    <!-- Mobile Menu Panel -->
+    <div class="mobile-menu-panel">
+        <div class="mobile-menu-content">
+            <a href="index.php">Home</a>
+            <a href="rent.php">For Rent</a>
+            <a href="product.html">New for Sale</a>
+            <a href="contact.php">Contact</a>
+            <?php if(isset($_SESSION['username'])) { ?>
+                <a href="post.php">Dashboard</a>
+            <?php } ?>
+            <!-- Mobile Icons -->
+            <div class="mobile-icons">
+                <a href="#"><i class="fa fa-heart-o"></i> Wishlist</a>
+                <a href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
+                <a href="contact.php"><i class="fa fa-user"></i> Profile</a>
+            </div>
+        </div>
+    </div>
+
  <!-- Navigation Menu with centered container -->
-    <div class="nav-bar" style="background-color:#F3F4F6;  margin-left: 95px; margin-right: 95px; margin-bottom: 10px; border-radius: 10px;">
+    <div class="nav-bar" style=" margin-left: 95px; margin-right: 95px; margin-bottom: 10px; border-radius: 10px;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <nav style="padding: 8px 0;">
                 <ul style="
@@ -108,7 +157,7 @@
                 ">
                     <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
-                    <li><a href="product.html" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
+                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
                     <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
@@ -125,9 +174,9 @@
             transition: color 0.3s ease;
         }
 
-        /* .nav-bar a:hover {
-            color: #ffffff !important;
-        } */
+        .nav-bar a:hover {
+            color:  #f39c12 !important;
+        }
 
         .nav-bar a::after {
     content: '';
@@ -136,7 +185,7 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background-color: #1B3C73;
+            background-color:  #f39c12;
             transition: width 0.3s ease;
         }
 
@@ -155,8 +204,8 @@
 
         /* Search input focus effect */
         #searchInput:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
         }
 
         .suggestion-item {
@@ -171,6 +220,195 @@
 
         .suggestion-item:last-child {
             border-bottom: none;
+        }
+
+        /* Add these styles while keeping existing ones */
+        .toggle-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: transparent;
+            color: #666;
+        }
+
+        .toggle-btn:hover {
+            background-color: rgba(0, 230, 195, 0.1);
+        }
+
+        .toggle-btn.active {
+            background-color: #FF6A18 !important;
+            color: white !important;
+            box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
+        }
+
+        /* Search container and suggestions styling */
+        .search-container {
+            position: relative;
+        }
+
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 25px 25px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            margin-top: -1px; /* Removes gap between search bar and suggestions */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .suggestion-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .suggestion-item:hover {
+            background-color: rgba(0, 230, 195, 0.1);
+        }
+
+        .suggestion-item:last-child {
+            border-radius: 0 0 25px 25px;
+        }
+
+        /* Search input container */
+        .search-container form > div {
+            border-radius: 25px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-container form > div:focus-within {
+            border-color: #00e6c3;
+            box-shadow: 0 0 0 2px rgba(0, 230, 195, 0.1);
+        }
+
+        /* Mobile-specific styles - Only apply to mobile devices */
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 8px 0 !important;
+            }
+
+            .container {
+                padding: 0 10px !important;
+            }
+
+            .logo-container {
+                flex: 0 0 70px !important;
+            }
+
+            .main-logo {
+                max-width: 70px !important;
+            }
+
+            .search-container {
+                flex: 1;
+                margin: 0 5px !important;
+            }
+
+            .search-container form > div {
+                padding: 2px !important;
+            }
+
+            .search-container .toggle-btn {
+                display: none !important;
+            }
+
+            #searchInput {
+                font-size: 12px !important;
+                padding: 6px 8px !important;
+            }
+
+            .search-container button {
+                padding: 6px 8px !important;
+            }
+
+            /* Adjust the gap between flex items */
+            .top-bar .container > div {
+                gap: 8px !important;
+            }
+
+            .header-icons {
+                display: none !important;
+            }
+
+            .nav-bar {
+                display: none !important;
+            }
+
+            .mobile-menu-btn {
+                display: block !important;
+                background: none;
+                border: none;
+                font-size: 20px;
+                color: #1B3C73;
+                cursor: pointer;
+                padding: 5px;
+                margin-left: 5px;
+            }
+
+            /* Rest of the mobile styles remain the same */
+            .mobile-menu-panel {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            }
+
+            .mobile-menu-panel.active {
+                right: 0;
+            }
+
+            .mobile-menu-content {
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .mobile-menu-content a {
+                color: #1B3C73;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 16px;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+
+            .mobile-icons {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .mobile-icons a {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        /* Desktop-specific styles - Hide mobile elements on desktop */
+        @media (min-width: 769px) {
+            .mobile-menu-btn,
+            .mobile-menu-panel {
+                display: none !important;
+            }
         }
   </style>
 </header>
@@ -511,50 +749,51 @@
 				<div class="row">				
 					<div class="col-md-3 col-sm-6">
 						<div class="single_ftr">
-							<h4 class="sf_title">Contacts</h4>
+							<h4 class="sf_title">Contact</h4>
 							<ul>
-								<li>4060 Reppert Coal Road Jackson, MS 39201 USA</li>
-								<li>(+123) 685 78 <br> (+064) 987 245</li>
-								<li>Contact@yourcompany.com</li>
+								<li><i class="fa fa-map-marker" style="margin-right: 10px;"></i>Jarn Yafour, Mafraq Industrial Area Abu Dhabi, UAE</li>
+								<li><i class="fa fa-phone" style="margin-right: 10px;"></i>058-9948428<br><span style="margin-left: 25px;">055-8118758</span></li>
+								<li><i class="fa fa-envelope" style="margin-right: 10px;"></i>listed.transport@yahoo.com<br><span style="margin-left: 25px;">listedgeneraltransport@gmail.com</span></li>
 							</ul>
 						</div>
 					</div> <!--  End Col -->
 					
 					<div class="col-md-3 col-sm-6">
 						<div class="single_ftr">
-							<h4 class="sf_title">Information</h4>
+							<h4 class="sf_title">Navigate</h4>
 							<ul>
-								<li><a href="#">About Us</a></li>
-								<li><a href="#">Delivery Information</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">Terms & Conditions</a></li>
-								<li><a href="#">Contact Us</a></li>
+								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
+								<li><a href="contact.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Delivery Information</a></li>
+								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Privacy Policy</a></li>
+								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Terms & Conditions</a></li>
+								<li><a href="contact.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Contact Us</a></li>
 							</ul>
 						</div>
 					</div> <!--  End Col -->
 					
 					<div class="col-md-3 col-sm-6">
 						<div class="single_ftr">
-							<h4 class="sf_title">Services</h4>
+							<h4 class="sf_title">Solution</h4>
 							<ul>
-								<li><a href="#">Returns</a></li>
-								<li><a href="#">Site Map</a></li>
-								<li><a href="#">Wish List</a></li>
-								<li><a href="#">My Account</a></li>
-								<li><a href="#">Order History</a></li>
+								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Returns</a></li>
+								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Site Map</a></li>
+								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Wish List</a></li>
+								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>My Account</a></li>
+								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Order History</a></li>
 							</ul>
 						</div>
 					</div> <!--  End Col -->	
 					
 					<div class="col-md-3 col-sm-6">
 						<div class="single_ftr">
-							<h4 class="sf_title">Newsletter</h4>
-							<div class="newsletter_form">
-								<p>There are many variations of passages of Lorem Ipsum available, but the majority have </p>
-								<form method="post" class="form-inline">				
-									<input name="EMAIL" id="email" placeholder="Enter Your Email" class="form-control" type="email">
-									<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-								</form>
+							<h4 class="sf_title">Follow Us</h4>
+							<div class="ftr_social_icon">
+								<ul>
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								</ul>
 							</div>
 						</div>
 					</div> <!--  End Col -->
@@ -570,15 +809,14 @@
 							<div class="ftr_social_icon">
 								<ul>
 									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-google"></i></a></li>
+									<li><a href="#"><i class="fa fa-instagram"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-rss"></i></a></li>
 								</ul>
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2024 All Rights Reserved listedtravel</p>
+							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved listedtravel</p>
 						</div>
 						
 						<div class="col-sm-4">
@@ -595,11 +833,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
-
 		</footer>
 		<!--  FOOTER END  -->
 
@@ -696,5 +929,31 @@
 });
 
 		</script>
+<script>
+// Add this to your existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            toggleButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = '#666';
+            });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            this.style.backgroundColor = '#FF6A18';
+            this.style.color = 'white';
+            
+            // Store the selected type (buy/rent)
+            const selectedType = this.getAttribute('data-type');
+            // You can use this selectedType value for your search functionality
+        });
+    });
+});
+</script>        
 	</body>
 </html>
