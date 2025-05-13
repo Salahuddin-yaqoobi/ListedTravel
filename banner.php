@@ -494,10 +494,19 @@ const createPickr = (element, defaultColor, targetInput, previewType) => {
 
 // Initialize all color pickers
 document.addEventListener('DOMContentLoaded', () => {
-    createPickr('#titleColorPicker', '#000000', 'titleColor', 'title');
-    createPickr('#headerColorPicker', '#000000', 'headerColor', 'header');
-    createPickr('#subtitleColorPicker', '#000000', 'subtitleColor', 'subtitle');
-    createPickr('#buttonColorPicker', '#3498db', 'buttonColor', 'button');
+    const colorPickers = [
+        { id: '#titleColorPicker', input: 'titleColor', type: 'title', default: '#000000' },
+        { id: '#headerColorPicker', input: 'headerColor', type: 'header', default: '#000000' },
+        { id: '#subtitleColorPicker', input: 'subtitleColor', type: 'subtitle', default: '#000000' },
+        { id: '#buttonColorPicker', input: 'buttonColor', type: 'button', default: '#3498db' }
+    ];
+
+    colorPickers.forEach(picker => {
+        const element = document.querySelector(picker.id);
+        if (element) {
+            createPickr(picker.id, picker.default, picker.input, picker.type);
+        }
+    });
 
     // Initialize alignment values
     updatePreview('title');
@@ -617,34 +626,20 @@ function validateForm() {
     let isValid = true;
     let errorMessage = '';
 
-    // Check title
-    if (!document.getElementById('bannerTitle').value.trim()) {
-        errorMessage += 'Banner Title is required\n';
+    const requiredFields = {
+        'bannerTitle': 'Banner Title',
+        'bannerHeader': 'Banner Header',
+        'bannerSubtitle': 'Banner Subtitle',
+        'bannerButton': 'Button Text',
+        'bannerImage': 'Banner Image'
+    };
+
+    for (let [id, label] of Object.entries(requiredFields)) {
+        const element = document.getElementById(id);
+        if (!element || (id === 'bannerImage' ? !element.files[0] : !element.value.trim())) {
+            errorMessage += `${label} is required\n`;
         isValid = false;
     }
-
-    // Check header
-    if (!document.getElementById('bannerHeader').value.trim()) {
-        errorMessage += 'Banner Header is required\n';
-        isValid = false;
-    }
-
-    // Check subtitle
-    if (!document.getElementById('bannerSubtitle').value.trim()) {
-        errorMessage += 'Banner Subtitle is required\n';
-        isValid = false;
-    }
-
-    // Check button text
-    if (!document.getElementById('bannerButton').value.trim()) {
-        errorMessage += 'Button Text is required\n';
-        isValid = false;
-    }
-
-    // Check image
-    if (!document.getElementById('bannerImage').files[0]) {
-        errorMessage += 'Banner Image is required\n';
-        isValid = false;
     }
 
     if (!isValid) {
@@ -654,15 +649,60 @@ function validateForm() {
             icon: 'error',
             confirmButtonText: 'OK'
         });
+    }
+
+    return isValid;
+}
+
+// Replace the form submission code
+document.querySelector('.banner-form').onsubmit = function(e) {
+    e.preventDefault();
+    
+    if (!validateForm()) {
         return false;
     }
 
-    return true;
-}
+    // Create FormData object
+    const formData = new FormData(this);
+    formData.append('submit', '1');
 
-// Modify the form element to include onsubmit validation
-document.querySelector('.banner-form').onsubmit = function(e) {
-    return validateForm();
+    // Add all color values explicitly
+    formData.append('banner_title_color', document.getElementById('titleColor').value);
+    formData.append('banner_header_color', document.getElementById('headerColor').value);
+    formData.append('banner_subtitle_color', document.getElementById('subtitleColor').value);
+    formData.append('banner_button_color', document.getElementById('buttonColor').value);
+
+    // Send using fetch
+    fetch('save-banner.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                title: 'Success!',
+                text: data.message || 'Banner saved successfully',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = 'all-banners.php';
+            });
+        } else {
+            throw new Error(data.message || 'Failed to save banner');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            title: 'Error!',
+            text: error.message || 'Failed to save banner',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    });
+
+    return false;
 };
 </script>
 

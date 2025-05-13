@@ -8,6 +8,9 @@ if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
 include "config.php";
 
 if(isset($_POST['submit'])) {
+    // Add error logging
+    error_log("Form submitted to save-banner.php");
+    
     // Get form data
     $banner_header = mysqli_real_escape_string($conn, $_POST['banner_header']);
     $banner_title = mysqli_real_escape_string($conn, $_POST['banner_title']);
@@ -20,8 +23,8 @@ if(isset($_POST['submit'])) {
     $subtitle_align = mysqli_real_escape_string($conn, $_POST['subtitle_align']);
     $button_align = mysqli_real_escape_string($conn, $_POST['button_align']);
     
-    // Get colors
-    $banner_head_color = mysqli_real_escape_string($conn, $_POST['banner_header_color']);
+    // Get colors - Fix the variable name here
+    $banner_header_color = mysqli_real_escape_string($conn, $_POST['banner_header_color']);
     $banner_subtitle_color = mysqli_real_escape_string($conn, $_POST['banner_subtitle_color']);
     $banner_title_color = mysqli_real_escape_string($conn, $_POST['banner_title_color']);
     $banner_button_color = mysqli_real_escape_string($conn, $_POST['banner_button_color']);
@@ -43,40 +46,33 @@ if(isset($_POST['submit'])) {
         move_uploaded_file($file_tmp, $upload_dir . $banner_img);
     }
 
-    // Always insert a new record
-    if(!empty($banner_img)) {
-        $sql = "INSERT INTO banner (
-            banner_header, banner_title, banner_subtitle, banner_button, banner_img,
-            title_align, header_align, subtitle_align, button_align,
-            banner_head_color, banner_subtitle_color, banner_title_color, banner_button_color
-        ) VALUES (
-            '$banner_header', '$banner_title', '$banner_subtitle', '$banner_button', '$banner_img',
-            '$title_align', '$header_align', '$subtitle_align', '$button_align',
-            '$banner_head_color', '$banner_subtitle_color', '$banner_title_color', '$banner_button_color'
-        )";
-    } else {
-        $sql = "INSERT INTO banner (
-            banner_header, banner_title, banner_subtitle, banner_button,
-            title_align, header_align, subtitle_align, button_align,
-            banner_head_color, banner_subtitle_color, banner_title_color, banner_button_color
-        ) VALUES (
-            '$banner_header', '$banner_title', '$banner_subtitle', '$banner_button',
-            '$title_align', '$header_align', '$subtitle_align', '$button_align',
-            '$banner_head_color', '$banner_subtitle_color', '$banner_title_color', '$banner_button_color'
-        )";
-    }
+    // Fix the SQL query - change banner_head_color to banner_header_color
+    $sql = "INSERT INTO banner (
+        banner_header, banner_title, banner_subtitle, banner_button, banner_img,
+        title_align, header_align, subtitle_align, button_align,
+        banner_header_color, banner_subtitle_color, banner_title_color, banner_button_color
+    ) VALUES (
+        '$banner_header', '$banner_title', '$banner_subtitle', '$banner_button', '$banner_img',
+        '$title_align', '$header_align', '$subtitle_align', '$button_align',
+        '$banner_header_color', '$banner_subtitle_color', '$banner_title_color', '$banner_button_color'
+    )";
 
-    // Execute query
+    // Log the SQL query for debugging
+    error_log("SQL Query: " . $sql);
+
+    // Execute query and send proper JSON response
+    header('Content-Type: application/json');
+    
     if(mysqli_query($conn, $sql)) {
-        $_SESSION['banner_success'] = true;
-        header("Location: banner.php");
-        exit();
+        echo json_encode(['success' => true, 'message' => 'Banner saved successfully']);
     } else {
-        $_SESSION['banner_error'] = mysqli_error($conn);
-        header("Location: banner.php");
-        exit();
+        echo json_encode(['success' => false, 'message' => mysqli_error($conn)]);
     }
+    exit();
 }
 
-header("Location: banner.php");
+// If we get here, no form was submitted
+header('Content-Type: application/json');
+echo json_encode(['success' => false, 'message' => 'No data submitted']);
+exit();
 ?>

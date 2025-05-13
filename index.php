@@ -288,9 +288,8 @@ session_start();
 
 .exploreInventoryBtn.btn.main_btn:hover {
   background-color: #ffffff !important;
-  color: #003566 !important;
-  border: 2px solid #003566 !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #000000 !important;
+  border: 2px solid var(--button-color, #003566) !important;
 }
 
 .owl-dots .owl-dot span {
@@ -325,55 +324,78 @@ session_start();
 }
 
 </style>
+
 <section id="slider_area" class="text-center" style="border-radius: 20px; overflow: hidden; margin-top:30px;">
   <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-    <div class="slider_active owl-carousel" >
-
-      <div class="single_slide" style="border-radius: 20px; background-image: url(img/top-1.jpg); background-size: cover; background-position: center; opacity: 1;">
-        <div class="container">  
-          <div class="single-slide-item-table">
-            <div class="single-slide-item-tablecell">
-              <div class="slider_content text-left slider-animated-1">           
-                <p class="animated">Listed Travel</p>
-                <h1 class="animated">Koeblco distribution</h1>
-                <h4 class="animated">Authorized dealer for Japanese technology, built to last</h4>
-                <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Explore inventory</a>
-              </div>
-            </div>
-          </div>            
-        </div>
-      </div>
-
-      <div class="single_slide" style="border-radius: 20px; background-image: url(img/Banner_image_-_english_3.jpg); background-size: cover; background-position: center ; opacity: 1;">
-        <div class="container">    
-          <div class="single-slide-item-table">
-            <div class="single-slide-item-tablecell">
-              <div class="slider_content text-center slider-animated-2">           
-                <p class="animated">Listed Travel</p>
-                <h1 class="animated">Skip the upfront cost</h1>
-                <h4 class="animated">Discover equipment rentals with certified operators</h4>
-                <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
-              </div>
-            </div>
-          </div>  
-        </div>
-      </div>
-
-      <div class="single_slide" style="border-radius: 20px; background-image: url(img/Banner_image_-_english_4.jpg); background-size: cover; background-position: center ; opacity: 1;">
+    <div class="slider_active owl-carousel">
+      <?php
+      // Include database connection if not already included
+      include "config.php";
+      
+      // First try to get banners with main status
+      $sql = "SELECT * FROM banner WHERE banner_status = 'main' ORDER BY banner_id DESC";
+      $result = mysqli_query($conn, $sql);
+      
+      // If no main banners found, get first three banners
+      if(mysqli_num_rows($result) == 0) {
+        $sql = "SELECT * FROM banner ORDER BY banner_id DESC LIMIT 3";
+        $result = mysqli_query($conn, $sql);
+      }
+      
+      if(mysqli_num_rows($result) > 0) {
+        while($banner = mysqli_fetch_assoc($result)) {
+          // Set default values if any field is empty
+          $banner_img = !empty($banner['banner_img']) ? 'uploads/'.$banner['banner_img'] : 'img/top-1.jpg';
+      ?>
+      <div class="single_slide" style="border-radius: 20px; background-image: url(<?php echo $banner_img; ?>); background-size: cover; background-position: center; opacity: 1;">
         <div class="container">
           <div class="single-slide-item-table">
             <div class="single-slide-item-tablecell">
-              <div class="slider_content text-right slider-animated-3">           
-                <p class="animated">Listed Travel</p>
-                <h1 class="animated">Low-hours used machinery</h1>
-                <h4 class="animated">Trusted brands. Top quality. Well-maintained.</h4>
-                <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Browse inventory</a>
+              <div class="slider_content text-<?php echo $banner['title_align']; ?> slider-animated-1">
+                <p class="animated" style="color: <?php echo $banner['banner_title_color']; ?>; text-align: <?php echo $banner['title_align']; ?>;">
+                  <?php echo htmlspecialchars($banner['banner_title']); ?>
+                </p>
+                <h1 class="animated" style="color: <?php echo $banner['banner_header_color']; ?>; text-align: <?php echo $banner['header_align']; ?>;">
+                  <?php echo htmlspecialchars($banner['banner_header']); ?>
+                </h1>
+                <h4 class="animated" style="color: <?php echo $banner['banner_subtitle_color']; ?>; text-align: <?php echo $banner['subtitle_align']; ?>;">
+                  <?php echo htmlspecialchars($banner['banner_subtitle']); ?>
+                </h4>
+                <div style="text-align: <?php echo $banner['button_align']; ?>;">
+                  <a href="product.html" class="exploreInventoryBtn btn main_btn animated" 
+                     style="background-color: <?php echo $banner['banner_button_color']; ?> !important; 
+                            display: inline-block;
+                            transition: all 0.3s ease !important;"
+                     onmouseover="this.style.backgroundColor='#ffffff !important'; this.style.color='#000000 !important';"
+                     onmouseout="this.style.backgroundColor='<?php echo $banner['banner_button_color']; ?> !important'; this.style.color='#ffffff !important';">
+                    <?php echo htmlspecialchars($banner['banner_button']); ?>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
+      <?php
+        }
+      } else {
+        // Fallback banner if no entries in database
+      ?>
+      <div class="single_slide" style="border-radius: 20px; background-image: url(img/top-1.jpg); background-size: cover; background-position: center; opacity: 1;">
+        <div class="container">
+          <div class="single-slide-item-table">
+            <div class="single-slide-item-tablecell">
+              <div class="slider_content text-left slider-animated-1">
+                <p class="animated">Listed Travel</p>
+                <h1 class="animated">Welcome</h1>
+                <h4 class="animated">Default Banner</h4>
+                <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Explore inventory</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php } ?>
     </div>
   </div>
 </section>
