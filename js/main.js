@@ -54,12 +54,14 @@ jQuery(document).on('ready', function(){
 		  }
 		});
 		
-		$('a').on('click', function(e){
+		$('a:not(.exploreInventoryBtn)').on('click', function(e){
 			var anchor = $(this);
-			$('html, body').stop().animate({
-				scrollTop: $(anchor.attr('href')).offset().top - 50
-			}, 1500);
-			e.preventDefault();
+			if(anchor.attr('href').startsWith('#')) {
+				$('html, body').stop().animate({
+					scrollTop: $(anchor.attr('href')).offset().top - 50
+				}, 1500);
+				e.preventDefault();
+			}
 		});
 			
 	

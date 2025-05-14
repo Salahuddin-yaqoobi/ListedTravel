@@ -44,7 +44,7 @@
                         font-weight: 500;
                         cursor: pointer;
                         transition: all 0.3s ease;
-                        background-color: #FF6A18;
+                        background-color: #E79C19;
                         color: white;
                     ">Buy</button>
                     <button type="button" class="toggle-btn" data-type="rent" style="
@@ -238,7 +238,7 @@
         }
 
         .toggle-btn.active {
-            background-color: #FF6A18 !important;
+            background-color: #E79C19 !important;
             color: white !important;
             box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
         }
@@ -748,6 +748,7 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
 		<script src="js/owl.carousel.min.js"></script>
 		<script src="js/simplePlayer.js"></script>
 		<script src="js/main.js"></script>
+		<script src="script.js"></script>
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
   const searchInput = document.getElementById('searchInput');

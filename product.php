@@ -85,7 +85,7 @@
                         font-weight: 500;
                         cursor: pointer;
                         transition: all 0.3s ease;
-                        background-color: #FF6A18;
+                        background-color: #E79C19;
                         color: white;
                     ">Buy</button>
                     <button type="button" class="toggle-btn" data-type="rent" style="
@@ -169,7 +169,7 @@
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.html">New for Sale</a>
+            <a href="product.php">New for Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -279,7 +279,7 @@
         }
 
         .toggle-btn.active {
-            background-color: #FF6A18 !important;
+            background-color: #E79C19 !important;
             color: white !important;
             box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
         }
@@ -787,5 +787,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-</body>
+		<script src="js/jquery.meanmenu.min.js"></script>
+		<script src="js/jquery.mixitup.js"></script>
+		<script src="js/jquery.counterup.min.js"></script>
+		<script src="js/waypoints.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script src="js/venobox.min.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/simplePlayer.js"></script>
+		<script src="js/main.js"></script>
+		<script src="script.js"></script>
+	</body>
 </html>

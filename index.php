@@ -111,7 +111,7 @@ session_start();
                         font-weight: 500;
                         cursor: pointer;
                         transition: all 0.3s ease;
-                        background-color: #FF6A18;
+                        background-color: #E79C19;
                         color: white;
                     ">Buy</button>
                     <button type="button" class="toggle-btn" data-type="rent" style="
@@ -195,7 +195,7 @@ session_start();
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.html">New for Sale</a>
+            <a href="product.php">New for Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -305,7 +305,7 @@ session_start();
         }
 
         .toggle-btn.active {
-            background-color: #FF6A18 !important;
+            background-color: #E79C19 !important;
             color: white !important;
             box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
         }
@@ -585,8 +585,8 @@ session_start();
 }
 
 .exploreInventoryBtn.btn.main_btn:hover {
-  background-color: #ffffff !important;
-  color: #000000 !important;
+  background-color:rgb(1, 21, 39)!important;
+  color: #ffffff !important;
   border: 2px solid var(--button-color, #003566) !important;
 }
 
@@ -660,12 +660,13 @@ session_start();
                   <?php echo htmlspecialchars($banner['banner_subtitle']); ?>
                 </h4>
                 <div style="text-align: <?php echo $banner['button_align']; ?>;">
-                  <a href="product.html" class="exploreInventoryBtn btn main_btn animated" 
+                  <a href="product.php" class="exploreInventoryBtn btn main_btn animated" 
                      style="background-color: <?php echo $banner['banner_button_color']; ?> !important; 
                             display: inline-block;
-                            transition: all 0.3s ease !important;"
-                     onmouseover="this.style.backgroundColor='#ffffff !important'; this.style.color='#000000 !important';"
-                     onmouseout="this.style.backgroundColor='<?php echo $banner['banner_button_color']; ?> !important'; this.style.color='#ffffff !important';">
+                            transition: all 0.3s ease !important;
+                            text-decoration: none !important;
+                            position: relative;
+                            z-index: 100;">
                     <?php echo htmlspecialchars($banner['banner_button']); ?>
                   </a>
                 </div>
@@ -687,7 +688,7 @@ session_start();
                 <p class="animated">Listed Travel</p>
                 <h1 class="animated">Welcome</h1>
                 <h4 class="animated">Default Banner</h4>
-                <a href="product.html" class="exploreInventoryBtn btn main_btn animated">Explore inventory</a>
+                <a href="./product.php" class="exploreInventoryBtn btn main_btn animated" style="position: relative; z-index: 100;">Explore inventory</a>
               </div>
             </div>
           </div>
@@ -868,7 +869,7 @@ session_start();
 						<div class="special_info">			
 							<h1 style="margin-bottom: 15px; font-weight: bolder; font-size: x-large;">Pioneering Digital Machinery Solutions</h1>
 							<p style="font-size: large;">Founded in 1978, Al Marwan has established itself as a trusted partner in the heavy equipment supply industry. We have introduced the region's first e-commerce platform to better meet MENA's growing demand for heavy equipment.</p>							
-							<a href="product.html" class="btn main_btn">Explore</a>					
+							<a href="product.php" class="btn main_btn">Explore</a>					
 								</div>
 							</div>
 						</div>
@@ -1136,127 +1137,111 @@ session_start();
 <!-- End of website -->
 </body>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchInput = document.getElementById('searchInput');
-  const suggestionsContainer = document.getElementById('suggestions');
-  
-  // Handle search submit
-  document.getElementById('searchForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const query = searchInput.value.trim().toLowerCase();
-
-    // Redirect to specific pages based on keywords
-    if (query === 'rent') {
-      window.location.href = 'rent.php';
-      return;
-    } else if (query === 'sale') {
-      window.location.href = 'sale.php';
-      return;
-    }
-
+document.addEventListener('DOMContentLoaded', function() {
     try {
-      const response = await fetch('get-product-id.php?query=' + encodeURIComponent(query));
-      const data = await response.json();
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsContainer = document.getElementById('suggestions');
+        
+        if (!searchInput || !suggestionsContainer) {
+            console.log('Search elements not found');
+            return;
+        }
 
-      if (data.success && data.post_id) {
-        window.location.href = 'product-details.php?post_id=' + data.post_id;
-      } else {
-        alert('Product not found.');
-      }
-    } catch (error) {
-      console.error('Search error:', error);
-      alert('Something went wrong.');
-    }
-  });
+        // Handle search submit
+        const searchForm = document.getElementById('searchForm');
+        if (searchForm) {
+            searchForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const query = searchInput.value.trim().toLowerCase();
 
-  // Fetch suggestions on input
-  searchInput.addEventListener('input', async function () {
-    const query = searchInput.value.trim();
+                // Redirect to specific pages based on keywords
+                if (query === 'rent') {
+                    window.location.href = 'rent.php';
+                    return;
+                } else if (query === 'sale') {
+                    window.location.href = 'sale.php';
+                    return;
+                }
 
-    if (query.length === 0) {
-      suggestionsContainer.innerHTML = '';
-      suggestionsContainer.style.display = 'none';  // Hide suggestions if query is empty
-      return;
-    }
+                try {
+                    const response = await fetch('get-product-id.php?query=' + encodeURIComponent(query));
+                    const data = await response.json();
 
-    try {
-      const response = await fetch('get-suggestions.php?query=' + encodeURIComponent(query));
-      const suggestions = await response.json();
-
-      suggestionsContainer.innerHTML = '';  // Clear previous suggestions
-      if (suggestions.length > 0) {
-        suggestionsContainer.style.display = 'block';  // Show suggestions if any
-        suggestions.forEach(item => {
-          const li = document.createElement('div'); // Changed to div for styling purpose
-          li.textContent = item.name;
-          li.classList.add('suggestion-item'); // Add the suggestion-item class
-          li.addEventListener('click', () => {
-            window.location.href = 'product-details.php?post_id=' + item.post_id;
-          });
-          suggestionsContainer.appendChild(li);
-        });
-      } else {
-        suggestionsContainer.style.display = 'none';  // Hide if no suggestions
-      }
-    } catch (error) {
-      console.error('Suggestion error:', error);
-    }
-  });
-
-  // Hide suggestions when clicking outside
-  document.addEventListener('click', function (event) {
-    if (
-      !searchInput.contains(event.target) &&
-      !suggestionsContainer.contains(event.target)
-    ) {
-      suggestionsContainer.innerHTML = '';  // Clear suggestions
-      suggestionsContainer.style.display = 'none';  // Hide suggestions container
-    }
-  });
-});
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    const filterButtons = document.querySelectorAll('.product_filter .filter');
-    const allItems = document.querySelectorAll('.product-item');
-    
-    // Initially, show all items
-    allItems.forEach(item => item.classList.add('visible'));
-    
-    filterButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            const filterValue = this.getAttribute('data-filter');
-            
-            // Set the active class on the clicked filter
-            filterButtons.forEach(function(el) {
-                el.classList.remove('active');
-            });
-            this.classList.add('active');
-            
-            // Animate items based on the selected category
-            allItems.forEach(function(item) {
-                if (filterValue === 'all') {
-                    item.classList.remove('hidden');
-                    item.classList.add('visible');
-                } else {
-                    if (item.classList.contains(filterValue)) {
-                        item.classList.remove('hidden');
-                        item.classList.add('visible');
+                    if (data.success && data.post_id) {
+                        window.location.href = 'product-details.php?post_id=' + data.post_id;
                     } else {
-                        item.classList.remove('visible');
-                        item.classList.add('hidden');
+                        alert('Product not found.');
                     }
+                } catch (error) {
+                    console.error('Search error:', error);
                 }
             });
+        }
+
+        // Fetch suggestions on input
+        searchInput.addEventListener('input', async function() {
+            const query = this.value.trim();
+
+            if (query.length === 0) {
+                suggestionsContainer.innerHTML = '';
+                suggestionsContainer.style.display = 'none';
+                return;
+            }
+
+            try {
+                const response = await fetch('get-suggestions.php?query=' + encodeURIComponent(query));
+                const suggestions = await response.json();
+
+                suggestionsContainer.innerHTML = '';
+                if (suggestions.length > 0) {
+                    suggestionsContainer.style.display = 'block';
+                    suggestions.forEach(item => {
+                        const div = document.createElement('div');
+                        div.textContent = item.name;
+                        div.classList.add('suggestion-item');
+                        div.addEventListener('click', () => {
+                            window.location.href = 'product-details.php?post_id=' + item.post_id;
+                        });
+                        suggestionsContainer.appendChild(div);
+                    });
+                } else {
+                    suggestionsContainer.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Suggestion error:', error);
+            }
         });
-    });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+                suggestionsContainer.innerHTML = '';
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+
+        // Toggle buttons functionality
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        if (toggleButtons) {
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    toggleButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.style.backgroundColor = 'transparent';
+                        btn.style.color = '#666';
+                    });
+                    
+                    this.classList.add('active');
+                    this.style.backgroundColor = '#FF6A18';
+                    this.style.color = 'white';
+                });
+            });
+        }
+    } catch (error) {
+        console.error('Initialization error:', error);
+    }
 });
-
 </script>
-
-
 
 			
 		<script src="js/vendor/jquery-1.12.4.min.js"></script>
@@ -1273,243 +1258,3 @@ document.addEventListener("DOMContentLoaded", function() {
 		<script src="script.js"></script>
 	</body>
 </html>
-
-<script>
-// Add this to your existing JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButtons = document.querySelectorAll('.toggle-btn');
-    
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            toggleButtons.forEach(btn => {
-                btn.classList.remove('active');
-                btn.style.backgroundColor = 'transparent';
-                btn.style.color = '#666';
-            });
-            
-            // Add active class to clicked button
-            this.classList.add('active');
-            this.style.backgroundColor = '#FF6A18';
-            this.style.color = 'white';
-            
-            // Store the selected type (buy/rent)
-            const selectedType = this.getAttribute('data-type');
-            // You can use this selectedType value for your search functionality
-        });
-    });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('blogSearchInput');
-    const suggestionsContainer = document.getElementById('searchSuggestions');
-    const searchForm = document.getElementById('blogSearchForm');
-
-    searchInput.addEventListener('input', async function() {
-        const query = this.value.trim();
-        
-        if (query.length < 2) {
-            suggestionsContainer.style.display = 'none';
-            return;
-        }
-
-        try {
-            const response = await fetch(`get-blog-suggestions.php?query=${encodeURIComponent(query)}`);
-            const suggestions = await response.json();
-            
-            suggestionsContainer.innerHTML = '';
-            
-            if (suggestions.length > 0) {
-                suggestions.forEach(blog => {
-                    const div = document.createElement('div');
-                    div.className = 'suggestion-item';
-                    div.textContent = blog.title;
-                    div.addEventListener('click', () => {
-                        window.location.href = `blog-details.php?id=${blog.id}`;
-                    });
-                    suggestionsContainer.appendChild(div);
-                });
-                suggestionsContainer.style.display = 'block';
-            } else {
-                suggestionsContainer.style.display = 'none';
-            }
-        } catch (error) {
-            console.error('Error fetching suggestions:', error);
-        }
-    });
-
-    // Hide suggestions when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
-            suggestionsContainer.style.display = 'none';
-        }
-    });
-
-    // Handle search form submission
-    searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const query = searchInput.value.trim();
-        if (query) {
-            // Search for exact blog title match
-            fetch(`get-blog-suggestions.php?query=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(suggestions => {
-                    if (suggestions.length > 0) {
-                        window.location.href = `blog-details.php?id=${suggestions[0].id}`;
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    });
-});
-</script>
-
-<style>
-/* Updated footer styling */
-.footer_area {
-    background: #28425B;
-    padding: 70px 0 20px;
-    color: #ffffff;
-}
-
-.sf_title {
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 25px;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.sf_title:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 50px;
-    height: 2px;
-    background: #ffffff;
-}
-
-.single_ftr ul li {
-    margin-bottom: 15px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.single_ftr ul li a {
-    color: rgba(255, 255, 255, 0.8);
-    transition: all 0.3s ease;
-    font-size: 14px;
-}
-
-.single_ftr ul li a:hover {
-    color: #ffffff;
-    padding-left: 5px;
-}
-
-.ftr_social_icon ul li {
-    display: inline-block;
-    margin-right: 15px;
-}
-
-.ftr_social_icon ul li a {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    display: block;
-    color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.ftr_social_icon ul li a:hover {
-    background: #ffffff;
-    color: #006C55;
-    transform: translateY(-3px);
-}
-
-.ftr_btm_area {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.copyright_text {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 14px;
-    margin: 10px 0;
-}
-
-.payment_mthd_icon ul li {
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.8);
-    transition: all 0.3s ease;
-}
-
-.payment_mthd_icon ul li:hover {
-    color: #ffffff;
-    transform: translateY(-3px);
-}
-
-/* Responsive adjustments */
-@media (max-width: 767px) {
-    .single_ftr {
-        margin-bottom: 30px;
-    }
-    
-    .ftr_btm_area {
-        text-align: center;
-    }
-    
-    .payment_mthd_icon.text-right {
-        text-align: center;
-        margin-top: 15px;
-    }
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenuPanel = document.querySelector('.mobile-menu-panel');
-    
-    // Initially hide mobile menu button
-    mobileMenuBtn.style.display = 'none';
-    
-    // Show/hide mobile menu button based on screen size
-    function checkScreenSize() {
-        if (window.innerWidth <= 768) {
-            mobileMenuBtn.style.display = 'block';
-        } else {
-            mobileMenuBtn.style.display = 'none';
-            mobileMenuPanel.classList.remove('active');
-        }
-    }
-    
-    // Check on load and resize
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    
-    // Toggle mobile menu
-    mobileMenuBtn.addEventListener('click', function() {
-        mobileMenuPanel.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!mobileMenuBtn.contains(event.target) && 
-            !mobileMenuPanel.contains(event.target) && 
-            mobileMenuPanel.classList.contains('active')) {
-            mobileMenuPanel.classList.remove('active');
-        }
-    });
-});
-</script>

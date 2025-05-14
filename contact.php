@@ -46,7 +46,7 @@
                         font-weight: 500;
                         cursor: pointer;
                         transition: all 0.3s ease;
-                        background-color: #FF6A18;
+                        background-color: #E79C19;
                         color: white;
                     ">Buy</button>
                     <button type="button" class="toggle-btn" data-type="rent" style="
@@ -240,7 +240,7 @@
         }
 
         .toggle-btn.active {
-            background-color: #FF6A18 !important;
+            background-color: #E79C19 !important;
             color: white !important;
             box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
         }
@@ -577,6 +577,7 @@
 		<script src="js/owl.carousel.min.js"></script>
 		<script src="js/simplePlayer.js"></script>
 		<script src="js/main.js"></script>
+		<script src="script.js"></script>
 		<!-- Add SweetAlert2 JS -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>

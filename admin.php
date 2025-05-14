@@ -48,57 +48,66 @@ if(isset($_SESSION['username'])){
     <link rel="stylesheet" href="../css/style.css">
     <style>
         body {
-            background: #f5f7fa;
+            background: url('img/construction image.jpg') no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-        }
-
-        .split-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .login-side {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            background: #ffffff;
-        }
-
-        .image-side {
-            flex: 1;
-            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
             position: relative;
         }
 
-        .image-side::before {
+        body::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.8) 0%, rgba(41, 128, 185, 0.8) 100%);
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .split-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+            z-index: 2;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-side {
+            flex: 0 1 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .image-side {
+            display: none;
         }
 
         #wrapper-admin {
             width: 100%;
             max-width: 400px;
             padding: 0;
+            position: relative;
         }
 
         .logo {
-            max-width: 150px;
+            max-width: 200px;
             margin: 0 auto 25px;
             display: block;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
         }
 
         .heading {
@@ -111,11 +120,13 @@ if(isset($_SESSION['username'])){
         }
 
         .form-container {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 35px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
+            margin-top: 80px;
+            backdrop-filter: blur(5px);
         }
 
         .form-container:hover {
@@ -142,6 +153,7 @@ if(isset($_SESSION['username'])){
             transition: all 0.3s ease;
             width: 100%;
             box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.9);
         }
 
         .form-control:focus {
@@ -177,26 +189,24 @@ if(isset($_SESSION['username'])){
             margin-top: 15px;
             font-size: 14px;
             padding: 10px;
-            background-color: #fde8e8;
+            background-color: rgba(253, 232, 232, 0.95);
             border-radius: 6px;
             border: 1px solid #fbd5d5;
         }
+        
 
         @media (max-width: 991px) {
-            .split-container {
-                flex-direction: column;
-            }
-
-            .image-side {
-                display: none;
-            }
-
             .login-side {
                 padding: 20px;
+                width: 100%;
             }
 
             #wrapper-admin {
                 max-width: 100%;
+            }
+
+            .logo {
+                top: -80px;
             }
         }
 
@@ -207,10 +217,16 @@ if(isset($_SESSION['username'])){
             
             .form-container {
                 padding: 25px;
+                margin-top: 60px;
             }
             
             .heading {
                 font-size: 28px;
+            }
+
+            .logo {
+                max-width: 150px;
+                top: -60px;
             }
         }
     </style>
@@ -219,8 +235,10 @@ if(isset($_SESSION['username'])){
     <div class="split-container">
         <div class="image-side"></div>
         <div class="login-side">
-            <div id="wrapper-admin" class="body-content">
-                <img class="logo" src="img/logo.png" alt="Logo">
+            <div id="wrapper-admin" class="body-content"> 
+            <img class="logo" src="img/logo.png" alt="Logo">
+
+               
                 <!-- <h3 class="heading">Admin Login</h3> -->
                 <div class="form-container">
                     <!-- Form Start -->

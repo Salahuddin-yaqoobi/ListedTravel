@@ -737,7 +737,7 @@
 
 /* One product per row on smaller screens */
 @media (max-width: 768px) {
-    .shop_details .row {
+    .shop_details .product_grid {
         grid-template-columns: 1fr; /* 1 item per row on smaller screens */
     }
 }
