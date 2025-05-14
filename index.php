@@ -20,6 +20,8 @@ session_start();
 	<link rel="stylesheet" href="css/bootstrap.min.css" />	
 	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="css/responsive.css" />	
+  <link rel="icon" href="img/logo.png" type="image/x-icon">
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1000,7 +1002,7 @@ session_start();
 						<div class="single_ftr">
 							<h4 class="sf_title">Navigate</h4>
 							<ul>
-								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
+								<li><a href="about-us.html"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
 								<li><a href="contact.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Delivery Information</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Privacy Policy</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Terms & Conditions</a></li>
@@ -1027,8 +1029,8 @@ session_start();
 							<h4 class="sf_title">Follow Us</h4>
 							<div class="ftr_social_icon">
 								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+									<li><a href="https://www.facebook.com/listedgeneraltransport"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="https://www.instagram.com/listed_earthmoving/"><i class="fa fa-instagram"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								</ul>
@@ -1046,8 +1048,8 @@ session_start();
 						<div class="col-sm-4">
 							<div class="ftr_social_icon">
 								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+									<li><a href="https://www.facebook.com/listedgeneraltransport"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="https://www.instagram.com/listed_earthmoving/"><i class="fa fa-instagram"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								</ul>

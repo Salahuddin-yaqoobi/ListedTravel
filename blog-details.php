@@ -48,6 +48,7 @@ $popular_result = mysqli_query($conn, $popular_sql);
 	<link rel="stylesheet" href="css/owl.carousel.min.css" />
 	<link rel="stylesheet" href="css/meanmenu.min.css" />
 	<link rel="stylesheet" href="css/venobox.css" />
+	<link rel="icon" href="img/logo.png" type="image/x-icon">
 	<link rel="stylesheet" href="css/font-awesome.css" />
 	<link rel="stylesheet" href="css/bootstrap.min.css" />	
 	<link rel="stylesheet" href="style.css" />
@@ -581,7 +582,7 @@ $popular_result = mysqli_query($conn, $popular_sql);
 						<div class="single_ftr">
 							<h4 class="sf_title">Navigate</h4>
 							<ul>
-								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
+								<li><a href="about-us.html"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
 								<li><a href="contact.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Delivery Information</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Privacy Policy</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Terms & Conditions</a></li>
@@ -627,8 +628,8 @@ $popular_result = mysqli_query($conn, $popular_sql);
 						<div class="col-sm-4">
 							<div class="ftr_social_icon">
 								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="https://www.facebook.com/listedgeneraltransport"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.instagram.com/listed_earthmoving/"><i class="fa fa-instagram"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								</ul>
@@ -641,8 +642,8 @@ $popular_result = mysqli_query($conn, $popular_sql);
 						<div class="col-sm-4">
 							<div class="payment_mthd_icon text-right">
 								<ul>
-									<li><i class="fa fa-cc-paypal"></i></li>
-									<li><i class="fa fa-cc-visa"></i></li>
+                                <li><a href="https://www.facebook.com/listedgeneraltransport"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.instagram.com/listed_earthmoving/"><i class="fa fa-instagram"></i></a></li>
 									<li><i class="fa fa-cc-discover"></i></li>
 									<li><i class="fa fa-cc-mastercard"></i></li>
 									<li><i class="fa fa-cc-amex"></i></li>

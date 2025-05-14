@@ -20,6 +20,7 @@ $result = mysqli_query($conn, $sql);
     <title>All Banners - Listed Travel</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
     <!-- Font Awesome Icon -->
     <link rel="stylesheet" href="css/font-awesome.css">
     <!-- Custom stlylesheet -->

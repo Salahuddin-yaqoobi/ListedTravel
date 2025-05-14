@@ -68,6 +68,7 @@ if (!$test_result) {
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- Font Awesome Icon -->
     <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
     <!-- Custom stlylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>

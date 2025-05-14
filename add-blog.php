@@ -115,6 +115,7 @@ if (isset($_SESSION['show_alert'])) {
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- Font Awesome Icon -->
     <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
     <!-- Custom stlylesheet -->
     <link rel="stylesheet" href="css/style.css">
     <!-- SweetAlert2 CDN -->

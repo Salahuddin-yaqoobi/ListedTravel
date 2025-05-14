@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css" />	
 	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="css/responsive.css" />
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
 	<!-- Add SweetAlert2 CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
@@ -492,7 +493,7 @@
 						<div class="single_ftr">
 							<h4 class="sf_title">Navigate</h4>
 							<ul>
-								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
+								<li><a href="about-us.html"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
 								<li><a href="contact.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Delivery Information</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Privacy Policy</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Terms & Conditions</a></li>
@@ -519,8 +520,8 @@
 							<h4 class="sf_title">Follow Us</h4>
 							<div class="ftr_social_icon">
 								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="https://www.facebook.com/listedgeneraltransport"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.instagram.com/listed_earthmoving/"><i class="fa fa-instagram"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								</ul>
@@ -538,8 +539,8 @@
 						<div class="col-sm-4">
 							<div class="ftr_social_icon">
 								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="https://www.facebook.com/listedgeneraltransport"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.instagram.com/listed_earthmoving/"><i class="fa fa-instagram"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								</ul>
@@ -613,6 +614,112 @@
 				});
 			});
 		</script>
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsContainer = document.getElementById('suggestions');
+        
+        if (!searchInput || !suggestionsContainer) {
+            console.log('Search elements not found');
+            return;
+        }
+
+        // Handle search submit
+        const searchForm = document.getElementById('searchForm');
+        if (searchForm) {
+            searchForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const query = searchInput.value.trim().toLowerCase();
+
+                // Redirect to specific pages based on keywords
+                if (query === 'rent') {
+                    window.location.href = 'rent.php';
+                    return;
+                } else if (query === 'sale') {
+                    window.location.href = 'sale.php';
+                    return;
+                }
+
+                try {
+                    const response = await fetch('get-product-id.php?query=' + encodeURIComponent(query));
+                    const data = await response.json();
+
+                    if (data.success && data.post_id) {
+                        window.location.href = 'product-details.php?post_id=' + data.post_id;
+                    } else {
+                        alert('Product not found.');
+                    }
+                } catch (error) {
+                    console.error('Search error:', error);
+                }
+            });
+        }
+
+        // Fetch suggestions on input
+        searchInput.addEventListener('input', async function() {
+            const query = this.value.trim();
+
+            if (query.length === 0) {
+                suggestionsContainer.innerHTML = '';
+                suggestionsContainer.style.display = 'none';
+                return;
+            }
+
+            try {
+                const response = await fetch('get-suggestions.php?query=' + encodeURIComponent(query));
+                const suggestions = await response.json();
+
+                suggestionsContainer.innerHTML = '';
+                if (suggestions.length > 0) {
+                    suggestionsContainer.style.display = 'block';
+                    suggestions.forEach(item => {
+                        const div = document.createElement('div');
+                        div.textContent = item.name;
+                        div.classList.add('suggestion-item');
+                        div.addEventListener('click', () => {
+                            window.location.href = 'product-details.php?post_id=' + item.post_id;
+                        });
+                        suggestionsContainer.appendChild(div);
+                    });
+                } else {
+                    suggestionsContainer.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Suggestion error:', error);
+            }
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+                suggestionsContainer.innerHTML = '';
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+
+        // Toggle buttons functionality
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        if (toggleButtons) {
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    toggleButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.style.backgroundColor = 'transparent';
+                        btn.style.color = '#666';
+                    });
+                    
+                    this.classList.add('active');
+                    this.style.backgroundColor = '#FF6A18';
+                    this.style.color = 'white';
+                });
+            });
+        }
+    } catch (error) {
+        console.error('Initialization error:', error);
+    }
+});
+</script>
 		<!-- Google Map APi
 		============================================ -->
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwIQh7LGryQdDDi-A603lR8NqiF3R_ycA"></script>

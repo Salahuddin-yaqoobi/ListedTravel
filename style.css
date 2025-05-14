@@ -1948,7 +1948,7 @@ input:focus, textarea:focus {
     color: #fff;
 }
 .single_ftr a:hover {
-    color: #33d286;
+    color: #28425B;
 }
 
 .ftr_social_icon li {
@@ -2643,7 +2643,7 @@ input:focus, textarea:focus {
     position: relative;
 }
 .our-team:hover .team-content{
-    background: #33d286;
+    background: #28425B;
 }
 .our-team .team-content:before{
     content: "+";
@@ -2659,7 +2659,7 @@ input:focus, textarea:focus {
 }
 .our-team:hover .team-content:before{
     width: 100%;
-    background: #33d286;
+    background: #28425B;
     color: #33d286;
 }
 .our-team .title{

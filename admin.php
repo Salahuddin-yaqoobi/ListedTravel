@@ -46,6 +46,7 @@ if(isset($_SESSION['username'])){
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="font/font-awesome-4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
     <style>
         body {
             background: url('img/construction image.jpg') no-repeat center center fixed;
