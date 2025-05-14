@@ -54,15 +54,7 @@ jQuery(document).on('ready', function(){
 		  }
 		});
 		
-		$('a:not(.exploreInventoryBtn)').on('click', function(e){
-			var anchor = $(this);
-			if(anchor.attr('href').startsWith('#')) {
-				$('html, body').stop().animate({
-					scrollTop: $(anchor.attr('href')).offset().top - 50
-				}, 1500);
-				e.preventDefault();
-			}
-		});
+		
 			
 	
 	// Declare Carousel jquery object

@@ -20,7 +20,7 @@
 	<body>
 
 		<!--  Start Header  -->
-        <header id="header_area">
+    <header id="header_area">
     <!-- Top Bar with Logo, Search, and Icons -->
     <div class="top-bar" style="background-color:#F3F4F6; padding: 15px 0;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
@@ -45,7 +45,7 @@
                         font-weight: 500;
                         cursor: pointer;
                         transition: all 0.3s ease;
-                        background-color: #FF6A18;
+                        background-color: #E79C19;
                         color: white;
                     ">Buy</button>
                     <button type="button" class="toggle-btn" data-type="rent" style="
@@ -239,7 +239,7 @@
         }
 
         .toggle-btn.active {
-            background-color: #FF6A18 !important;
+            background-color: #E79C19 !important;
             color: white !important;
             box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
         }

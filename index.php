@@ -86,7 +86,7 @@ session_start();
 
 		
 		<!--  Start Header  -->
-<header id="header_area">
+    <header id="header_area">
     <!-- Top Bar with Logo, Search, and Icons -->
     <div class="top-bar" style="background-color:#F3F4F6; padding: 15px 0;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
@@ -195,7 +195,7 @@ session_start();
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.php">New for Sale</a>
+            <a href="product.html">New for Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -476,66 +476,6 @@ session_start();
                 display: none !important;
             }
         }
-
-        @media (max-width: 768px) {
-            #slider_area {
-                margin-top: 15px !important;
-                padding: 0 10px;
-            }
-
-            .single_slide {
-                height: 400px !important;
-                border-radius: 10px !important;
-                margin: 0 !important;
-            }
-
-            .slider_content {
-                padding: 20px !important;
-            }
-
-            .slider_content p {
-                font-size: 14px !important;
-                margin-bottom: 8px !important;
-            }
-
-            .slider_content h1 {
-                font-size: 28px !important;
-                margin-bottom: 8px !important;
-            }
-
-            .slider_content h4 {
-                font-size: 16px !important;
-                margin-bottom: 15px !important;
-            }
-
-            .exploreInventoryBtn.btn.main_btn {
-                padding: 8px 20px !important;
-                font-size: 14px !important;
-            }
-
-            /* Fix for overlapping slides */
-            .owl-carousel .owl-item {
-                padding: 0 !important;
-            }
-
-            .owl-carousel .owl-stage {
-                padding: 0 !important;
-            }
-
-            /* Adjust dots navigation position */
-            #slider_area .owl-dots {
-                bottom: 10px !important;
-            }
-
-            #slider_area .owl-dot {
-                margin: 0 3px !important;
-            }
-
-            #slider_area .owl-dot > span {
-                width: 8px !important;
-                height: 8px !important;
-            }
-        }
   </style>
 </header>
 
@@ -688,7 +628,7 @@ session_start();
                 <p class="animated">Listed Travel</p>
                 <h1 class="animated">Welcome</h1>
                 <h4 class="animated">Default Banner</h4>
-                <a href="./product.php" class="exploreInventoryBtn btn main_btn animated" style="position: relative; z-index: 100;">Explore inventory</a>
+                <a href="product.php" class="exploreInventoryBtn btn main_btn animated" style="position: relative; z-index: 100;">Explore inventory</a>
               </div>
             </div>
           </div>

@@ -37,11 +37,7 @@ $(document).ready(function () {
     });
   });
 
-  document.querySelectorAll('.exploreInventoryBtn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        window.location.href = 'product.php';
-    });
-});
+
 function openSidebar() {
   document.getElementById('sidebar').classList.add('active');
 }

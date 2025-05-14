@@ -654,6 +654,18 @@ $popular_result = mysqli_query($conn, $popular_sql);
 			</div>
 		</footer>
 		<!--  FOOTER END  -->
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenuPanel = document.querySelector('.mobile-menu-panel');
+    
+    if (mobileMenuBtn && mobileMenuPanel) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenuPanel.classList.toggle('active');
+        });
+    }
+});
+</script>
 
 		<script src="js/vendor/jquery-1.12.4.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
@@ -666,6 +678,228 @@ $popular_result = mysqli_query($conn, $popular_sql);
 		<script src="js/owl.carousel.min.js"></script>
 		<script src="js/simplePlayer.js"></script>
 		<script src="js/main.js"></script>
-		<script src="script.js"></script>
+
+		<style>
+		.search_container {
+			position: relative;
+		}
+
+		.search-suggestions {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: #ffffff;
+			border: 1px solid #28425B;
+			border-top: none;
+			border-radius: 0 0 4px 4px;
+			max-height: 200px;
+			overflow-y: auto;
+			z-index: 1000;
+			box-shadow: 0 4px 6px rgba(0, 108, 85, 0.1);
+		}
+
+		.suggestion-item {
+			padding: 10px 15px;
+			cursor: pointer;
+			border-bottom: 1px solid rgba(0, 108, 85, 0.1);
+		}
+
+		.suggestion-item:hover {
+			background-color: rgba(0, 108, 85, 0.1);
+		}
+
+		.blog_title {
+			font-size: 28px;
+			margin-bottom: 15px;
+			color: #28425B;
+			font-weight: 600;
+		}
+
+		.blog_meta {
+			margin-bottom: 20px;
+			color: #7f8c8d;
+		}
+
+		.blog_meta span {
+			margin-right: 15px;
+		}
+
+		.blog_meta i {
+			margin-right: 5px;
+		}
+
+		.single_blog_img img {
+			border-radius: 8px;
+			margin-bottom: 20px;
+		}
+
+		/* Tag styling */
+		.sdbr_inner a {
+			display: inline-block;
+			padding: 8px 15px;
+			margin: 4px;
+			border-radius: 20px;
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+
+		.sdbr_inner a:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		/* Search button styling */
+		.search_button {
+			background-color: #28425B;
+			color: white;
+			border: none;
+			padding: 8px 15px;
+			border-radius: 20px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+
+		/* Search input styling */
+		.search_input {
+			border-radius: 25px;
+			border: 1px solid #e0e0e0;
+			padding: 10px 15px;
+			transition: all 0.3s ease;
+		}
+
+		.search_input:focus {
+			border-color:rgb(71, 118, 163);
+			box-shadow: 0 0 0 2px rgba(0, 108, 85, 0.1);
+		}
+
+		.sdbr_title {
+			color: #28425B;
+			border-bottom: 2px solid #28425B;
+			padding-bottom: 10px;
+			margin-bottom: 20px;
+		}
+
+		.tags .sdbr_inner a {
+			background: #28425B !important;
+			color: white !important;
+		}
+
+		.tags .sdbr_inner a:hover {
+			background:rgb(29, 51, 71) !important;
+		}
+
+		.single_blog .blog_title {
+			color: #28425B;
+			font-weight: 600;
+		}
+
+		.popular_post .spp_text a:hover,
+		.category ul li a:hover {
+			color: #28425B;
+		}
+
+		/* Owl Carousel area updates */
+		#slider_area .owl-dot.active>span {
+			background: #28425B;
+			border: 1px solid #28425B;
+		}
+
+		#slider_area .owl-nav .owl-next,
+		#slider_area .owl-nav .owl-prev {
+			color: #28425B;
+		}
+
+		#slider_area .owl-nav .owl-next:hover,
+		#slider_area .owl-nav .owl-prev:hover {
+			border-color: #28425B;
+			background: #28425B;
+			color: #fff;
+		}
+		</style>
+
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const searchInput = document.getElementById('blogSearchInput');
+			const suggestionsContainer = document.getElementById('searchSuggestions');
+			const searchForm = document.getElementById('blogSearchForm');
+
+			searchInput.addEventListener('input', async function() {
+				const query = this.value.trim();
+				
+				if (query.length < 2) {
+					suggestionsContainer.style.display = 'none';
+					return;
+				}
+
+				try {
+					const response = await fetch(`get-blog-suggestions.php?query=${encodeURIComponent(query)}`);
+					const suggestions = await response.json();
+					
+					suggestionsContainer.innerHTML = '';
+					
+					if (suggestions.length > 0) {
+						suggestions.forEach(blog => {
+							const div = document.createElement('div');
+							div.className = 'suggestion-item';
+							div.textContent = blog.title;
+							div.addEventListener('click', () => {
+								window.location.href = `blog-details.php?id=${blog.id}`;
+							});
+							suggestionsContainer.appendChild(div);
+						});
+						suggestionsContainer.style.display = 'block';
+					} else {
+						suggestionsContainer.style.display = 'none';
+					}
+				} catch (error) {
+					console.error('Error fetching suggestions:', error);
+				}
+			});
+
+			// Hide suggestions when clicking outside
+			document.addEventListener('click', function(e) {
+				if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+					suggestionsContainer.style.display = 'none';
+				}
+			});
+
+			// Handle search form submission
+			searchForm.addEventListener('submit', function(e) {
+				e.preventDefault();
+				const query = searchInput.value.trim();
+				if (query) {
+					window.location.href = `blog-search.php?q=${encodeURIComponent(query)}`;
+				}
+			});
+		});
+		</script>
+		<script>
+// Add this to your existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            toggleButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = '#666';
+            });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            this.style.backgroundColor = '#FF6A18';
+            this.style.color = 'white';
+            
+            // Store the selected type (buy/rent)
+            const selectedType = this.getAttribute('data-type');
+            // You can use this selectedType value for your search functionality
+        });
+    });
+});
+</script>
 	</body>
 </html>
