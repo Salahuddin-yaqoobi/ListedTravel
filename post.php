@@ -1,11 +1,10 @@
 <?php 
 session_start();
+include 'config.php';
 if(!isset($_SESSION['username'])){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
     exit();
 }
-
-include "config.php";
 
 // Get statistics for charts
 $total_posts = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM post"));
@@ -31,7 +30,7 @@ $monthly_result = mysqli_query($conn, $monthly_sql);
 $months = [];
 $monthly_counts = [];
 while($row = mysqli_fetch_assoc($monthly_result)) {
-    $months[] = date('M Y', strtotime($row['month']));
+    $months[] = $row['month'] ? date('M Y', strtotime($row['month'])) : '';
     $monthly_counts[] = $row['count'];
 }
 

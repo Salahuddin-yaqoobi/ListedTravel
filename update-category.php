@@ -35,7 +35,7 @@ if(isset($_POST['sumbit'])){
     $cat_name = $_POST['cat_name'];
     $sql1 = "UPDATE category SET category_name = '{$cat_name}' WHERE category_id = {$cat_id}";
     if(mysqli_query($conn , $sql1)){
-        header("Location: http://localhost/news-site/admin/category.php");
+        header("Location: " . APP_URL . "/admin/category.php");
     }
 } 
 ?>

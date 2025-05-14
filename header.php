@@ -1,8 +1,8 @@
 <?php
-
+include "config.php";
 session_start();
 if(!isset($_SESSION['username'])){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
     exit();
 }
 // var_dump($_SESSION);

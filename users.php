@@ -1,13 +1,13 @@
 <?php
 session_start();
+include "config.php";
 if(!isset($_SESSION['username'])){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
     exit();
 }
 
 // Handle form submission
 if(isset($_POST['submit'])) {
-    include "config.php";
     
     $username = $_SESSION['username'];
     $first_name = mysqli_real_escape_string($conn, $_POST['firstname']);
@@ -122,7 +122,6 @@ if(isset($_POST['submit'])) {
             </div>
             
             <?php
-            include "config.php";
             $username = $_SESSION['username'];
             $sql = "SELECT * FROM user WHERE username = '$username'";
             $result = mysqli_query($conn, $sql);

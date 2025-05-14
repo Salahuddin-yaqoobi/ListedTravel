@@ -1,11 +1,12 @@
 <?php
 session_start();
+include "config.php";
+
 if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
     exit();
 }
 
-include "config.php";
 
 // Fetch all banners
 $sql = "SELECT * FROM banner ORDER BY banner_id DESC";
@@ -51,7 +52,7 @@ $result = mysqli_query($conn, $sql);
                 <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-blog.php') ? 'class="active"' : ''; ?>>
                     <a href="add-blog.php"><i class="fa fa-pencil"></i> <span>Add Blog</span></a>
                 </li>
-                <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+                <li <?php echo (basename($_SERVER['PHP_SELF']) == 'all-banners.php') ? 'class="active"' : ''; ?>>
                     <a href="all-banners.php"><i class="fa fa-plus"></i> <span>All Banner</span></a>
                 </li>
                 <li <?php echo (basename($_SERVER['PHP_SELF']) == 'banner.php') ? 'class="active"' : ''; ?>>

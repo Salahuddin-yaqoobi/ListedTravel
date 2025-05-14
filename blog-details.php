@@ -12,7 +12,7 @@ $result = mysqli_stmt_get_result($stmt);
 $blog = mysqli_fetch_assoc($result);
 
 if (!$blog) {
-    header("Location: index.php");
+    header("Location: " . APP_URL . "/index.php");
     exit();
 }
 

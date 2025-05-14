@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
 
     if ($result) {
         // Perform the redirect after successful update
-        header("Location: http://localhost/news-site/admin/users.php");
+        header("Location: " . APP_URL . "/admin/users.php");
         exit;  // Exit to make sure no further code is executed
     } else {
         echo "Query failed";

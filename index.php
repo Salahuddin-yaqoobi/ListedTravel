@@ -1,4 +1,6 @@
 <?php
+include "config.php";
+
 session_start();
 
 
@@ -569,8 +571,7 @@ session_start();
   <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     <div class="slider_active owl-carousel">
       <?php
-      // Include database connection if not already included
-      include "config.php";
+      
       
       // First try to get banners with main status
       $sql = "SELECT * FROM banner WHERE banner_status = 'main' ORDER BY banner_id DESC";
@@ -738,11 +739,7 @@ session_start();
 					ini_set('display_errors', 1);
 					error_reporting(E_ALL);
 
-					// Database connection
-					$mysqli = new mysqli("localhost", "root", "", "travel");
-                     if ($mysqli->connect_errno) {
-					    die("Connection failed: " . $mysqli->connect_error);
-					}
+				
 					?>
 
 				<div class="text-center">
@@ -758,9 +755,9 @@ session_start();
         <div class="row" id="product-container">
             <?php
             $sql = "SELECT * FROM post ORDER BY post_id DESC LIMIT 8";
-            $result = $mysqli->query($sql);
+            $result = mysqli_query($conn, $sql);
 
-            while ($row = $result->fetch_assoc()):
+            while ($row = mysqli_fetch_assoc($result)):
                 $cat_class = '';
                 if (strtolower($row['category']) === 'for sale') {
                     $cat_class = 'sale';
@@ -834,7 +831,7 @@ session_start();
 				<div class="row">
 					<?php
 					// Include database connection
-					include "config.php";
+					
 					
 					// Fetch 3 most recent blogs with 'main' location
 					$sql = "SELECT * FROM blogs WHERE blog_location = 'main' ORDER BY blog_date DESC LIMIT 3";

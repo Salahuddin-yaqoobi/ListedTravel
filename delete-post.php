@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 
-$hostname = "http://localhost/listedtravel";
+$hostname = APP_URL;
 
 if (isset($_GET['id'])) {
     $post_id = intval($_GET['id']);
