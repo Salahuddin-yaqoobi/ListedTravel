@@ -32,7 +32,7 @@ if(isset($_POST['login'])) {
 }
 
 if(isset($_SESSION['username'])){
-    header("Location: http://localhost/listedtravel/post.php");
+    header("Location: " . APP_URL . "/post.php");
     exit();
 }
 ?>

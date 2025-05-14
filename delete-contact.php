@@ -1,12 +1,13 @@
 <?php
 session_start();
+include "config.php";
+
 if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
     header('Content-Type: application/json');
     echo json_encode(['status' => 'error', 'message' => 'Unauthorized access']);
     exit();
 }
 
-include "config.php";
 
 // Set proper JSON header
 header('Content-Type: application/json');

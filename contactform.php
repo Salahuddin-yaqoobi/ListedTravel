@@ -1,21 +1,9 @@
 <?php
 // Set header to return JSON response
+include "config.php";
 header('Content-Type: application/json');
 
-// Database connection parameters
-$servername = "localhost";
-$username = "root";  // default XAMPP username
-$password = "";      // default XAMPP password
-$dbname = "travel";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
-    exit();
-}
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

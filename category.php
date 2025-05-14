@@ -1,10 +1,10 @@
 <?php include "header.php"; 
-     if($_SESSION['role'] == '0'){
-        header("Location: http://localhost/news-site/admin/post.php");
-      }
-?>
-<?php 
    include "config.php"; 
+
+     if($_SESSION['role'] == '0'){
+        header("Location: " . APP_URL . "/admin/post.php");
+      }
+
    $limit = 3;
 
  if(isset($_GET['page'])){

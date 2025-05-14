@@ -3,7 +3,7 @@ session_start();
 include "config.php";
 
 if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
     exit();
 }
 
@@ -74,6 +74,3 @@ if(isset($_POST['submit'])) {
     exit();
 }
 ?>
-<script>
-    console.log($banner_id);
-</script>

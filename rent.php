@@ -1,3 +1,8 @@
+<?php
+include "config.php";
+
+session_start();
+?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 	<head>
@@ -448,7 +453,7 @@
 			<div class="shop_details text-center">
 				<div class="product_grid">
 					<?php
-					include 'config.php';
+				
 
 					$sort = $_GET['sort'] ?? 'name_desc';
 					$limit = $_GET['limit'] ?? 8;

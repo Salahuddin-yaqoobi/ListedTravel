@@ -1,10 +1,7 @@
 <?php
 // DB connection
-$conn = new mysqli("localhost", "root", "", "travel");
-if ($conn->connect_error) {
-    echo json_encode(['success' => false]);
-    exit;
-}
+include "config.php";
+
 
 $query = isset($_GET['query']) ? trim($_GET['query']) : '';
 $category = isset($_GET['category']) ? trim($_GET['category']) : '';

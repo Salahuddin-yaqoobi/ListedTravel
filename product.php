@@ -1,3 +1,7 @@
+<?php
+include "config.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -479,7 +483,7 @@
                     <select name="vehicle_type" class="w-full border p-2 rounded">
                         <option value="">All Types</option>
                         <?php
-                        include_once "config.php";
+                      
                         $type_sql = "SELECT * FROM vehicle_category";
                         $type_result = mysqli_query($conn, $type_sql);
                         if($type_result) {
@@ -517,7 +521,7 @@
       <!-- Product Grid -->
       <section class="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <?php
-        include "config.php";
+      
         
         $where_conditions = array();
 

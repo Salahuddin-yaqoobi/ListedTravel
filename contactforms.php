@@ -1,11 +1,12 @@
 <?php
 session_start();
+include "config.php";
+
 if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
     exit();
 }
 
-include "config.php";
 
 // Pagination
 $limit = 10;

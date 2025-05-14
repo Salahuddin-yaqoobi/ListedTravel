@@ -1,11 +1,13 @@
 <?php 
+include "config.php";
+
 session_start();
 if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
+
     exit();
 }
 
-include "config.php";
 
 // Initialize empty banner array instead of fetching from database
 $banner = array(
@@ -70,7 +72,7 @@ $banner = array(
                 <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
                 <a href="all-banners.php"><i class="fa fa-plus"></i> <span>All Banner</span></a>
                 </li>
-                <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+                <li <?php echo (basename($_SERVER['PHP_SELF']) == 'banner.php') ? 'class="active"' : ''; ?>>
                 <a href="banner.php"><i class="fa fa-plus"></i> <span>Add Banner</span></a>
                 </li>
                 <?php if(isset($_SESSION['role']) && $_SESSION['role'] == '1') { ?>

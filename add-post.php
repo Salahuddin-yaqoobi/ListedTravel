@@ -2,12 +2,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Let's also test the database connection and query
 include "config.php";
 
 session_start();
 if(!isset($_SESSION['username'])){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
     exit();
 }
 
@@ -97,10 +96,10 @@ if (!$test_result) {
             <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-blog.php') ? 'class="active"' : ''; ?>>
                 <a href="add-blog.php"><i class="fa fa-pencil"></i> <span>Add Blog</span></a>
             </li>
-            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'all-banners.php') ? 'class="active"' : ''; ?>>
                 <a href="all-banners.php"><i class="fa fa-plus"></i> <span>All Banner</span></a>
             </li>
-            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'banner.php') ? 'class="active"' : ''; ?>>
                 <a href="banner.php"><i class="fa fa-plus"></i> <span>Add Banner</span></a>
             </li>
             <?php if(isset($_SESSION['role']) && $_SESSION['role'] == '1') { ?>

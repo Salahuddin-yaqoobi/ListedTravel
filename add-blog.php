@@ -15,7 +15,7 @@ function getMainBlogCount($conn) {
 
 session_start();
 if(!isset($_SESSION['username'])){
-    header("Location: http://localhost/listedtravel/admin/");
+    header("Location: " . APP_URL . "/admin/");
     exit();
 }
 
