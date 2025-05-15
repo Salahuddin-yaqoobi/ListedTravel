@@ -478,7 +478,6 @@ session_start();
 </header>
 
 	<?php
-include('config.php');  // Include the database connection file
 
 // Check if 'post_id' is set in the URL and is a valid number
 if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {

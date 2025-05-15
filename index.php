@@ -643,7 +643,21 @@ session_start();
 </section>
 
 		<!-- End Slider Area -->		
-	
+	<style>
+    @media (max-width: 768px) {
+  #promo_area img {
+   width: 140px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #promo_area img {
+    width: 350px !important;
+  }
+}
+
+  </style>
+
 		<!--  Promo ITEM STRAT  -->
 		<section id="promo_area" class="section_padding">
   <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
