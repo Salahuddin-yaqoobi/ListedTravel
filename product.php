@@ -22,7 +22,7 @@ session_start();
   <link rel="stylesheet" href="style.css?v=123" />
   <link rel="stylesheet" href="css/responsive.css" />	
   <link rel="icon" href="img/logo.png" type="image/x-icon">
-  <title>Heavy Equipment Marketplace</title>
+  <title>Sale - Listed Transport</title>
 
   <!-- Load jQuery first -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
