@@ -135,7 +135,7 @@ session_start();
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.html">New for Sale</a>
+            <a href="product.php">New for Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>

@@ -2393,6 +2393,7 @@ input:focus, textarea:focus {
 .single_info {
 	margin-bottom: 30px;
 	text-align: left;
+	
 }
 .single_info .con_icon {
 	display: inline-block;
@@ -2409,6 +2410,7 @@ input:focus, textarea:focus {
 	transform: .5s;
 	box-shadow: 0 5px 10px rgba(0,0,0,0.05);
 }
+
 .single_info .con_icon:hover{
 	background: #28425B;
 	color: #fff;

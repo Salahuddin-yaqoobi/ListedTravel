@@ -29,7 +29,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
   <!-- Owl Carousel CSS + JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -972,7 +972,7 @@ session_start();
 								<a href="#"><img src="img/clients/logoV2.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/Shirawi-logo-svg.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Shirawi-logo.svg.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
 								<a href="#"><img src="img/clients/tsg-copy-300x294.png" alt="" class="brand-img" /></a>

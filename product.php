@@ -7,19 +7,30 @@ session_start();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="style.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"/> 
-	<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">	
-	<link rel="stylesheet" href="css/animate.css" />
-	<link rel="stylesheet" href="css/owl.theme.default.min.css" />
-	<link rel="stylesheet" href="css/owl.carousel.min.css" />
-	<link rel="stylesheet" href="css/meanmenu.min.css" />
-	<link rel="stylesheet" href="css/venobox.css" />
-	<link rel="stylesheet" href="css/font-awesome.css" />
-	<link rel="stylesheet" href="css/bootstrap.min.css" />	
-	<link rel="stylesheet" href="style.css?v=123" />
-	<link rel="stylesheet" href="css/responsive.css" />	
-    <link rel="icon" href="img/logo.png" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"/> 
+  <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">	
+  <link rel="stylesheet" href="css/animate.css" />
+  <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+  <link rel="stylesheet" href="css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="css/meanmenu.min.css" />
+  <link rel="stylesheet" href="css/venobox.css" />
+  <link rel="stylesheet" href="css/font-awesome.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />	
+  <link rel="stylesheet" href="style.css?v=123" />
+  <link rel="stylesheet" href="css/responsive.css" />	
+  <link rel="icon" href="img/logo.png" type="image/x-icon">
+  <title>Heavy Equipment Marketplace</title>
+
+  <!-- Load jQuery first -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- You can also use your local version of jQuery, like:
+  <script src="js/jquery.min.js"></script>
+  -->
+
   <title>Heavy Equipment Marketplace</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>

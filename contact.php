@@ -414,6 +414,7 @@
         }
   </style>
 </header>
+
 		
 		<!-- Contact Page -->
 		<div class="contact_page_area fix">
@@ -451,19 +452,20 @@
                         providing timely and innovative infrastructure equipment solutions thus reducing the risks and enhance profitability 
                         of our customers.
 						</p>
+                        
 						<div class="single_info">
 							<div class="con_icon"><i class="fa fa-map-marker"></i></div>
-							<p> Jarn yafour, Mafraq Industrial Area<br /> Abu Dhabi, UAE  </p>
+							<p style="color:black;" > Jarn yafour, Mafraq Industrial Area<br /> Abu Dhabi, UAE  </p>
 						</div>
 						<div class="single_info">
 							<div class="con_icon"><i class="fa fa-phone"></i></div>
-							<p>Phone : 058-9948428</p>
-							<p>Fax : 055-8118758</p>
+							<p style="color:black;">Phone : 058-9948428</p>
+							<p style="color:black;">Fax : 055-8118758</p>
 						</div>
 						<div class="single_info">
 							<div class="con_icon"><i class="fa fa-envelope"></i></div>
-							<a href="#">listed_transport@yahoo.com </a> <br />
-							<a href="#">listedgeneraltransport@gmail.com </a>
+							<a href="#" style="color:black;">listed_transport@yahoo.com </a> <br />
+							<a href="#" style="color:black;">listedgeneraltransport@gmail.com </a>
 						</div>
 						
 					</div>
@@ -722,29 +724,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 		<!-- Google Map APi
 		============================================ -->
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwIQh7LGryQdDDi-A603lR8NqiF3R_ycA"></script>
-		<script>
 		
-			function initialize() {
-			  var mapOptions = {
-				zoom: 15,
-				
-				scrollwheel: false,
-				center: new google.maps.LatLng(43.538265, -80.305982),
-				
-			  };
-			  var map = new google.maps.Map(document.getElementById('contact_map_area'),
-				  mapOptions);
-			  var marker = new google.maps.Marker({
-				position: map.getCenter(),
-				icon: 'img/map_pin.png',
-				map: map,
-				
-			  });
-	  
-			}
-			google.maps.event.addDomListener(window, 'load', initialize);			
-		</script>	
+		
         <script>
 // Add this to your existing JavaScript
 document.addEventListener('DOMContentLoaded', function() {
