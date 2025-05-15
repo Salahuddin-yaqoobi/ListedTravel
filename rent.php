@@ -8,7 +8,7 @@ session_start();
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
-		<title>Shop - Ecommerce Bootstrap Template</title>
+		<title>Rent - Listed Transport</title>
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"> 
 		<link rel="stylesheet" href="css/animate.css" />
 		<link rel="stylesheet" href="css/owl.theme.default.min.css" />
@@ -135,7 +135,7 @@ session_start();
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.php">New for Sale</a>
+            <a href="product.php">For Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -163,7 +163,7 @@ session_start();
                 ">
                     <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
-                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
+                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
                     <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
@@ -424,102 +424,109 @@ session_start();
     <div class="container">
         <!-- Shop Bar -->
         <div class="shop_bar_tp fix mb-4">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="short_by_inner d-flex flex-wrap align-items-center">
-                        <label class="me-2">Sort by:</label>
-                        <form method="GET" id="sortForm" class="d-flex gap-2">
-                            <select name="sort" onchange="document.getElementById('sortForm').submit()">
-                                <option value="name_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'name_desc') ? 'selected' : '' ?>>Name Descending</option>
-                                <option value="name_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'name_asc') ? 'selected' : '' ?>>Name Ascending</option>
-                                <option value="date_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_desc') ? 'selected' : '' ?>>Date Descending</option>
-                                <option value="date_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_asc') ? 'selected' : '' ?>>Date Ascending</option>
-                                <option value="price_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'price_desc') ? 'selected' : '' ?>>Price Descending</option>
-                                <option value="price_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'price_asc') ? 'selected' : '' ?>>Price Ascending</option>
-                            </select>
-                            <select name="limit" onchange="document.getElementById('sortForm').submit()">
-                                <option value="8" <?= (isset($_GET['limit']) && $_GET['limit'] == '8') ? 'selected' : '' ?>>8</option>
-                                <option value="12" <?= (isset($_GET['limit']) && $_GET['limit'] == '12') ? 'selected' : '' ?>>12</option>
-                                <option value="30" <?= (isset($_GET['limit']) && $_GET['limit'] == '30') ? 'selected' : '' ?>>30</option>
-                                <option value="all" <?= (isset($_GET['limit']) && $_GET['limit'] == 'all') ? 'selected' : '' ?>>ALL</option>
-                            </select>
-                        </form>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="short_by_inner d-flex flex-wrap align-items-center">
+                <label class="me-2">Sort by:</label>
+                <form method="GET" id="sortForm" class="d-flex gap-2">
+                    <select name="sort" onchange="document.getElementById('sortForm').submit()">
+                        <option value="name_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'name_desc') ? 'selected' : '' ?>>Name Descending</option>
+                        <option value="name_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'name_asc') ? 'selected' : '' ?>>Name Ascending</option>
+                        <option value="date_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_desc') ? 'selected' : '' ?>>Date Descending</option>
+                        <option value="date_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_asc') ? 'selected' : '' ?>>Date Ascending</option>
+                        <option value="price_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'price_desc') ? 'selected' : '' ?>>Price Descending</option>
+                        <option value="price_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'price_asc') ? 'selected' : '' ?>>Price Ascending</option>
+                    </select>
+                    <select name="limit" onchange="document.getElementById('sortForm').submit()">
+                        <option value="8" <?= (isset($_GET['limit']) && $_GET['limit'] == '8') ? 'selected' : '' ?>>8</option>
+                        <option value="12" <?= (isset($_GET['limit']) && $_GET['limit'] == '12') ? 'selected' : '' ?>>12</option>
+                        <option value="30" <?= (isset($_GET['limit']) && $_GET['limit'] == '30') ? 'selected' : '' ?>>30</option>
+                        <option value="all" <?= (isset($_GET['limit']) && $_GET['limit'] == 'all') ? 'selected' : '' ?>>ALL</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shop Product Display -->
+<div class="shop_details text-center">
+    <div class="product_grid">
+        <?php
+
+        $sort = $_GET['sort'] ?? 'name_desc';
+        $raw_limit = $_GET['limit'] ?? 8;
+
+        // Sorting Logic: Order by the most recent post
+        switch ($sort) {
+            case 'price_asc':
+                $order_by = "ORDER BY price ASC"; // Sort by price ascending
+                break;
+            case 'price_desc':
+                $order_by = "ORDER BY price DESC"; // Sort by price descending
+                break;
+            case 'date_asc':
+                $order_by = "ORDER BY post_date ASC"; // Sort by date ascending
+                break;
+            case 'date_desc':
+                $order_by = "ORDER BY post_date DESC"; // Sort by date descending
+                break;
+            case 'name_asc':
+                $order_by = "ORDER BY title ASC"; // Sort by name ascending
+                break;
+            case 'name_desc':
+            default:
+                $order_by = "ORDER BY title DESC"; // Sort by name descending
+                break;
+        }
+
+        // Pagination Logic
+        $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+
+        if ($raw_limit === 'all') {
+            $limit_sql = "";
+            $offset = 0;
+        } else {
+            $limit = max(1, intval($raw_limit));
+            $offset = ($page - 1) * $limit;
+            $limit_sql = "LIMIT $limit OFFSET $offset";
+        }
+
+        // Query for fetching products with limit and offset
+        $query = "SELECT * FROM post $order_by $limit_sql";
+        $result = mysqli_query($conn, $query);
+
+        // Check if the query executed successfully
+        if (!$result) {
+            echo "Error executing query: " . mysqli_error($conn);
+        } else {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $title = htmlspecialchars($row['title'] ?? 'Untitled');
+                $price = htmlspecialchars($row['price'] ?? '0');
+                $description = htmlspecialchars($row['description'] ?? 'No description available.');
+                $image = !empty($row['post_img']) ?  $row['post_img'] : 'img/top-1.jpg';
+        ?>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
+                <div class="single_product">
+                    <div class="product_image">
+                        <img src="<?= $image ?>" alt="<?= $title ?>" class="img-fluid product-img" />
+                    </div>
+                    <div class="product_btm_text">
+                        <span class="product_category"><?= htmlspecialchars($row['category']) ?></span>
+                        <h4><a href="#"><?= $title ?></a></h4>
+                        <span class="price">AED <?= $price ?></span>
+                        <p class="product_description"><?= $description ?></p>
+                        <a href="product-details.php?post_id=<?= $row['post_id'] ?>" class="read_more">Read More <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php 
+            }
+        }
+        ?>
+    </div>
+</div>
 
-			<!-- Shop Product Display -->
-			<div class="shop_details text-center">
-				<div class="product_grid">
-					<?php
-				
-
-					$sort = $_GET['sort'] ?? 'name_desc';
-					$limit = $_GET['limit'] ?? 8;
-
-					// Sorting Logic: Order by the most recent post
-					switch ($sort) {
-						case 'price_asc':
-							$order_by = "ORDER BY price ASC"; // Sort by price ascending
-							break;
-						case 'price_desc':
-							$order_by = "ORDER BY price DESC"; // Sort by price descending
-							break;
-						case 'date_asc':
-							$order_by = "ORDER BY post_date ASC"; // Sort by date ascending
-							break;
-						case 'date_desc':
-							$order_by = "ORDER BY post_date DESC"; // Sort by date descending
-							break;
-						case 'name_asc':
-							$order_by = "ORDER BY title ASC"; // Sort by name ascending
-							break;
-						case 'name_desc':
-						default:
-							$order_by = "ORDER BY title DESC"; // Sort by name descending
-							break;
-					}
-
-					// Pagination Logic
-					$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-					$limit = 12; // Limit to 3 products per page
-					$offset = ($page - 1) * $limit;
-
-					// Query for fetching products with limit and offset
-					$query = "SELECT * FROM post $order_by LIMIT $limit OFFSET $offset";
-					$result = mysqli_query($conn, $query);
-
-					// Check if the query executed successfully
-					if (!$result) {
-						echo "Error executing query: " . mysqli_error($conn);
-					} else {
-						while ($row = mysqli_fetch_assoc($result)) {
-							$title = htmlspecialchars($row['title'] ?? 'Untitled');
-							$price = htmlspecialchars($row['price'] ?? '0');
-							$description = htmlspecialchars($row['description'] ?? 'No description available.');
-							$image = !empty($row['post_img']) ?  $row['post_img'] : 'img/top-1.jpg';  
-					?>
-						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="<?= $image ?>" alt="<?= $title ?>" class="img-fluid product-img" />
-								</div>
-								<div class="product_btm_text">
-									<span class="product_category"><?= htmlspecialchars($row['category']) ?></span>
-									<h4><a href="#"><?= $title ?></a></h4>
-									<span class="price">$<?= $price ?></span>
-									<p class="product_description"><?= $description ?></p>
-									<a href="product-details.php?post_id=<?= $row['post_id'] ?>" class="read_more">Read More <i class="fa fa-arrow-right"></i></a>
-									</div>
-							</div>
-						</div>
-					<?php 
-						}
-					}
-					?>
-				</div>
-			</div>
 
         <!-- Blog Pagination -->
         <div class="col-xs-12">
@@ -822,7 +829,7 @@ session_start();
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved listedtravel</p>
+							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved Listed Transport</p>
 						</div>
 						
 						<div class="col-sm-4">

@@ -30,7 +30,7 @@ $result = mysqli_query($conn, $sql) or die("Query Failed.");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Forms - Listed Travel</title>
+    <title>Contact Forms - Listed Transport</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- Font Awesome Icon -->

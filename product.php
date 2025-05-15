@@ -31,7 +31,7 @@ session_start();
   <script src="js/jquery.min.js"></script>
   -->
 
-  <title>Heavy Equipment Marketplace</title>
+  <title>Sale - Listed Transport</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .product-card img {
@@ -185,7 +185,7 @@ session_start();
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.php">New for Sale</a>
+            <a href="product.php">For Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -213,7 +213,7 @@ session_start();
                 ">
                     <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
-                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
+                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
                     <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
@@ -670,7 +670,7 @@ session_start();
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved listedtravel</p>
+							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved Listed Transport</p>
 						</div>
 						
 						<div class="col-sm-4">

@@ -41,7 +41,7 @@ $popular_result = mysqli_query($conn, $popular_sql);
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Blog Details - listedtravel</title>
+	<title>Blog Details - Listed Transport</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"> 
 	<link rel="stylesheet" href="css/animate.css" />
 	<link rel="stylesheet" href="css/owl.theme.default.min.css" />
@@ -166,7 +166,7 @@ $popular_result = mysqli_query($conn, $popular_sql);
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.html">New for Sale</a>
+            <a href="product.html">For Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -194,7 +194,7 @@ $popular_result = mysqli_query($conn, $popular_sql);
                 ">
                     <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
-                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
+                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
                     <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
@@ -485,7 +485,7 @@ $popular_result = mysqli_query($conn, $popular_sql);
 									<h2 class="blog_title"><?php echo htmlspecialchars($blog['blog_title']); ?></h2>
 									<div class="blog_meta">
 										<span><i class="fa fa-calendar"></i> <?php echo date('d M Y', strtotime($blog['blog_date'])); ?></span>
-										<span><i class="fa fa-user"></i> Listed Travel</span>
+										<span><i class="fa fa-user"></i> Listed Transport</span>
 									</div>
 									<p class="blog_dtls_page"><?php echo nl2br(htmlspecialchars($blog['blog_description'])); ?></p>
 								</div>							
@@ -636,7 +636,7 @@ $popular_result = mysqli_query($conn, $popular_sql);
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved listedtravel</p>
+							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved Listed Transport</p>
 						</div>
 						
 						<div class="col-sm-4">

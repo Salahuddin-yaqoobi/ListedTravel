@@ -73,7 +73,7 @@ while($row = mysqli_fetch_assoc($vehicle_cat_result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Listed Travel</title>
+    <title>Dashboard - Listed Transport</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="icon" href="img/logo.png" type="image/x-icon">

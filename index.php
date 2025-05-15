@@ -10,7 +10,7 @@ session_start();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Listed Travel</title>
+	<title>Listed Transport</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"> 
 	<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">	
 	<link rel="stylesheet" href="css/animate.css" />
@@ -199,7 +199,7 @@ session_start();
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.html">New for Sale</a>
+            <a href="product.html">For Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -227,7 +227,7 @@ session_start();
                 ">
                     <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
-                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
+                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
                     <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
@@ -628,7 +628,7 @@ session_start();
           <div class="single-slide-item-table">
             <div class="single-slide-item-tablecell">
               <div class="slider_content text-left slider-animated-1">
-                <p class="animated">Listed Travel</p>
+                <p class="animated">Listed Transport</p>
                 <h1 class="animated">Welcome</h1>
                 <h4 class="animated">Default Banner</h4>
                 <a href="product.php" class="exploreInventoryBtn btn main_btn animated" style="position: relative; z-index: 100;">Explore inventory</a>
@@ -795,7 +795,7 @@ session_start();
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <span class="price">$<?= number_format($row['price'], 2) ?></span>
+                        <span class="price">AED <?= number_format($row['price'], 2) ?></span>
                     </div>
                 </div>
             </div>
@@ -813,7 +813,7 @@ session_start();
 			<div class="container">
 				<div class="row">
 					<div class="col-md-5">
-						<div class="special_img text-left">
+						<div class="special_img text-left" style="margin-top:50px;">
 							<img src="img/single-1.webp" width="370" alt="" class="img-responsive">
 						</div>
 					</div>			
@@ -821,7 +821,10 @@ session_start();
 					<div class="col-md-7 text-left">
 						<div class="special_info">			
 							<h1 style="margin-bottom: 15px; font-weight: bolder; font-size: x-large;">Pioneering Digital Machinery Solutions</h1>
-							<p style="font-size: large;">Founded in 1978, Al Marwan has established itself as a trusted partner in the heavy equipment supply industry. We have introduced the region's first e-commerce platform to better meet MENA's growing demand for heavy equipment.</p>							
+							<p style="font-size: large;">Listed General Transport Equipment's Rental Services vertical is one of the upcoming organized equipment services
+              provider. Offers complete range of equipment solutions with technically competent operations and maintenance team
+              serving a wide range of infrastructure sectors like highways, power, telecom, real estate, ports, railways, airports,
+              etc. under its Rental Services vertical. </p>							
 							<a href="product.php" class="btn main_btn">Explore</a>					
 								</div>
 							</div>
@@ -868,7 +871,7 @@ session_start();
 								<div class="date">
 									<p style="color: #9BA5CD;">
 										<?php echo date('d M, Y', strtotime($row['blog_date'])); ?> 
-										By <span style="color: #FF6A18; font-weight: bold;">Listed Travel</span>
+										By <span style="color: #FF6A18; font-weight: bold;">Listed Transport</span>
 									</p>
 								</div>
 								<h4 class="post_title">
@@ -1067,7 +1070,7 @@ session_start();
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved listedtravel</p>
+							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved Listed Transport</p>
 						</div>
 						
 						<div class="col-sm-4">

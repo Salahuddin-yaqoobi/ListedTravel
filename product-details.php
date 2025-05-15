@@ -7,7 +7,7 @@ session_start();
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>listedtravel - Ecommerce Bootstrap Template</title>
+		<title>Listed Transport - Ecommerce Bootstrap Template</title>
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"> 
 		<link rel="stylesheet" href="css/animate.css" />
 		<link rel="stylesheet" href="css/owl.theme.default.min.css" />
@@ -133,7 +133,7 @@ session_start();
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.html">New for Sale</a>
+            <a href="product.html">For Sale</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -161,7 +161,7 @@ session_start();
                 ">
                     <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
-                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">New for Sale</a></li>
+                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
                     <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
@@ -527,7 +527,16 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
 }
 ?>
 
+<style>
+.pd_img img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain; /* Show entire image, might leave blank space */
+  background-color: #f5f5f5; /* Optional: background behind image */
+  border-radius: 8px;
+}
 
+</style>
 <!-- Product Details Area -->
 <div class="prdct_dtls_page_area" style="margin-top: 35px;">
     <div class="container">
@@ -629,7 +638,7 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
                 <h4 style="font-size: 20px; font-weight: bold; margin-bottom: 10px;">
                     <?= htmlspecialchars($related_product['title']) ?>
                 </h4>
-                <span class="price" style="font-size: 15px; font-weight: bold; color: #1F92C1;">$ <?= htmlspecialchars($related_product['price']) ?></span>
+                <span class="price" style="font-size: 15px; font-weight: bold; color: #1F92C1;">AED <?= htmlspecialchars($related_product['price']) ?></span>
             </div>
 
         </div>
@@ -721,7 +730,7 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved listedtravel</p>
+							<p class="copyright_text text-center">&copy; 2025 All Rights Reserved Listed Transport</p>
 						</div>
 						
 						<div class="col-sm-4">
