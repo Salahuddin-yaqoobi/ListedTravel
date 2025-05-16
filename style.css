@@ -2449,7 +2449,7 @@ input:focus, textarea:focus {
 .short_by_inner select {
 	-moz-appearance: none;
 	appearance: none;
-	background: rgba(0, 0, 0, 0) url("img/icon/arrow.png") no-repeat scroll right center;
+	/* background: rgba(0, 0, 0, 0) url("img/icon/arrow.png") no-repeat scroll right center; */
 	border: 1px solid #ddd;
 	height: 45px;
 	line-height: 27px;
@@ -3296,4 +3296,37 @@ input:focus, textarea:focus {
 
 .custom-control {
 	padding-left: 30px;
+}
+
+.nav-bar a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-bar a:hover {
+    color: #f39c12 !important;
+}
+
+.nav-bar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #f39c12;
+    transition: width 0.3s ease;
+}
+
+.nav-bar a:hover::after {
+    width: 100%;
+}
+
+/* Active link styles */
+.nav-bar a.active {
+    color: #f39c12 !important;
+}
+
+.nav-bar a.active::after {
+    width: 100%;
 }
