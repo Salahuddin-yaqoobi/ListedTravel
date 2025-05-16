@@ -34,59 +34,115 @@ session_start();
   <!-- Owl Carousel CSS + JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-</head>
-	<body>
-	
-	<!-- New Preloader (Skeleton Loader) -->
-		<!-- <div class="preloader bg-white">
-  <!-- <header class="bg-white border-b border-gray-200">
-    <div class="flex items-center justify-between p-4">
-      <div class="animate-pulse">
-        <div class="h-12 w-32 bg-gray-300 rounded"></div>
-      </div>
-      <form class="flex-1 max-w-md mx-8">
-        <div class="relative">
-          <input type="text" class="w-full h-10 bg-gray-300 rounded-full pl-10" aria-label="Search input" />
-          <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
-            <div class="h-5 w-5 bg-gray-300 rounded-full"></div>
-          </div>
-        </div>
-      </form>
-      <div class="flex items-center gap-6">
-        <div class="animate-pulse h-14 w-14 bg-gray-300 rounded-full"></div>
-        <div class="animate-pulse h-14 w-14 bg-gray-300 rounded-full"></div>
-        <div class="animate-pulse h-16 w-16 bg-gray-300 rounded-full"></div>
-      </div>
-    </div>
-    <nav class="bg-gray-100 border-t border-gray-200">
-      <ul class="flex justify-center items-center gap-10 py-3">
-        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
-        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
-        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
-        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
-        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
-        <li class="animate-pulse h-6 w-20 bg-gray-300 rounded"></li>
-      </ul>
-    </nav>
-  </header> -->
-<!-- 
-  <div id="dynamicContent">
-    <section id="slider_area" class="text-center p-4 flex gap-4 justify-center">
-      <div class="animate-pulse h-64 w-64 bg-gray-300 rounded"></div>
-      <div class="animate-pulse h-64 w-64 bg-gray-300 rounded"></div>
-      <div class="animate-pulse h-64 w-64 bg-gray-300 rounded"></div>
-    </section>
 
-    <section id="promo_area" class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
-      <div class="space-y-4">
-        <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
-        <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
-      </div>
-      <div class="animate-pulse h-48 bg-gray-300 rounded"></div>
-    </section>
+  <style>
+    /* Preloader styles */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .preloader-container {
+      width: 80px;
+      height: 100px;
+    }
+
+    .preloader-block {
+      position: relative;
+      box-sizing: border-box;
+      float: left;
+      margin: 0 10px 10px 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: #000000;
+    }
+
+    .preloader-block:nth-child(4n+1) {
+      animation: wave_61 2s ease .0s infinite;
+    }
+
+    .preloader-block:nth-child(4n+2) {
+      animation: wave_61 2s ease .2s infinite;
+    }
+
+    .preloader-block:nth-child(4n+3) {
+      animation: wave_61 2s ease .4s infinite;
+    }
+
+    .preloader-block:nth-child(4n+4) {
+      animation: wave_61 2s ease .6s infinite;
+      margin-right: 0;
+    }
+
+    @keyframes wave_61 {
+      0% {
+        top: 0;
+        opacity: 1;
+      }
+
+      50% {
+        top: 30px;
+        opacity: .2;
+      }
+
+      100% {
+        top: 0;
+        opacity: 1;
+      }
+    }
+     /* Footer Link Hover Effects */
+     .single_ftr ul li a {
+        transition: color 0.3s ease;
+    }
+
+    .single_ftr ul li a:hover {
+        color: #E79C19 !important;
+    }
+
+    .single_ftr ul li a i {
+        transition: transform 0.3s ease;
+    }
+
+    .single_ftr ul li a:hover i {
+        transform: translateX(3px);
+        color: #E79C19;
+    }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-container">
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+      <div class="preloader-block"></div>
+    </div>
   </div>
-		</div> --> 
+
+	
+
 
 		
 		<!--  Start Header  -->
@@ -225,7 +281,8 @@ session_start();
                     padding: 0;
                     list-style: none;
                 ">
-                    <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
+                    <li><a href="index.php" class="active" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
+                    <li><a href="about-us.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">About Us</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
                     <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
@@ -240,7 +297,7 @@ session_start();
 <style>
         /* Hover effects for nav links */
         .nav-bar a {
-    position: relative;
+            position: relative;
             transition: color 0.3s ease;
         }
 
@@ -249,8 +306,8 @@ session_start();
         }
 
         .nav-bar a::after {
-    content: '';
-    position: absolute;
+            content: '';
+            position: absolute;
             width: 0;
             height: 2px;
             bottom: -5px;
@@ -260,6 +317,15 @@ session_start();
         }
 
         .nav-bar a:hover::after {
+            width: 100%;
+        }
+
+        /* Active link styles */
+        .nav-bar a.active {
+            color: #f39c12 !important;
+        }
+
+        .nav-bar a.active::after {
             width: 100%;
         }
 
@@ -596,7 +662,7 @@ session_start();
                 <p class="animated" style="color: <?php echo $banner['banner_title_color']; ?>; text-align: <?php echo $banner['title_align']; ?>;">
                   <?php echo htmlspecialchars($banner['banner_title']); ?>
                 </p>
-                <h1 class="animated" style="color: <?php echo $banner['banner_header_color']; ?>; text-align: <?php echo $banner['header_align']; ?>;">
+                <h1 class="animated" style="color: <?php echo $banner['banner_header_color']; ?> !important; text-align: <?php echo $banner['header_align']; ?>;">
                   <?php echo htmlspecialchars($banner['banner_header']); ?>
                 </h1>
                 <h4 class="animated" style="color: <?php echo $banner['banner_subtitle_color']; ?>; text-align: <?php echo $banner['subtitle_align']; ?>;">
@@ -775,14 +841,17 @@ session_start();
 					</div>
 				</div>
 			
-				<?php
-					ini_set('display_errors', 1);
-					error_reporting(E_ALL);
-
-				
-					?>
+		
 
 				<div class="text-center">
+
+
+
+        
+    <div class="loader-container">
+        <span class="loader"></span>
+    </div>
+
     <div class="product_filter text-center">
         <ul>
             <li class="active filter" data-filter="all">ALL</li>
@@ -828,6 +897,13 @@ session_start();
             <?php endwhile; ?>
         </div>
     </div>
+
+
+
+
+
+
+
 				</div>
 			</div>
 		</section>
@@ -1042,7 +1118,7 @@ session_start();
 						<div class="single_ftr">
 							<h4 class="sf_title">Navigate</h4>
 							<ul>
-								<li><a href="about-us.html"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
+								<li><a href="about-us.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
 								<li><a href="contact.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Delivery Information</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Privacy Policy</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Terms & Conditions</a></li>
@@ -1225,6 +1301,81 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter');
+    const productContainer = document.getElementById('product-container');
+    const loaderContainer = document.querySelector('.loader-container');
+
+    function showLoader() {
+        loaderContainer.style.display = 'flex';
+        productContainer.style.display = 'none';
+    }
+
+    function hideLoader() {
+        loaderContainer.style.display = 'none';
+        productContainer.style.display = 'block';
+    }
+
+    function renderProducts(products) {
+        let html = '';
+        products.forEach(product => {
+            html += `
+                <div class="col-lg-3 col-md-4 col-sm-6 product-item ${product.cat_class} mb-4">
+                    <div class="single_product">
+                        <a href="product-details.php?post_id=${product.post_id}">
+                            <div class="product_image">
+                                <img src="${product.post_img}" alt="" style="width: 100%; height: auto; max-height: 250px; object-fit: contain; transition: transform 0.5s ease;" />
+                            </div>
+                        </a>
+                        <div class="product_btm_text">
+                            <h4><a href="product-details.php?post_id=${product.post_id}">${product.title}</a></h4>
+                            <div class="p_rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span class="price">AED ${product.price}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        productContainer.innerHTML = html;
+    }
+
+    async function fetchProducts(filter) {
+        try {
+            showLoader();
+            const response = await fetch(`get-filtered-products.php?filter=${filter}`);
+            const products = await response.json();
+            renderProducts(products);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        } finally {
+            hideLoader();
+        }
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Update active state
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            // Fetch filtered products
+            const filter = this.getAttribute('data-filter');
+            fetchProducts(filter);
+        });
+    });
+
+    // Initial load with 'all' filter
+    fetchProducts('all');
+});
+</script>
+
 			
 		<script src="js/vendor/jquery-1.12.4.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
@@ -1238,5 +1389,25 @@ document.addEventListener('DOMContentLoaded', function() {
 		<script src="js/simplePlayer.js"></script>
 		<script src="js/main.js"></script>
 		<script src="script.js"></script>
+
+    <script>
+      // Preloader
+      document.addEventListener('DOMContentLoaded', function() {
+        // Hide preloader when all content is loaded
+        window.addEventListener('load', function() {
+          const preloader = document.getElementById('preloader');
+          preloader.style.opacity = '0';
+          preloader.style.transition = 'opacity 0.5s ease';
+          setTimeout(function() {
+            preloader.style.display = 'none';
+          }, 500);
+        });
+
+        // Show preloader while content is loading
+        const preloader = document.getElementById('preloader');
+        preloader.style.display = 'flex';
+        preloader.style.opacity = '1';
+      });
+    </script>
 	</body>
 </html>

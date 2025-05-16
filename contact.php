@@ -129,7 +129,8 @@
     <!-- Mobile Menu Panel -->
     <div class="mobile-menu-panel">
         <div class="mobile-menu-content">
-            <a href="index.php">Home</a>
+            <a href="index.php" class="active">Home</a>
+            <a href="about-us.php">About Us</a>
             <a href="rent.php">For Rent</a>
             <a href="product.html">For Sale</a>
             <a href="contact.php">Contact</a>
@@ -158,9 +159,10 @@
                     list-style: none;
                 ">
                     <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
+                    <li><a href="about-us.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">About Us</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
                     <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
-                    <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
+                    <li><a href="contact.php" class="active" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
                     <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
     <?php } ?>
@@ -412,6 +414,24 @@
                 display: none !important;
             }
         }
+
+         /* Footer Link Hover Effects */
+    .single_ftr ul li a {
+        transition: color 0.3s ease;
+    }
+
+    .single_ftr ul li a:hover {
+        color: #E79C19 !important;
+    }
+
+    .single_ftr ul li a i {
+        transition: transform 0.3s ease;
+    }
+
+    .single_ftr ul li a:hover i {
+        transform: translateX(3px);
+        color: #E79C19;
+    }
   </style>
 </header>
 
@@ -495,7 +515,7 @@
 						<div class="single_ftr">
 							<h4 class="sf_title">Navigate</h4>
 							<ul>
-								<li><a href="about-us.html"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
+								<li><a href="about-us.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
 								<li><a href="contact.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Delivery Information</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Privacy Policy</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Terms & Conditions</a></li>

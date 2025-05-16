@@ -73,6 +73,68 @@ session_start();
     .condition-tag.used {
       background-color: #a0aec0;
     }
+    /* Custom Select Styling for Filter Sidebar */
+    #filterForm select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: #fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2328425B' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat;
+        background-position: calc(100% - 10px) center;
+        background-size: 12px;
+        padding-right: 30px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        height: 38px;
+        padding: 8px 30px 8px 12px;
+        font-size: 14px;
+        color: #28425B;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    #filterForm select:hover {
+        border-color: #E79C19;
+    }
+
+    #filterForm select:focus {
+        outline: none;
+        border-color: #E79C19;
+        box-shadow: 0 0 0 2px rgba(231, 156, 25, 0.1);
+    }
+
+    /* Hide default arrow in IE */
+    #filterForm select::-ms-expand {
+        display: none;
+    }
+
+    /* Footer Link Hover Effects */
+    .single_ftr ul li a {
+        transition: color 0.3s ease;
+    }
+
+    .single_ftr ul li a:hover {
+        color: #E79C19 !important;
+    }
+
+    .single_ftr ul li a i {
+        transition: transform 0.3s ease;
+    }
+
+    .single_ftr ul li a:hover i {
+        transform: translateX(3px);
+        color: #E79C19;
+    }
+
+    /* Active Navigation Link */
+    .nav-bar a.active {
+        color: #E79C19 !important;
+    }
+
+    .nav-bar a.active::after {
+        width: 100%;
+        background-color: #E79C19;
+    }
   </style>
 </head>
 <body class="bg-gray-100">
@@ -184,6 +246,7 @@ session_start();
     <div class="mobile-menu-panel">
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
+            <a href="about-us.php">About Us</a>
             <a href="rent.php">For Rent</a>
             <a href="product.php">For Sale</a>
             <a href="contact.php">Contact</a>
@@ -211,12 +274,13 @@ session_start();
                     padding: 0;
                     list-style: none;
                 ">
-                    <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
-                    <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
-                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
-                    <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
+                    <li><a href="index.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
+                    <li><a href="about-us.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'about-us.php' ? 'active' : ''; ?>" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">About Us</a></li>
+                    <li><a href="rent.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'rent.php' ? 'active' : ''; ?>" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
+                    <li><a href="product.php"  class="<?php echo basename($_SERVER['PHP_SELF']) == 'product.php' ? 'active' : ''; ?>" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
+                    <li><a href="contact.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'contact.php' ? 'active' : ''; ?>" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
-                    <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
+                    <li><a href="post.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'post.php' ? 'active' : ''; ?>" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
     <?php } ?>
   </ul>
 </nav>
@@ -598,7 +662,12 @@ session_start();
       </section>
     </div>
   </div>
-  <footer class="footer_area">
+
+
+
+
+
+<footer class="footer_area">
 			<div class="container">
 				<div class="row">				
 					<div class="col-md-3 col-sm-6">
@@ -616,7 +685,7 @@ session_start();
 						<div class="single_ftr">
 							<h4 class="sf_title">Navigate</h4>
 							<ul>
-								<li><a href="about-us.html"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
+								<li><a href="about-us.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>About Us</a></li>
 								<li><a href="contact.php"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Delivery Information</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Privacy Policy</a></li>
 								<li><a href="#"><i class="fa fa-angle-right" style="margin-right: 10px;"></i>Terms & Conditions</a></li>
@@ -687,7 +756,20 @@ session_start();
 					</div>
 				</div>
 			</div>
-		</footer>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <script>
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
