@@ -738,6 +738,32 @@ session_start();
 </section>
 		<!--  Promo ITEM END -->	
 		<!-- Start product Area -->
+     <style>
+      .single_product {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.product_image {
+    height: 250px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product_image img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+     </style>
 		<section id="product_area" class="section_padding">
 			<div class="container">		
 				<div class="row">
@@ -783,7 +809,7 @@ session_start();
                 <div class="single_product">
                     <a href="product-details.php?post_id=<?= $row['post_id'] ?>">
                         <div class="product_image">
-                            <img src="<?= htmlspecialchars($row['post_img']) ?>" alt="" style="width: 100%; height: 300px; object-fit: cover; transition: transform 0.5s ease;" />
+                        <img src="<?= htmlspecialchars($row['post_img']) ?>" alt="" style="width: 100%; height: auto; max-height: 250px; object-fit: contain; transition: transform 0.5s ease;" />
                         </div>
                     </a>
                     <div class="product_btm_text">
