@@ -637,7 +637,9 @@ session_start();
             while($row = mysqli_fetch_assoc($result)) {
         ?>
           <div class="bg-white rounded-lg shadow p-4 product-card">
+          <a href="product-details.php?post_id=<?php echo $row['post_id']; ?>">
                 <img src="<?php echo $row['post_img']; ?>" alt="<?php echo $row['title']; ?>" />
+                </a>
             <div class="mt-2">
                     <span class="for-sale-tag"><?php echo $row['category']; ?></span>
                     <span class="condition-tag"><?php echo $row['category_name']; ?></span>

@@ -573,18 +573,21 @@ session_start();
                 $image = !empty($row['post_img']) ?  $row['post_img'] : 'img/top-1.jpg';
         ?>
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
+            <a href="product-details.php?post_id=<?= $row['post_id'] ?>" class="read_more">
                 <div class="single_product">
                     <div class="product_image">
                         <img src="<?= $image ?>" alt="<?= $title ?>" class="img-fluid product-img" />
                     </div>
+                    </a>
                     <div class="product_btm_text">
                         <span class="product_category"><?= htmlspecialchars($row['category']) ?></span>
-                        <h4><a href="#"><?= $title ?></a></h4>
+                        <h4><a href="product-details.php?post_id=<?= $row['post_id'] ?>"><?= $title ?></a></h4>
                         <span class="price">AED <?= $price ?></span>
                         <p class="product_description"><?= $description ?></p>
                         <a href="product-details.php?post_id=<?= $row['post_id'] ?>" class="read_more">Read More <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
+                
             </div>
         <?php 
             }
