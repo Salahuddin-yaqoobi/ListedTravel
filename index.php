@@ -255,7 +255,8 @@ session_start();
         <div class="mobile-menu-content">
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
-            <a href="product.html">For Sale</a>
+            <a href="product.php">For Sale</a>
+            <a href=about-us.php">About us</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>
@@ -282,9 +283,9 @@ session_start();
                     list-style: none;
                 ">
                     <li><a href="index.php" class="active" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
-                    <li><a href="about-us.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">About Us</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
                     <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
+                    <li><a href="about-us.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">About Us</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
                     <li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
@@ -1001,7 +1002,7 @@ session_start();
 		
 		
         <!--  Process -->
-		<section class="process_area section_padding gradient_section">
+		<section class="process_area section_padding gradient_section" style="margin-bottom:80px;">
 			<div class="container">
 				<div class="row text-center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
 					<div class="col-lg-3 col-md-6 col-sm-6" style="flex: 1 1 250px; max-width: 300px;">
@@ -1039,18 +1040,18 @@ session_start();
 		
         <!--  End Process -->
 
-		<section class="customers-header">
+		<!-- <section class="customers-header">
 			<div class="container">
 				<div class="section-heading">
 					<span class="subtitle">OUR CUSTOMERS</span>
 					<h2 class="title">Satisfied customers we are proud of</h2>
 				</div>
 			</div>
-		</section>
+		</section> -->
 		
 
         <!--  Brand -->
-		<section id="brand_area" class="text-center" style="padding: 40px 0;">
+		<!-- <section id="brand_area" class="text-center" style="padding: 40px 0;">
 			<div class="container">					
 				<div class="row">
 					<div class="col-sm-12">
@@ -1096,7 +1097,7 @@ session_start();
 				</div>
 			</div>        
 		</section>
-			  
+			   -->
         <!--   Brand end  -->	
 	</div>
 		<!--  FOOTER START  -->

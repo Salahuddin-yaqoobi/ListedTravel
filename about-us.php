@@ -122,14 +122,24 @@
 		  </div>
 				</div>
 			</div>
+			<style>
+		.nav-bar a.active {
+        color: #E79C19 !important;
+        }
+
+        .nav-bar a.active::after {
+        width: 100%;
+        background-color: #E79C19;
+         }
+			</style>
 		
 			<!-- Mobile Menu Panel -->
 			<div class="mobile-menu-panel">
 				<div class="mobile-menu-content">
 					<a href="index.php">Home</a>
-					<a href="about-us.php">About Us</a>
 					<a href="rent.php">For Rent</a>
-					<a href="product.html">For Sale</a>
+					<a href="product.">For Sale</a>
+					<a href="about-us.php">About Us</a>
 					<a href="contact.php">Contact</a>
 					<?php if(isset($_SESSION['username'])) { ?>
 						<a href="post.php">Dashboard</a>
@@ -156,9 +166,9 @@
 							list-style: none;
 						">
 							<li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
-							<li><a href="about-us.php" class="active" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">About Us</a></li>
 							<li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
 							<li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
+							<li><a href="about-us.php" class="active" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">About Us</a></li>
 							<li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
 			<?php if(isset($_SESSION['username'])) { ?>
 							<li><a href="post.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Dashboard</a></li>
