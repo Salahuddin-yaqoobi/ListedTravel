@@ -590,10 +590,19 @@ $popular_result = mysqli_query($conn, $popular_sql);
 						<div class="single_ftr">
 							<h4 class="sf_title">Contact</h4>
 							<ul>
-								<li><i class="fa fa-map-marker" style="margin-right: 10px;"></i>Jarn Yafour, Mafraq Industrial Area Abu Dhabi, UAE</li>
+                            <li style="display: flex; align-items: flex-start;">
+  							<i class="fa fa-map-marker" style="margin-right: 10px; margin-top: 3px;"></i>
+  							<span style="display: inline-block;">
+    							Jarn Yafour, Mafraq Industrial Area Abu Dhabi, UAE
+  							</span>
 								<li><i class="fa fa-phone" style="margin-right: 10px;"></i>058-9948428<br><span style="margin-left: 25px;">055-8118758</span></li>
-								<li><i class="fa fa-envelope" style="margin-right: 10px;"></i>listed.transport@yahoo.com<br><span style="margin-left: 25px;">listedgeneraltransport@gmail.com</span></li>
-							</ul>
+                                <li>
+                                  <i class="fa fa-envelope" style="margin-right: 10px;"></i>
+                                  <a href="mailto:listed.transport@yahoo.com">listed.transport@yahoo.com</a><br>
+                                  <span style="display: inline-block; margin-left: 25px;">
+                                    <a href="mailto:listedgeneraltransport@gmail.com">listedgeneraltransport@gmail.com</a>
+                                  </span>
+                                </li>							</ul>
 						</div>
 					</div> <!--  End Col -->
 					
