@@ -256,7 +256,7 @@ session_start();
             <a href="index.php">Home</a>
             <a href="rent.php">For Rent</a>
             <a href="product.php">For Sale</a>
-            <a href=about-us.php">About us</a>
+            <a href="about-us.php">About us</a>
             <a href="contact.php">Contact</a>
             <?php if(isset($_SESSION['username'])) { ?>
                 <a href="post.php">Dashboard</a>

@@ -287,8 +287,8 @@ session_start();
 </nav>
         </div>
     </div>
-
 <style>
+
         /* Hover effects for nav links */
         .nav-bar a {
     position: relative;
@@ -785,18 +785,7 @@ session_start();
 
 
 
-        <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenuPanel = document.querySelector('.mobile-menu-panel');
-    
-    if (mobileMenuBtn && mobileMenuPanel) {
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenuPanel.classList.toggle('active');
-        });
-    }
-});
-</script>
+ 
   <script>
     document.querySelectorAll('.favorite-icon').forEach(icon => {
       icon.addEventListener('click', function () {

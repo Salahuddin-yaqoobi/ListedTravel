@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>About Us - Listed Transport</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">	
 	<link rel="stylesheet" href="css/animate.css" />
 	<link rel="stylesheet" href="css/owl.theme.default.min.css" />
 	<link rel="stylesheet" href="css/owl.carousel.min.css" />
@@ -14,8 +14,19 @@
 	<link rel="stylesheet" href="css/font-awesome.css" />
 	<link rel="stylesheet" href="css/bootstrap.min.css" />	
 	<link rel="stylesheet" href="style.css" />
-	<link rel="stylesheet" href="css/responsive.css" />
-	<link rel="icon" href="img/logo.png" type="image/x-icon">
+	<link rel="stylesheet" href="css/responsive.css" />	
+  <link rel="icon" href="img/logo.png" type="image/x-icon">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+  <!-- Owl Carousel CSS + JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </head>
 	<body>
 
@@ -139,7 +150,7 @@
 				<div class="mobile-menu-content">
 					<a href="index.php">Home</a>
 					<a href="rent.php">For Rent</a>
-					<a href="product.">For Sale</a>
+					<a href="product.php">For Sale</a>
 					<a href="about-us.php">About Us</a>
 					<a href="contact.php">Contact</a>
 					<?php if(isset($_SESSION['username'])) { ?>
@@ -181,264 +192,257 @@
 		
 		<style>
 				/* Hover effects for nav links */
-				.nav-bar a {
-			position: relative;
-					transition: color 0.3s ease;
-				}
-		
-				.nav-bar a:hover {
-					color:  #f39c12 !important;
-				}
-		
-				.nav-bar a::after {
-			content: '';
-			position: absolute;
-					width: 0;
-					height: 2px;
-					bottom: -5px;
-					left: 0;
-					background-color:  #f39c12;
-					transition: width 0.3s ease;
-				}
-		
-				.nav-bar a:hover::after {
-					width: 100%;
-				}
-		
-				/* Hover effects for icons */
-				.header-icons a {
-					transition: transform 0.3s ease;
-				}
-		
-				.header-icons a:hover {
-					transform: scale(1.2);
-				}
-		
-				/* Search input focus effect */
-				#searchInput:focus {
-				  outline: none;
-				  box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
-				}
-		
-				.suggestion-item {
-					padding: 8px 20px;
-					cursor: pointer;
-					border-bottom: 1px solid rgba(243, 156, 18, 0.1);
-				}
-		
-				.suggestion-item:hover {
-					background-color: rgba(243, 156, 18, 0.1);
-				}
-		
-				.suggestion-item:last-child {
-					border-bottom: none;
-				}
-		
-				/* Add these styles while keeping existing ones */
-				.toggle-btn {
-					padding: 8px 20px;
-					border-radius: 20px;
-					border: none;
-					font-weight: 500;
-					cursor: pointer;
-					transition: all 0.3s ease;
-					background-color: transparent;
-					color: #666;
-				}
-		
-				.toggle-btn:hover {
-					background-color: rgba(0, 230, 195, 0.1);
-				}
-		
-				.toggle-btn.active {
-					background-color: #E79C19 !important;
-					color: white !important;
-					box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
-				}
-		
-				/* Search container and suggestions styling */
-				.search-container {
-					position: relative;
-				}
-		
-				#suggestions {
-					position: absolute;
-					top: 100%;
-					left: 0;
-					right: 0;
-					background: #ffffff;
-					border: 1px solid #e0e0e0;
-					border-top: none;
-					border-radius: 0 0 25px 25px;
-					max-height: 200px;
-					overflow-y: auto;
-					z-index: 1000;
-					margin-top: -1px; /* Removes gap between search bar and suggestions */
-					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-				}
-		
-				.suggestion-item {
-					padding: 10px 20px;
-					cursor: pointer;
-					transition: background-color 0.3s ease;
-				}
-		
-				.suggestion-item:hover {
-					background-color: rgba(0, 230, 195, 0.1);
-				}
-		
-				.suggestion-item:last-child {
-					border-radius: 0 0 25px 25px;
-				}
-		
-				/* Search input container */
-				.search-container form > div {
-					border-radius: 25px;
-					border: 1px solid #e0e0e0;
-					background: white;
-					transition: all 0.3s ease;
-				}
-		
-				.search-container form > div:focus-within {
-					border-color: #00e6c3;
-					box-shadow: 0 0 0 2px rgba(0, 230, 195, 0.1);
-				}
-		
-				/* Mobile-specific styles - Only apply to mobile devices */
-				@media (max-width: 768px) {
-					.top-bar {
-						padding: 8px 0 !important;
-					}
-		
-					.container {
-						padding: 0 10px !important;
-					}
-		
-					.logo-container {
-						flex: 0 0 70px !important;
-					}
-		
-					.main-logo {
-						max-width: 70px !important;
-					}
-		
-					.search-container {
-						flex: 1;
-						margin: 0 5px !important;
-					}
-		
-					.search-container form > div {
-						padding: 2px !important;
-					}
-		
-					.search-container .toggle-btn {
-						display: none !important;
-					}
-		
-					#searchInput {
-						font-size: 12px !important;
-						padding: 6px 8px !important;
-					}
-		
-					.search-container button {
-						padding: 6px 8px !important;
-					}
-		
-					/* Adjust the gap between flex items */
-					.top-bar .container > div {
-						gap: 8px !important;
-					}
-		
-					.header-icons {
-						display: none !important;
-					}
-		
-					.nav-bar {
-						display: none !important;
-					}
-		
-					.mobile-menu-btn {
-						display: block !important;
-						background: none;
-						border: none;
-						font-size: 20px;
-						color: #1B3C73;
-						cursor: pointer;
-						padding: 5px;
-						margin-left: 5px;
-					}
-		
-					/* Rest of the mobile styles remain the same */
-					.mobile-menu-panel {
-						position: fixed;
-						top: 0;
-						right: -300px;
-						width: 300px;
-						height: 100vh;
-						background: white;
-						z-index: 1000;
-						transition: right 0.3s ease;
-						box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-					}
-		
-					.mobile-menu-panel.active {
-						right: 0;
-					}
-		
-					.mobile-menu-content {
-						padding: 20px;
-						display: flex;
-						flex-direction: column;
-						gap: 15px;
-					}
-		
-					.mobile-menu-content a {
-						color: #1B3C73;
-						text-decoration: none;
-						font-weight: 600;
-						font-size: 16px;
-						padding: 10px 0;
-						border-bottom: 1px solid #eee;
-					}
-		
-					.mobile-icons {
-						margin-top: 20px;
-						display: flex;
-						flex-direction: column;
-						gap: 15px;
-					}
-		
-					.mobile-icons a {
-						display: flex;
-						align-items: center;
-						gap: 10px;
-					}
-				}
-		
-				/* Desktop-specific styles - Hide mobile elements on desktop */
-				@media (min-width: 769px) {
-					.mobile-menu-btn,
-					.mobile-menu-panel {
-						display: none !important;
-					}
-				}
-				 /* Footer Link Hover Effects */
-				 .single_ftr ul li a {
-        transition: color 0.3s ease;
-    }
+  /* Hover effects for nav links */
+  .nav-bar a {
+            position: relative;
+            transition: color 0.3s ease;
+        }
 
-    .single_ftr ul li a:hover {
-        color: #E79C19 !important;
-    }
+        .nav-bar a:hover {
+            color:  #f39c12 !important;
+        }
 
-    .single_ftr ul li a i {
-        transition: transform 0.3s ease;
-    }
+        .nav-bar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color:  #f39c12;
+            transition: width 0.3s ease;
+        }
 
-    .single_ftr ul li a:hover i {
-        transform: translateX(3px);
-        color: #E79C19;
-    }
+        .nav-bar a:hover::after {
+            width: 100%;
+        }
+
+        /* Active link styles */
+        .nav-bar a.active {
+            color: #f39c12 !important;
+        }
+
+        .nav-bar a.active::after {
+            width: 100%;
+        }
+
+        /* Hover effects for icons */
+        .header-icons a {
+            transition: transform 0.3s ease;
+        }
+
+        .header-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Search input focus effect */
+        #searchInput:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item {
+            padding: 8px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item:hover {
+            background-color: rgba(243, 156, 18, 0.1);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Add these styles while keeping existing ones */
+        .toggle-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: transparent;
+            color: #666;
+        }
+
+        .toggle-btn:hover {
+            background-color: rgba(0, 230, 195, 0.1);
+        }
+
+        .toggle-btn.active {
+            background-color: #E79C19 !important;
+            color: white !important;
+            box-shadow: 0 2px 4px rgba(0, 230, 195, 0.2);
+        }
+
+        /* Search container and suggestions styling */
+        .search-container {
+            position: relative;
+        }
+
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 25px 25px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            margin-top: -1px; /* Removes gap between search bar and suggestions */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .suggestion-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .suggestion-item:hover {
+            background-color: rgba(0, 230, 195, 0.1);
+        }
+
+        .suggestion-item:last-child {
+            border-radius: 0 0 25px 25px;
+        }
+
+        /* Search input container */
+        .search-container form > div {
+            border-radius: 25px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-container form > div:focus-within {
+            border-color: #00e6c3;
+            box-shadow: 0 0 0 2px rgba(0, 230, 195, 0.1);
+        }
+
+        /* Mobile-specific styles - Only apply to mobile devices */
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 8px 0 !important;
+            }
+
+            .container {
+                padding: 0 10px !important;
+            }
+
+            .logo-container {
+                flex: 0 0 70px !important;
+            }
+
+            .main-logo {
+                max-width: 70px !important;
+            }
+
+            .search-container {
+                flex: 1;
+                margin: 0 5px !important;
+            }
+
+            .search-container form > div {
+                padding: 2px !important;
+            }
+
+            .search-container .toggle-btn {
+                display: none !important;
+            }
+
+            #searchInput {
+                font-size: 12px !important;
+                padding: 6px 8px !important;
+            }
+
+            .search-container button {
+                padding: 6px 8px !important;
+            }
+
+            /* Adjust the gap between flex items */
+            .top-bar .container > div {
+                gap: 8px !important;
+            }
+
+            .header-icons {
+                display: none !important;
+            }
+
+            .nav-bar {
+                display: none !important;
+            }
+
+            .mobile-menu-btn {
+                display: block !important;
+                background: none;
+                border: none;
+                font-size: 20px;
+                color: #1B3C73;
+                cursor: pointer;
+                padding: 5px;
+                margin-left: 5px;
+            }
+
+            /* Rest of the mobile styles remain the same */
+            .mobile-menu-panel {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            }
+
+            .mobile-menu-panel.active {
+                right: 0;
+            }
+
+            .mobile-menu-content {
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .mobile-menu-content a {
+                color: #1B3C73;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 16px;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+
+            .mobile-icons {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .mobile-icons a {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        /* Desktop-specific styles - Hide mobile elements on desktop */
+        @media (min-width: 769px) {
+            .mobile-menu-btn,
+            .mobile-menu-panel {
+                display: none !important;
+            }
+        }
 		  </style>
 		</header>
 		<!--  End Header  -->
@@ -593,35 +597,35 @@
 			</div>
 		</div>
 	</div>
+	
 
-
-        
-		
-
-		<!--  FOOTER START  -->
-		<footer class="footer_area">
-			<div class="container">
-				<div class="row">				
-					<div class="col-md-3 col-sm-6">
-						<div class="single_ftr">
-							<h4 class="sf_title">Contact</h4>
+	
+	
+	
+	<!--  FOOTER START  -->
+	<footer class="footer_area">
+		<div class="container">
+			<div class="row">				
+				<div class="col-md-3 col-sm-6">
+					<div class="single_ftr">
+						<h4 class="sf_title">Contact</h4>
 							<ul>
-							<li style="display: flex; align-items: flex-start;">
+								<li style="display: flex; align-items: flex-start;">
         						<i class="fa fa-map-marker" style="margin-right: 10px; margin-top: 3px;"></i>
         						<span style="display: inline-block; word-break: break-word; overflow-wrap: break-word;">
-          						Jarn Yafour, Mafraq Industrial Area Abu Dhabi, UAE
+									Jarn Yafour, Mafraq Industrial Area Abu Dhabi, UAE
         						</span>
       						</li>
+							  
 
-
-								<li><i class="fa fa-phone" style="margin-right: 10px;"></i>058-9948428<br><span style="margin-left: 25px;">055-8118758</span></li>
-								<li>
-                                  <i class="fa fa-envelope" style="margin-right: 10px;"></i>
+							  <li><i class="fa fa-phone" style="margin-right: 10px;"></i>058-9948428<br><span style="margin-left: 25px;">055-8118758</span></li>
+							  <li>
+								  <i class="fa fa-envelope" style="margin-right: 10px;"></i>
                                   <a href="mailto:listed.transport@yahoo.com">listed.transport@yahoo.com</a><br>
                                   <span style="display: inline-block; margin-left: 25px;">
                                     <a href="mailto:listedgeneraltransport@gmail.com">listedgeneraltransport@gmail.com</a>
-                                  </span>
-                                </li>
+								</span>
+							</li>
 							</ul>
 						</div>
 					</div> <!--  End Col -->
@@ -657,8 +661,8 @@
 							<h4 class="sf_title">Follow Us</h4>
 							<div class="ftr_social_icon">
 								<ul>
-                                <li><a href="https://www.facebook.com/listedgeneraltransport"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://www.instagram.com/listed_earthmoving/"><i class="fa fa-instagram"></i></a></li>
+									<li><a href="https://www.facebook.com/listedgeneraltransport"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="https://www.instagram.com/listed_earthmoving/"><i class="fa fa-instagram"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								</ul>
@@ -669,7 +673,7 @@
 				</div>
 			</div>
 	
-		
+			
 			<div class="ftr_btm_area">
 				<div class="container">
 					<div class="row">
@@ -702,6 +706,18 @@
 				</div>
 			</div>
 		</footer>
+		<script src="js/vendor/jquery-1.12.4.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.meanmenu.min.js"></script>
+		<script src="js/jquery.mixitup.js"></script>
+		<script src="js/jquery.counterup.min.js"></script>
+		<script src="js/waypoints.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script src="js/venobox.min.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/simplePlayer.js"></script>
+		<script src="js/main.js"></script>
+		<script src="script.js"></script>
 		<script>
 			// Add this to your existing JavaScript
 			document.addEventListener('DOMContentLoaded', function() {
@@ -867,18 +883,7 @@
 							}
 						});
 						</script>
-		<!--  FOOTER END  -->
 
-		<script src="js/vendor/jquery-1.12.4.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.meanmenu.min.js"></script>
-		<script src="js/jquery.mixitup.js"></script>
-		<script src="js/jquery.counterup.min.js"></script>
-		<script src="js/waypoints.min.js"></script>
-		<script src="js/wow.min.js"></script>
-		<script src="js/venobox.min.js"></script>
-		<script src="js/owl.carousel.min.js"></script>
-		<script src="js/simplePlayer.js"></script>
-		<script src="js/main.js"></script>
+
 	</body>
 </html>
