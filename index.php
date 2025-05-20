@@ -1002,7 +1002,7 @@ session_start();
 		
 		
         <!--  Process -->
-		<section class="process_area section_padding gradient_section" style="margin-bottom:80px;">
+		<section class="process_area section_padding gradient_section">
 			<div class="container">
 				<div class="row text-center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
 					<div class="col-lg-3 col-md-6 col-sm-6" style="flex: 1 1 250px; max-width: 300px;">
@@ -1039,65 +1039,139 @@ session_start();
 		</section>
 		
         <!--  End Process -->
-
-		<!-- <section class="customers-header">
+<style>
+  .brand-img:hover{
+    box-shadow: 2px 2px 10px 5px rgba(238, 172, 29, 0.9); /* You might want to add some margin to see the shadow clearly */
+  margin: 10px;
+  }
+</style>
+		<section class="customers-header">
 			<div class="container">
 				<div class="section-heading">
 					<span class="subtitle">OUR CUSTOMERS</span>
 					<h2 class="title">Satisfied customers we are proud of</h2>
 				</div>
 			</div>
-		</section> -->
+		</section>
 		
 
         <!--  Brand -->
-		<!-- <section id="brand_area" class="text-center" style="padding: 40px 0;">
+		<section id="brand_area" class="text-center" style="padding: 40px 0;">
 			<div class="container">					
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="brand_slide owl-carousel">
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/allullogo.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Adnoc Logo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/AVANTI_LOGO-removebg-preview.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Al Naboodah Logo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/d.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/AMANA Logo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/KRL.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Descon Logo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/logo-footer.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Gulf Contractors Logo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/LogoPng.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Keller Logo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/logoV2.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Nakheel Logo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/Shirawi-logo.svg.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Nurol Logo.png" alt="" class="brand-img" /></a>
 							</div>
 							<div class="item text-center">
-								<a href="#"><img src="img/clients/tsg-copy-300x294.png" alt="" class="brand-img" /></a>
+								<a href="#"><img src="img/clients/Shapoorji Pallonji Logo.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/clients/Trojan Logo.png" alt="" class="brand-img" /></a>
 							</div>
 						</div>
-						<div class="brand-scroll-indicator text-center mt-3">
-							<span class="dot active"></span>
-							<span class="dot"></span>
-							<span class="dot"></span>
-							<span class="dot"></span>
-							<span class="dot"></span>
-							<span class="dot"></span>
-						  </div>
+						
+				</div>
+			</div>        
+		</section>
+
+
+
+    <section class="customers-header">
+			<div class="container">
+				<div class="section-heading">
+					<span class="subtitle" style="text-align: center;">OUR BRANDS</span>
+         <h2 class="title">BRANDS WE DEAL WITH</h2>
+				</div>
+			</div>
+		</section>
+
+    <section id="brand_area" class="text-center" style="padding: 40px 0;">
+			<div class="container">					
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="brand_slide owl-carousel">
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Bobcat logo.png" alt="" class="brand-img" /></a>
+							</div>
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Caterpillar Logo.png" alt="" class="brand-img" /></a>
+							</div>
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Daynapac Logo.png" alt="" class="brand-img" /></a>
+							</div>
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Doosan Logo.png" alt="" class="brand-img" /></a>
+							</div>
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Escort Logo.png" alt="" class="brand-img" /></a>
+							</div>
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Genie Logo.png" alt="" class="brand-img" /></a>
+							</div>
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Hitachi logo.png" alt="" class="brand-img" /></a>
+							</div>
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Hyundai logo.png" alt="" class="brand-img" /></a>
+							</div>
+							<div class="item text-center">
+								<a href="#"><img src="img/brands/Ingersoll Rand Logo.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/brands/JCB.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/brands/JLG logo.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/brands/Komatsu logo.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/brands/Kubota Logo.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/brands/Sany Logo.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/brands/Sumitomo Logo.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/brands/Volvo Logo.png" alt="" class="brand-img" /></a>
+							</div>
+              <div class="item text-center">
+								<a href="#"><img src="img/brands/XCMG Logo.png" alt="" class="brand-img" /></a>
+							</div>
+						</div>
+						
 						  
 					</div>
 				</div>
 			</div>        
 		</section>
-			   -->
+			  
         <!--   Brand end  -->	
 	</div>
 		<!--  FOOTER START  -->
