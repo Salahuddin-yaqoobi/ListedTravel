@@ -507,6 +507,13 @@
 						</div>
 					</div>
 				</div>	
+				<style>
+  					.our-team .team-content .title {
+    					color: #E79C19;
+    					transition: color 0.3s ease;
+  					}
+
+                </style>
 
 				<div class="row">
 					<div class="col-lg-3 col-md-4 col-sm-6">
@@ -600,11 +607,12 @@
 							<h4 class="sf_title">Contact</h4>
 							<ul>
 							<li style="display: flex; align-items: flex-start;">
-  							<i class="fa fa-map-marker" style="margin-right: 10px; margin-top: 3px;"></i>
-  							<span style="display: inline-block;">
-    							Jarn Yafour, Mafraq Industrial Area Abu Dhabi, UAE
-  							</span>
-							</li>
+        						<i class="fa fa-map-marker" style="margin-right: 10px; margin-top: 3px;"></i>
+        						<span style="display: inline-block; word-break: break-word; overflow-wrap: break-word;">
+          						Jarn Yafour, Mafraq Industrial Area Abu Dhabi, UAE
+        						</span>
+      						</li>
+
 
 								<li><i class="fa fa-phone" style="margin-right: 10px;"></i>058-9948428<br><span style="margin-left: 25px;">055-8118758</span></li>
 								<li>

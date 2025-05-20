@@ -2631,7 +2631,7 @@ input:focus, textarea:focus {
 }
 .our-team:hover .pic:before,
 .our-team:hover .pic:after{
-    border-color: #33d286;
+    border-color: #E79C19;
     transform: scale(1);
 }
 .our-team .pic img{
@@ -2662,7 +2662,7 @@ input:focus, textarea:focus {
 .our-team:hover .team-content:before{
     width: 100%;
     background: #28425B;
-    color: #33d286;
+    color: #E79C19;
 }
 .our-team .title{
     font-size: 18px;
@@ -2700,7 +2700,7 @@ input:focus, textarea:focus {
     height: 35px;
     line-height: 35px;
     font-size: 16px;
-    color: #33d286;
+    color: #E79C19;
     margin-right: 10px;
     position: relative;
     z-index: 1;
