@@ -599,37 +599,54 @@ session_start();
 
         <!-- Blog Pagination -->
         <div class="col-xs-12">
-            <?php
-            // Get total number of posts
-            $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM post");
-            $total_row = mysqli_fetch_assoc($total_result);
-            $total_posts = $total_row['total'];
-            $total_pages = ceil($total_posts / $limit);  // Calculate total pages
-            ?>
+    <?php
+    // Get and handle limit
+    if (isset($_GET['limit']) && $_GET['limit'] === 'all') {
+        $limit = 'all';
+    } else {
+        $limit = isset($_GET['limit']) && is_numeric($_GET['limit']) ? (int) $_GET['limit'] : 6;
+    }
 
-            <!-- Blog Pagination -->
-            <?php if ($limit): ?>
-            <div class="col-xs-12">
-                <div class="blog_pagination pgntn_mrgntp fix">
-                    <div class="pagination text-center">
-                        <ul>
-                            <?php if ($page > 1): ?>
-                                <li><a href="?page=<?= $page - 1 ?>&sort=<?= $sort ?>&limit=<?= $limit ?>"><i class="fa fa-angle-left"></i></a></li>
-                            <?php endif; ?>
+    // Get and handle page
+    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 
-                            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                                <li><a href="?page=<?= $i ?>&sort=<?= $sort ?>&limit=<?= $limit ?>" class="<?= ($i == $page) ? 'active' : '' ?>"><?= $i ?></a></li>
-                            <?php endfor; ?>
+    // Get total number of posts
+    $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM post");
+    $total_row = mysqli_fetch_assoc($total_result);
+    $total_posts = $total_row['total'];
 
-                            <?php if ($page < $total_pages): ?>
-                                <li><a href="?page=<?= $page + 1 ?>&sort=<?= $sort ?>&limit=<?= $limit ?>"><i class="fa fa-angle-right"></i></a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </div>
-                </div>
+    // Calculate total pages
+    if ($limit === 'all') {
+        $total_pages = 1;
+    } else {
+        $total_pages = ceil($total_posts / $limit);
+    }
+    ?>
+
+    <!-- Blog Pagination -->
+    <?php if ($limit !== 'all'): ?>
+    <div class="col-xs-12">
+        <div class="blog_pagination pgntn_mrgntp fix">
+            <div class="pagination text-center">
+                <ul>
+                    <?php if ($page > 1): ?>
+                        <li><a href="?page=<?= $page - 1 ?>&sort=<?= $sort ?>&limit=<?= $limit ?>"><i class="fa fa-angle-left"></i></a></li>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li><a href="?page=<?= $i ?>&sort=<?= $sort ?>&limit=<?= $limit ?>" class="<?= ($i == $page) ? 'active' : '' ?>"><?= $i ?></a></li>
+                    <?php endfor; ?>
+
+                    <?php if ($page < $total_pages): ?>
+                        <li><a href="?page=<?= $page + 1 ?>&sort=<?= $sort ?>&limit=<?= $limit ?>"><i class="fa fa-angle-right"></i></a></li>
+                    <?php endif; ?>
+                </ul>
             </div>
-            <?php endif; ?>
         </div>
+    </div>
+    <?php endif; ?>
+</div>
+
 
     </div>
         </div>

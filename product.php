@@ -547,11 +547,16 @@ session_start();
         <div class="space-y-4">
           <div>
                     <label class="block text-sm font-medium mb-1">Category</label>
-                    <select name="category" class="w-full border p-2 rounded">
-                        <option value="">All Categories</option>
-                        <option value="For Sale" <?php echo (isset($_GET['category']) && $_GET['category'] == 'For Sale') ? 'selected' : ''; ?>>For Sale</option>
-                        <option value="For Rent" <?php echo (isset($_GET['category']) && $_GET['category'] == 'For Rent') ? 'selected' : ''; ?>>For Rent</option>
-            </select>
+                <select name="category" class="w-full border p-2 rounded">
+                    <option value="">All Categories</option>
+                    <option value="For Sale" <?php
+                        echo (!isset($_GET['category']) || $_GET['category'] === 'For Sale') ? 'selected' : '';
+                    ?>>For Sale</option>
+                    <option value="For Rent" <?php
+                        echo (isset($_GET['category']) && $_GET['category'] === 'For Rent') ? 'selected' : '';
+                    ?>>For Rent</option>
+                </select>
+
           </div>
                 
           <div>
@@ -599,12 +604,20 @@ session_start();
         <?php
       
         
-        $where_conditions = array();
+      $where_conditions = array();
 
-        if(isset($_GET['category']) && !empty($_GET['category'])) {
-            $category = mysqli_real_escape_string($conn, $_GET['category']);
-            $where_conditions[] = "p.category = '$category'";
-        }
+      // Apply 'For Sale' by default if no category is selected
+      if (!isset($_GET['category'])) {
+          $category = 'For Sale'; // default
+      } else {
+          $category = mysqli_real_escape_string($conn, $_GET['category']);
+      }
+      
+      // Add to query if not empty
+      if (!empty($category)) {
+          $where_conditions[] = "p.category = '$category'";
+      }
+      
 
         if(isset($_GET['vehicle_type']) && !empty($_GET['vehicle_type'])) {
             $vehicle_type = mysqli_real_escape_string($conn, $_GET['vehicle_type']);
@@ -900,6 +913,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<script src="js/vendor/jquery-1.12.4.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.meanmenu.min.js"></script>
 		<script src="js/jquery.mixitup.js"></script>
 		<script src="js/jquery.counterup.min.js"></script>

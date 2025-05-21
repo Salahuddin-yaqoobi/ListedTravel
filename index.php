@@ -849,63 +849,83 @@ session_start();
 
 
         
-    <div class="loader-container">
-        <span class="loader"></span>
-    </div>
+ <!-- Loader container -->
+ 
+ <!-- Category Filter -->
+ <div class="product_filter text-center">
+   <ul>
+     <li class="active filter" data-filter="all">ALL</li>
+     <li class="filter" data-filter="sale">Sale</li>
+     <li class="filter" data-filter="bslr">Rent</li>
+    </ul>
+  </div>
+  
+  <div class="loader-container text-center my-4" style="display: none; display: flex; justify-content: center; height: 100vh;" >
+      <span class="loader"></span>
+  </div>
+<!-- Product Items -->
+<div class="product_item">
+    <div class="row" id="product-container">
+        <?php
+        $sql = "SELECT * FROM post ORDER BY post_id DESC LIMIT 8";
+        $result = mysqli_query($conn, $sql);
 
-    <div class="product_filter text-center">
-        <ul>
-            <li class="active filter" data-filter="all">ALL</li>
-            <li class="filter" data-filter="sale">Sale</li>
-            <li class="filter" data-filter="bslr">Rent</li>
-        </ul>
-    </div>
-
-    <div class="product_item">
-        <div class="row" id="product-container">
-            <?php
-            $sql = "SELECT * FROM post ORDER BY post_id DESC LIMIT 8";
-            $result = mysqli_query($conn, $sql);
-
-            while ($row = mysqli_fetch_assoc($result)):
-                $cat_class = '';
-                if (strtolower($row['category']) === 'for sale') {
-                    $cat_class = 'sale';
-                } elseif (strtolower($row['category']) === 'for rent') {
-                    $cat_class = 'bslr';
-                }
-            ?>
-            <div class="col-lg-3 col-md-4 col-sm-6 product-item <?= $cat_class ?> mb-4">
-                <div class="single_product">
-                    <a href="product-details.php?post_id=<?= $row['post_id'] ?>">
-                        <div class="product_image">
+        while ($row = mysqli_fetch_assoc($result)):
+            $cat_class = '';
+            if (strtolower($row['category']) === 'for sale') {
+                $cat_class = 'sale';
+            } elseif (strtolower($row['category']) === 'for rent') {
+                $cat_class = 'bslr';
+            }
+        ?>
+        <div class="col-lg-3 col-md-4 col-sm-6 product-item <?= $cat_class ?> mb-4">
+            <div class="single_product">
+                <a href="product-details.php?post_id=<?= $row['post_id'] ?>">
+                    <div class="product_image">
                         <img src="<?= htmlspecialchars($row['post_img']) ?>" alt="" style="width: 100%; height: auto; max-height: 250px; object-fit: contain; transition: transform 0.5s ease;" />
-                        </div>
-                    </a>
-                    <div class="product_btm_text">
-                        <h4><a href="product-details.php?post_id=<?= $row['post_id'] ?>"><?= htmlspecialchars($row['title']) ?></a></h4>
-                        <div class="p_rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <span class="price">AED <?= number_format($row['price'], 2) ?></span>
                     </div>
+                </a>
+                <div class="product_btm_text">
+                    <h4><a href="product-details.php?post_id=<?= $row['post_id'] ?>"><?= htmlspecialchars($row['title']) ?></a></h4>
+                    <div class="p_rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <span class="price">AED <?= number_format($row['price'], 2) ?></span>
                 </div>
             </div>
-            <?php endwhile; ?>
         </div>
+        <?php endwhile; ?>
     </div>
+</div>
 
-
-
-
-
-
-
-				</div>
+<style>
+.loader {
+  width: 60px;
+  aspect-ratio: 1;
+  --c:no-repeat linear-gradient(#046D8B 0 0);
+  background: var(--c),var(--c),var(--c),var(--c);
+  animation: 
+    l9-1 1.5s infinite,
+    l9-2 1.5s infinite;
+}
+@keyframes l9-1 {
+  0%   {background-size: 0    4px,4px 0   }
+  25%  {background-size: 40px 4px,4px 0   }
+  45%, 55% {background-size: 40px 4px,4px 42px}
+  75%  {background-size: 0    4px,4px 42px}
+  100% {background-size: 0    4px,4px 0   }
+}
+@keyframes l9-2 {
+  0%,49.9% {background-position: 0  38px               ,18px 18px,100% 18px,right 18px bottom 18px}
+  50%,100% {background-position: right 20px bottom 18px,18px 100%,20px 18px,right 18px top 0      }
+}
+</style>
+<!-- Loader Styles -->
+			</div>
 			</div>
 		</section>
 		
@@ -1041,8 +1061,7 @@ session_start();
         <!--  End Process -->
 <style>
   .brand-img:hover{
-    box-shadow: 2px 2px 10px 5px rgba(238, 172, 29, 0.9); /* You might want to add some margin to see the shadow clearly */
-  margin: 10px;
+    box-shadow: 2px 2px 10px 5px rgba(238, 172, 29, 0.9); 
   }
 </style>
 		<section class="customers-header">
@@ -1098,79 +1117,166 @@ session_start();
 		</section>
 
 
+    
+
 
     <section class="customers-header">
-			<div class="container">
-				<div class="section-heading">
-					<span class="subtitle" style="text-align: center;">OUR BRANDS</span>
-         <h2 class="title">BRANDS WE DEAL WITH</h2>
-				</div>
-			</div>
-		</section>
+    <div class="container">
+        <div class="section-heading">
+            <span class="subtitle" style="text-align: center;">OUR BRANDS</span>
+            <h2 class="title">BRANDS WE DEAL WITH</h2>
+        </div>
+    </div>
+</section>
 
-    <section id="brand_area" class="text-center" style="padding: 40px 0;">
-			<div class="container">					
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="brand_slide owl-carousel">
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Bobcat logo.png" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Caterpillar Logo.png" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Daynapac Logo.png" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Doosan Logo.png" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Escort Logo.png" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Genie Logo.png" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Hitachi logo.png" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Hyundai logo.png" alt="" class="brand-img" /></a>
-							</div>
-							<div class="item text-center">
-								<a href="#"><img src="img/brands/Ingersoll Rand Logo.png" alt="" class="brand-img" /></a>
-							</div>
-              <div class="item text-center">
-								<a href="#"><img src="img/brands/JCB.png" alt="" class="brand-img" /></a>
-							</div>
-              <div class="item text-center">
-								<a href="#"><img src="img/brands/JLG logo.png" alt="" class="brand-img" /></a>
-							</div>
-              <div class="item text-center">
-								<a href="#"><img src="img/brands/Komatsu logo.png" alt="" class="brand-img" /></a>
-							</div>
-              <div class="item text-center">
-								<a href="#"><img src="img/brands/Kubota Logo.png" alt="" class="brand-img" /></a>
-							</div>
-              <div class="item text-center">
-								<a href="#"><img src="img/brands/Sany Logo.png" alt="" class="brand-img" /></a>
-							</div>
-              <div class="item text-center">
-								<a href="#"><img src="img/brands/Sumitomo Logo.png" alt="" class="brand-img" /></a>
-							</div>
-              <div class="item text-center">
-								<a href="#"><img src="img/brands/Volvo Logo.png" alt="" class="brand-img" /></a>
-							</div>
-              <div class="item text-center">
-								<a href="#"><img src="img/brands/XCMG Logo.png" alt="" class="brand-img" /></a>
-							</div>
-						</div>
-						
-						  
-					</div>
-				</div>
-			</div>        
-		</section>
+<section id="brand_area" class="text-center" style="padding: 40px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="brand_slide brands-logo-slide">
+                    <div class="brand-items only-brands-items">
+                        <!-- All your brand images -->
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Bobcat logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Caterpillar Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Daynapac Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Doosan Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Escort Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Genie Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Hitachi logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Hyundai logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Ingersoll Rand Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/JCB.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/JLG logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Komatsu logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Kubota Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Sany Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Sumitomo Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/Volvo Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                        <div class="item text-center">
+                            <a href="#"><img src="img/brands/XCMG Logo.png" alt="" class="brand-img" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
+</section>
+
+<!-- Additional CSS for animation -->
+<!-- Updated CSS -->
+<style>
+    /* Ensure the brand images are displayed with equal width and height */
+    .brand-img {
+        width: 9  0px;  /* Set a smaller fixed width for uniformity */
+        height: 80px; /* Set a smaller fixed height for uniformity */
+        object-fit: contain; /* Ensure the images maintain their aspect ratio */
+        transition: transform 0.3s ease;
+        display: block; /* Ensure it's block level to avoid inline gaps */
+        margin: 0 auto; /* Center the image within its container */
+    }
+
+    /* Create the brand container to hold all the brand logos */
+    .brands-logo-slide {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    /* Flex the container to line up all the brands in a single row */
+    .only-brands-items {
+        display: flex;
+        width: max-content;
+        animation: slideLeftToRight 30s linear infinite;
+    }
+
+    /* Duplicate the items by using CSS */
+    .brand-items .item {
+        flex: 0 0 auto;
+        padding: 10px;
+    }
+
+    /* Keyframes for animation to create the sliding effect */
+    @keyframes slideLeftToRight {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    /* Stop animation on hover */
+    .brand_slide:hover .brand-items {
+        animation-play-state: paused;
+    }
+
+    /* Optional styling for the brand images container */
+    .brand-items .item {
+        flex: 0 0 auto;
+        padding: 10px;
+    }
+
+    /* Ensure the images don't grow on hover */
+    .brand-items .item:hover .brand-img {
+        transform: none; /* Prevent scaling or shifting */
+    }
+
+    /* No gaps between brands */
+    .brand-items {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+</style>
+
+
+<!-- Optional: jQuery to ensure smooth hover effect -->
+<script>
+    $(document).ready(function(){
+        $(".brands-logo").hover(
+            function() {
+                // Pause the animation on hover
+                $(".brand-items").css("animation-play-state", "paused");
+            },
+            function() {
+                // Resume the animation after hover
+                $(".brand-items").css("animation-play-state", "running");
+            }
+        );
+    });
+</script>
+
+
 			  
         <!--   Brand end  -->	
 	</div>
@@ -1461,6 +1567,35 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchProducts('all');
 });
 </script>
+<!-- jQuery Filtering with Loader -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.filter').on('click', function(){
+        var filter = $(this).data('filter');
+
+        // Set active class
+        $('.filter').removeClass('active');
+        $(this).addClass('active');
+
+        // Show loader and hide products
+        $('.loader-container').show();
+        $('#product-container .product-item').hide();
+
+        // Simulate loading delay (can replace with AJAX)
+        setTimeout(function(){
+            if (filter == 'all') {
+                $('#product-container .product-item').fadeIn();
+            } else {
+                $('#product-container .product-item').hide();
+                $('#product-container .'+filter).fadeIn();
+            }
+            $('.loader-container').hide();
+        }, 800); // Adjust timing if needed
+    });
+});
+</script>
+
 
 			
 		<script src="js/vendor/jquery-1.12.4.min.js"></script>
