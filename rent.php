@@ -559,7 +559,7 @@ session_start();
         }
 
         // Query for fetching products with limit and offset
-        $query = "SELECT * FROM post $order_by $limit_sql";
+        $query = "SELECT * FROM post WHERE category = 'For Rent' $order_by $limit_sql";
         $result = mysqli_query($conn, $query);
 
         // Check if the query executed successfully
@@ -611,7 +611,7 @@ session_start();
     $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 
     // Get total number of posts
-    $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM post");
+    $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM post WHERE category = 'For Rent'");
     $total_row = mysqli_fetch_assoc($total_result);
     $total_posts = $total_row['total'];
 

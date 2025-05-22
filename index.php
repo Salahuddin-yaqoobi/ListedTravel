@@ -730,7 +730,7 @@ session_start();
   <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     <div class="row">
       <div class="col-lg-4 col-md-6 col-sm-12">
-        <a href="#">
+        <a href="http://listedtransport.com/product.php?category=&vehicle_type=6&min_price=&max_price=">
           <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             <img src="category img on main/Caterpillar CS533-ROAD ROLLERS.png" alt="" style="width: 100%; height: 200px; object-fit: cover;">
             <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
@@ -742,7 +742,7 @@ session_start();
       </div><!-- End Col -->
 
       <div class="col-lg-4 col-md-6 col-sm-12">
-        <a href="#">
+        <a href="http://listedtransport.com/product.php?category=&vehicle_type=5&min_price=&max_price=">
           <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             <img src="category img on main/kamatsu GD655-MOTOR GRADER.png" alt="" style="width: 100%; height: 200px; object-fit: cover;">
             <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
@@ -754,7 +754,7 @@ session_start();
       </div><!-- End Col -->
 
       <div class="col-lg-4 col-md-6 col-sm-12">
-        <a href="#">
+        <a href="http://listedtransport.com/product.php?category=&vehicle_type=4&min_price=&max_price=">
           <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             <img src="category img on main/Bobcat S130-SKID-STEER LOADERS.png" alt="" style="width: 100%; height: 200px; object-fit: cover;">
             <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
@@ -766,7 +766,7 @@ session_start();
       </div><!-- End Col -->
 
       <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 20px;">
-        <a href="#">
+        <a href="http://listedtransport.com/product.php?category=&vehicle_type=3&min_price=&max_price=">
           <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             <img src="category img on main/Kamatsu Pc400-EXCAVATORS.png" alt="" style="width: 100%; height: 200px; object-fit: cover;">
             <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
@@ -778,7 +778,7 @@ session_start();
       </div><!-- End Col -->
 
       <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 20px;">
-        <a href="#">
+        <a href="http://listedtransport.com/product.php?category=&vehicle_type=2&min_price=&max_price=">
           <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             <img src="category img on main/Caterpillar 966H-WHEEL LOADER.png" alt="" style="width: 100%; height: 200px; object-fit: cover;">
             <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
@@ -790,7 +790,7 @@ session_start();
       </div><!-- End Col -->
 
       <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 20px;">
-        <a href="#">
+        <a href="http://listedtransport.com /product.php?category=&vehicle_type=1&min_price=&max_price=">
           <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             <img src="category img on main/JCB 4cx- Backhoe Loader.png" alt="" style="width: 100%; height: 200px; object-fit: cover;">
             <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">
@@ -1194,18 +1194,27 @@ session_start();
     </div>        
 </section>
 
-<!-- Additional CSS for animation -->
 <!-- Updated CSS -->
 <style>
     /* Ensure the brand images are displayed with equal width and height */
     .brand-img {
-        width: 9  0px;  /* Set a smaller fixed width for uniformity */
-        height: 80px; /* Set a smaller fixed height for uniformity */
-        object-fit: contain; /* Ensure the images maintain their aspect ratio */
-        transition: transform 0.3s ease;
-        display: block; /* Ensure it's block level to avoid inline gaps */
-        margin: 0 auto; /* Center the image within its container */
+      width: 120px; /* Or whatever fixed width you want */
+    height: 80px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+        
     }
+    .item{
+      width: 140px;  /* slightly more than image width */
+    height: 100px; /* slightly more than image height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    flex: 0 0 auto;
+    }
+    
 
     /* Create the brand container to hold all the brand logos */
     .brands-logo-slide {
