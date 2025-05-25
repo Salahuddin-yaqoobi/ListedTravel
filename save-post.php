@@ -68,16 +68,42 @@ if (isset($_POST['submit'])) {
         $date = date("d M, Y");
 
         // Update the post
-        $sql = "UPDATE post 
-                SET title = '{$title}', 
-                    description = '{$description}', 
-                    category = '{$category}', 
-                    price = '{$price}', 
-                    duration = '{$duration}', 
-                    post_date = '{$date}', 
-                    post_img = '{$file_name}',
-                    product_status = '{$_POST['product_status']}'
-                WHERE post_id = {$post_id}";
+       // Handle side_images[] upload
+$sideImages = array();
+
+if (isset($_FILES['side_images']) && count($_FILES['side_images']['name']) > 0) {
+    for ($i = 0; $i < count($_FILES['side_images']['name']); $i++) {
+        if ($_FILES['side_images']['error'][$i] === 0) {
+            $sideFileName = $_FILES['side_images']['name'][$i];
+            $sideFileTmp = $_FILES['side_images']['tmp_name'][$i];
+            $sideFileExt = strtolower(pathinfo($sideFileName, PATHINFO_EXTENSION));
+            $validExtensions = array("jpg", "jpeg", "png", "webp");
+
+            if (in_array($sideFileExt, $validExtensions)) {
+                $uniqueName = time() . "_" . basename($sideFileName);
+                if (move_uploaded_file($sideFileTmp, "uploads/" . $uniqueName)) {
+                    $sideImages[] = $uniqueName;
+                }
+            }
+        }
+    }
+}
+
+// Convert side image array to JSON for DB
+$sideImagesJson = json_encode(array_values($sideImages));
+
+// Final SQL Update Query
+$sql = "UPDATE post 
+        SET title = '{$title}', 
+            description = '{$description}', 
+            category = '{$category}', 
+            price = '{$price}', 
+            duration = '{$duration}', 
+            post_date = '{$date}', 
+            post_img = '{$file_name}', 
+            product_status = '{$_POST['product_status']}',
+            side_img = '{$sideImagesJson}' 
+        WHERE post_id = {$post_id}";
 
         if (mysqli_query($conn, $sql)) {
             echo json_encode(['status' => 'success', 'message' => 'Post updated successfully']);
@@ -94,4 +120,6 @@ if (isset($_POST['submit'])) {
     echo json_encode(['status' => 'error', 'message' => 'Form not submitted']);
     exit;
 }
+
+
 ?>

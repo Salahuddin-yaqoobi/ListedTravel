@@ -652,6 +652,9 @@ session_start();
         ?>
           <div class="bg-white rounded-lg shadow p-4 product-card">
           <a href="product-details.php?post_id=<?php echo $row['post_id']; ?>">
+            <php
+            echo $row['post_img']; 
+            ?php>
                 <img src="<?php echo $row['post_img']; ?>" alt="<?php echo $row['title']; ?>" />
                 </a>
             <div class="mt-2">

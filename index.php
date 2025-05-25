@@ -790,7 +790,7 @@ session_start();
       </div><!-- End Col -->
 
       <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 20px;">
-        <a href="http://listedtransport.com /product.php?category=&vehicle_type=1&min_price=&max_price=">
+        <a href="http://listedtransport.com/product.php?category=&vehicle_type=1&min_price=&max_price=">
           <div class="single_promo" style="border-radius: 10px; overflow: hidden; position: relative; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             <img src="category img on main/JCB 4cx- Backhoe Loader.png" alt="" style="width: 100%; height: 200px; object-fit: cover;">
             <div class="box-content" style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; z-index: 10;">

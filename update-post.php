@@ -2,25 +2,91 @@
 session_start();
 include "config.php";
 
-if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
+if (!isset($_SESSION['username']) || $_SESSION['role'] != '1') {
     header("Location: " . APP_URL . "/admin/");
     exit();
 }
 
+$side_images = [];
 
-  if (isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $post_id = intval($_GET['id']);
     $sql = "SELECT * FROM post WHERE post_id = {$post_id}";
     $result = mysqli_query($conn, $sql) or die("Query failed");
 
     if (mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_assoc($result);
+        $row = mysqli_fetch_assoc($result);
+
+        if (!empty($row['side_img']) && $row['side_img'] !== 'null') {
+            $decodedImages = json_decode($row['side_img'], true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decodedImages)) {
+                $side_images = $decodedImages;
+            } else {
+                error_log("JSON Decode Error: " . json_last_error_msg());
+                $side_images = [];
+            }
+        }
     } else {
-      echo "<h2>No data found for the given post ID.</h2>";
-      exit;
+        echo "<h2>No data found for the given post ID.</h2>";
+        exit();
     }
-  }
+}
+
+// Process form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Content-Type: application/json');
+
+    $post_id = intval($_GET['id']);
+    $post_title = mysqli_real_escape_string($conn, $_POST['post_title']);
+    $postdesc = mysqli_real_escape_string($conn, $_POST['postdesc']);
+    $category = mysqli_real_escape_string($conn, $_POST['category']);
+    $price = mysqli_real_escape_string($conn, $_POST['price']);
+    $duration = mysqli_real_escape_string($conn, $_POST['duration']);
+    $product_status = mysqli_real_escape_string($conn, $_POST['product_status']);
+
+    $existingImages = isset($_POST['existing_side_images']) ? $_POST['existing_side_images'] : [];
+    $deletedImages = isset($_POST['remove_images']) ? $_POST['remove_images'] : [];
+
+    $newSideImages = [];
+
+    if (isset($_FILES['side_images'])) {
+        foreach ($_FILES['side_images']['name'] as $key => $filename) {
+            $filename = basename($filename);
+            $file_tmp = $_FILES['side_images']['tmp_name'][$key];
+            $upload_path = "uploads/" . $filename;
+
+            if (move_uploaded_file($file_tmp, $upload_path)) {
+                $newSideImages[] = $filename;
+            }
+        }
+    }
+
+    $allSideImages = array_merge($existingImages, $newSideImages);
+    $finalSideImages = array_values(array_diff($allSideImages, $deletedImages)); // clean index
+
+    $sideImagesJson = count($finalSideImages) ? json_encode($finalSideImages) : json_encode($side_images);
+
+    $sql = "UPDATE post SET 
+                title = '{$post_title}', 
+                description = '{$postdesc}', 
+                category = '{$category}', 
+                price = '{$price}', 
+                duration = '{$duration}', 
+                product_status = '{$product_status}', 
+                side_img = '{$sideImagesJson}' 
+            WHERE post_id = {$post_id}";
+
+    if (mysqli_query($conn, $sql)) {
+        echo json_encode(['status' => 'success', 'message' => 'Post updated successfully!']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Error updating post in database.']);
+    }
+
+    exit();
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,32 +113,40 @@ if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
             <img src="img/logo.png" alt="Logo" class="logo">
         </div>
         <nav class="sidebar-nav">
-            <ul>
-                <li>
-                    <a href="post.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                </li>
-                <li class="active">
-                    <a href="all-posts.php"><i class="fa fa-newspaper-o"></i> <span>All Posts</span></a>
-                </li>
-                <li>
-                    <a href="add-post.php"><i class="fa fa-plus"></i> <span>Add Post</span></a>
-                </li>
-                <li>
-                    <a href="users.php"><i class="fa fa-users"></i> <span>Profile</span></a>
-                </li>
-                <li>
-                    <a href="contactforms.php"><i class="fa fa-envelope"></i> <span>Contact Forms</span></a>
-                </li>
-                <!-- <li>
-                    <a href="profile.php"><i class="fa fa-user"></i> <span>Profile</span></a>
-                </li>
-                <li>
-                    <a href="settings.php"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                </li> -->
-                <li class="logout-item">
-                    <a href="logout.php"><i class="fa fa-sign-out"></i> <span>Logout</span></a>
-                </li>
-            </ul>
+        <ul>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'post.php') ? 'class="active"' : ''; ?>>
+                <a href="post.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'all-posts.php') ? 'class="active"' : ''; ?>>
+                <a href="all-posts.php"><i class="fa fa-newspaper-o"></i> <span>All Posts</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+                <a href="add-post.php"><i class="fa fa-plus"></i> <span>Add Post</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'all-blogs.php') ? 'class="active"' : ''; ?>>
+                <a href="all-blogs.php"><i class="fa fa-rss"></i> <span>All Blogs</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-blog.php') ? 'class="active"' : ''; ?>>
+                <a href="add-blog.php"><i class="fa fa-pencil"></i> <span>Add Blog</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'all-banners.php') ? 'class="active"' : ''; ?>>
+                <a href="all-banners.php"><i class="fa fa-plus"></i> <span>All Banner</span></a>
+            </li>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'banner.php') ? 'class="active"' : ''; ?>>
+                <a href="banner.php"><i class="fa fa-plus"></i> <span>Add Banner</span></a>
+            </li>
+            <?php if(isset($_SESSION['role']) && $_SESSION['role'] == '1') { ?>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'users.php') ? 'class="active"' : ''; ?>>
+                <a href="users.php"><i class="fa fa-users"></i> <span>Profile</span></a>
+            </li>
+            <?php } ?>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'contactforms.php') ? 'class="active"' : ''; ?>>
+                <a href="contactforms.php"><i class="fa fa-envelope"></i> <span>Contact Forms</span></a>
+            </li>
+            <li class="logout-item">
+                <a href="logout.php"><i class="fa fa-sign-out"></i> <span>Logout</span></a>
+            </li>
+        </ul>
         </nav>
     </div>
 
@@ -82,8 +156,8 @@ if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
             <div class="page-header">
                 <h1><i class="fa fa-edit"></i> Update Post</h1>
             </div>
-            <form action="save-post.php" method="POST" enctype="multipart/form-data" autocomplete="off" class="post-form">
-                <input type="hidden" name="post_id" value="<?php echo $row['post_id']; ?>">
+            <form id="postForm" action="all-posts.php" method="POST" enctype="multipart/form-data" autocomplete="off" class="post-form">
+            <input type="hidden" name="post_id" value="<?php echo $row['post_id']; ?>">
                 <input type="hidden" name="old-image" value="<?php echo $row['post_img']; ?>">
 
                 <div class="form-row">
@@ -133,6 +207,215 @@ if(!isset($_SESSION['username']) || $_SESSION['role'] != '1'){
                         </div>
                     </div>
                 </div>
+
+
+<style>
+   .preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.preview-container img {
+    width: 120px; /* Fixed width */
+    height: 120px; /* Fixed height */
+    object-fit: contain; /* Ensure the full image is visible within the container */
+    border: 1px solid #ccc;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.side-image-container {
+    position: relative;
+}
+
+.cross-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    padding: 3px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.side-image-container:hover .cross-btn {
+    visibility: visible;
+}
+
+</style>
+
+
+
+<div class="form-group">
+            <label for="side_images" id="side-images-label">Side Images</label>
+            <input type="file" id="side_images" name="side_images[]" multiple>
+     <!-- Displaying Side Images (Thumbnails) -->
+<div id="side-image-preview" class="preview-container">
+    <?php
+    // Check if there are images
+    if (!empty($side_images)) {
+        // Loop through and display each side image
+        foreach ($side_images as $image) {
+            $image = trim($image);  // Trim the image name for safety
+            if (!empty($image)) {
+                // Display image with its remove button
+                $encodedImage = 'uploads/' . rawurlencode($image);
+                echo '<div class="side-image-container" data-filename="' . htmlspecialchars($image) . '">';
+                echo '<img src="' . $encodedImage . '" alt="Side Image" class="side-image">';
+                echo '<button class="remove-image cross-btn" data-filename="' . htmlspecialchars($image) . '">&times;</button>';
+                echo '</div>';
+            }
+        }
+    } else {
+        echo "<p>No side images found.</p>"; // Fallback message if no images
+    }
+    ?>
+</div>
+
+
+        </div>
+
+
+
+        <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('postForm');
+    const sideImageInput = document.getElementById('side_images');
+    const sideImagePreview = document.getElementById('side-image-preview');
+    const allSideImages = [];
+    const deletedImages = [];
+
+    // Fetch existing images from HTML (data-filename attribute)
+    document.querySelectorAll('.side-image-container[data-filename]').forEach(container => {
+        const filename = container.dataset.filename;
+        allSideImages.push(filename);
+
+        const crossBtn = container.querySelector('.cross-btn');
+        if (crossBtn) {
+            crossBtn.addEventListener('click', function () {
+                container.remove();
+                const index = allSideImages.indexOf(filename);
+                if (index !== -1) {
+                    allSideImages.splice(index, 1);
+                    deletedImages.push(filename);
+                }
+            });
+        }
+    });
+
+    // Handle new image uploads
+    sideImageInput.addEventListener('change', function () {
+        Array.from(this.files).forEach(file => {
+            const alreadyExists = allSideImages.some(img => (typeof img === 'string' ? img : img.name) === file.name);
+            if (!alreadyExists) {
+                allSideImages.push(file);
+
+                const container = document.createElement('div');
+                container.classList.add('side-image-container');
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    container.appendChild(img);
+
+                    const crossBtn = document.createElement('button');
+                    crossBtn.classList.add('cross-btn');
+                    crossBtn.textContent = 'X';
+                    crossBtn.addEventListener('click', function () {
+                        container.remove();
+                        const index = allSideImages.findIndex(f => (typeof f === 'string' ? f : f.name) === file.name);
+                        if (index !== -1) {
+                            allSideImages.splice(index, 1);
+                        }
+                    });
+
+                    container.appendChild(crossBtn);
+                    sideImagePreview.appendChild(container);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        this.value = ''; // Clear input
+    });
+
+    // Handle form submission
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+
+        const formData = new FormData(form);
+
+        allSideImages.forEach(image => {
+            if (image instanceof File) {
+                formData.append('side_images[]', image);
+            } else {
+                formData.append('existing_side_images[]', image);
+            }
+        });
+
+        deletedImages.forEach(img => {
+            formData.append('remove_images[]', img);
+        });
+
+        fetch(window.location.href, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+        Swal.fire({
+        icon: 'success',
+        title: 'Updated!',
+        text: 'Post updated successfully!',
+        timer: 1500,
+        showConfirmButton: false
+        });
+
+        Swal.fire({
+    icon: 'success',
+    title: 'Updated!',
+    text: 'Post updated successfully!',
+    timer: 1500,
+    showConfirmButton: false
+}).then(() => {
+    // ✅ Redirect to all-posts.php after success
+    window.location.href = 'all-posts.php';
+});
+
+            } else {
+                alert(data.message || 'An error occurred.');
+                submitButton.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Error during fetch:', error);
+            submitButton.disabled = false;
+        });
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+                
 
                 <div class="form-group">
                     <label for="product_status"><i class="fa fa-tag"></i> Product Status</label>

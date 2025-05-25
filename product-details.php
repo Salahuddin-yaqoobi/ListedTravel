@@ -162,7 +162,7 @@ session_start();
                 ">
                     <li><a href="index.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Home</a></li>
                     <li><a href="rent.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Rent</a></li>
-                    <li><a href="product.php" class="active" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
+                    <li><a href="product.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">For Sale</a></li>
                     <li><a href="about-us.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">About Us</a></li>
                     <li><a href="contact.php" style="color: #1B3C73; text-decoration: none; font-weight: 600; font-size: 15px; text-transform: uppercase;">Contact</a></li>
     <?php if(isset($_SESSION['username'])) { ?>
@@ -549,25 +549,137 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
 <style>
 .pd_img img {
   width: 100%;
-  height: 300px;
+  height: 400px;
   object-fit: contain; /* Show entire image, might leave blank space */
-  background-color: #f5f5f5; /* Optional: background behind image */
+  background-color: white; /* Optional: background behind image */
   border-radius: 8px;
+  border: 2px solid #ccc;
 }
+.side-thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.side-thumbnails .thumb {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.side-thumbnails .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Smooth fade animation */
+#mainProductImg {
+  transition: opacity 0.3s ease;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+}
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  color: black;
+  border: 2px solid #E79C19;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #E79C19;
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-left {
+  left: 10px;
+}
+
+.nav-right {
+  right: 10px;
+}
+
+
+.side-thumbnails {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.thumb img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: border 0.3s;
+}
+
+.thumb img.active-thumb {
+  border: 2px solid #E79C19;
+}
+
 
 </style>
 <!-- Product Details Area -->
 <div class="prdct_dtls_page_area" style="margin-top: 35px;">
     <div class="container">
-        <div class="row">
+        <div class="row"">
             <!-- Product Details Image -->
             <div class="col-md-6 col-xs-12">
-                <div class="pd_img fix">
-				<a class="venobox" href="<?= htmlspecialchars($product['post_img']) ?>">
-                  <img src="<?= htmlspecialchars($product['post_img']) ?>" alt="<?= htmlspecialchars($product['title']) ?>" />
-                 </a>
-                </div>
-            </div>
+            <div class="pd_img fix" style="position: relative;">
+    <!-- Navigation buttons -->
+    <button id="prevBtn" class="nav-btn nav-left">&#8592;</button>
+    <button id="nextBtn" class="nav-btn nav-right">&#8594;</button>
+
+    <!-- Main Image -->
+    <a class="venobox" id="mainImageLink" href="<?= htmlspecialchars($product['post_img']) ?>">
+        <img id="mainProductImg" src="<?= htmlspecialchars($product['post_img']) ?>" alt="<?= htmlspecialchars($product['title']) ?>" />
+    </a>
+</div>
+
+
+    <!-- Side Images (thumbnails) -->
+    <div class="side-thumbnails">
+    <?php
+    $sideImages = json_decode($product['side_img'], true);
+    if (is_array($sideImages)) {
+        foreach ($sideImages as $sideImg) {
+            $sideImg = trim($sideImg);
+            if (!empty($sideImg)) {
+                echo '<div class="thumb">';
+                echo '<img class="side-thumb" src="uploads/' . htmlspecialchars($sideImg) . '" alt="side image">';
+                echo '</div>';
+            }
+        }
+    }
+    ?>
+    </div>
+</div>
+
             <!-- Product Details Content -->
             <div class="col-md-6 col-xs-12">
                 <div class="prdct_dtls_content">
@@ -792,6 +904,95 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
 		<script src="js/simplePlayer.js"></script>
 		<script src="js/main.js"></script>
 		<script src="script.js"></script>
+
+
+        <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const mainImg = document.getElementById('mainProductImg');
+    const mainLink = document.getElementById('mainImageLink');
+    const thumbnails = document.querySelectorAll('.side-thumb');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+
+    let currentIndex = 0;
+
+    function swapImages(targetIndex) {
+        if (targetIndex >= 0 && targetIndex < thumbnails.length) {
+            const tempSrc = mainImg.src;
+            mainImg.classList.add('fade-out');
+
+            setTimeout(() => {
+                mainImg.src = thumbnails[targetIndex].src;
+                mainLink.href = thumbnails[targetIndex].src;
+                thumbnails[targetIndex].src = tempSrc;
+
+                mainImg.classList.remove('fade-out');
+                mainImg.classList.add('fade-in');
+
+                setTimeout(() => {
+                    mainImg.classList.remove('fade-in');
+                }, 300);
+            }, 200);
+
+            currentIndex = targetIndex;
+        }
+    }
+
+    nextBtn.addEventListener('click', () => {
+        let nextIndex = (currentIndex + 1) % thumbnails.length; // Loop back if at the end
+        swapImages(nextIndex);
+    });
+
+    prevBtn.addEventListener('click', () => {
+        let prevIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length; // Loop back if at the start
+        swapImages(prevIndex);
+    });
+
+    thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', () => {
+            swapImages(index);
+        });
+    });
+});
+</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const mainImg = document.getElementById('mainProductImg');
+    const mainLink = document.getElementById('mainImageLink');
+    const thumbnails = document.querySelectorAll('.side-thumb');
+
+    thumbnails.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+            const newSrc = thumb.src;
+
+            // Smooth transition effect
+            mainImg.classList.add('fade-out');
+
+            setTimeout(() => {
+                mainImg.src = newSrc;
+                mainLink.href = newSrc;
+
+                mainImg.classList.remove('fade-out');
+                mainImg.classList.add('fade-in');
+
+                setTimeout(() => {
+                    mainImg.classList.remove('fade-in');
+                }, 300);
+            }, 200);
+        });
+    });
+});
+</script>
+
+
+
+
+
+
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
   const searchInput = document.getElementById('searchInput');

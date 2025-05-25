@@ -3,60 +3,126 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include "config.php";
-
 session_start();
-if(!isset($_SESSION['username'])){
+
+// Check if the user is an admin
+if (!isset($_SESSION['username']) || $_SESSION['role'] != '1') {
     header("Location: " . APP_URL . "/admin/");
     exit();
 }
 
-// Move the form processing code here, before any HTML output
-if (isset($_POST['submit'])) {
-    // Basic data collection
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Collecting data
     $post_title = mysqli_real_escape_string($conn, $_POST['post_title']);
     $postdesc = mysqli_real_escape_string($conn, $_POST['postdesc']);
     $category = mysqli_real_escape_string($conn, $_POST['category']);
     $vehicle_cat = mysqli_real_escape_string($conn, $_POST['vehicle_category']);
     $price = mysqli_real_escape_string($conn, $_POST['price']);
-    
-    // Handle duration differently
-    if($category == 'For Rent') {
-        $duration = isset($_POST['duration']) ? mysqli_real_escape_string($conn, $_POST['duration']) : 'per_day';
-    } else {
-        $duration = 'one_time'; // Default value for For Sale
+
+    // Handle main image upload
+    $target_dir = "uploads/";
+    $main_img_name = basename($_FILES["fileToUpload"]["name"]);
+    $target_file = $target_dir . $main_img_name;
+
+    // Check if the main image is uploaded
+    if (!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        die("Error uploading main image. Check folder permissions or file type.");
     }
 
-    // File upload
-    $target_dir = "uploads/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+    // Determine duration
+    $duration = ($category == 'For Rent') ? 
+        (isset($_POST['duration']) ? mysqli_real_escape_string($conn, $_POST['duration']) : 'per_day') 
+        : 'one_time';
 
-    // Current date
+    // Get current date
     $date = date('d M, Y');
 
-    // Add product_status
-    $product_status = isset($_POST['product_status']) ? 'sold' : 'available';
+    // Add product status
+    $product_status = mysqli_real_escape_string($conn, $_POST['product_status']);
 
-    // Insert query with duration always having a value
-    $sql = "INSERT INTO post (title, description, category, vehicle_cat, post_img, post_date, price, duration, product_status) 
-            VALUES ('{$post_title}', '{$postdesc}', '{$category}', {$vehicle_cat}, '{$target_file}', '{$date}', {$price}, '{$duration}', '{$product_status}')";
+    // Handle side images upload
+    $sideImages = [];
+    $maxFileSize = 2097152; // 2MB
 
-    // Execute query and redirect
-    if(mysqli_query($conn, $sql)) {
+    if (isset($_FILES['side_images']) && !empty($_FILES['side_images']['name'][0])) {
+        foreach ($_FILES['side_images']['name'] as $key => $file_name) {
+            $file_tmp = $_FILES['side_images']['tmp_name'][$key];
+            $file_size = $_FILES['side_images']['size'][$key];
+            $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
+
+            if (in_array($file_ext, $allowed_extensions) && $file_size <= $maxFileSize) {
+                $upload_path = $target_dir . $file_name;
+
+                if (move_uploaded_file($file_tmp, $upload_path)) {
+                    if (!in_array($file_name, $sideImages)) {
+                        $sideImages[] = $file_name;
+                    }
+                }
+            }
+        }
+    }
+
+    // If there are side images, encode them in JSON. Otherwise, store NULL or empty string.
+    $sideImagesJson = !empty($sideImages) ? json_encode($sideImages) : NULL;
+    $sideImagesJsonEscaped = mysqli_real_escape_string($conn, $sideImagesJson);
+
+    // Prepare SQL insert query
+    $sql = "INSERT INTO post (title, description, category, vehicle_cat, post_img, post_date, price, duration, product_status, side_img) 
+            VALUES (
+                '{$post_title}', 
+                '{$postdesc}', 
+                '{$category}', 
+                '{$vehicle_cat}', 
+                'uploads/{$main_img_name}', 
+                '{$date}', 
+                '{$price}', 
+                '{$duration}', 
+                '{$product_status}', 
+                '{$sideImagesJsonEscaped}'
+            )";
+
+    // Execute the query
+    if (mysqli_query($conn, $sql)) {
+        // Store success message in session
+        $_SESSION['status'] = 'success';
+        // Redirect to the posts page
         header("Location: all-posts.php");
         exit();
     } else {
-        die("Error: " . mysqli_error($conn));
+        die("SQL Error: " . mysqli_error($conn));
     }
 }
-
-// Test query to check vehicle_category table
-$test_query = "SELECT * FROM vehicle_category";
-$test_result = mysqli_query($conn, $test_query);
-if (!$test_result) {
-    die("Query Error: " . mysqli_error($conn));
-}
 ?>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+// Check if there is a success status in the session
+<?php if (isset($_SESSION['status']) && $_SESSION['status'] == 'success'): ?>
+    // Show SweetAlert success message
+    Swal.fire({
+        icon: 'success',
+        title: 'Post Added!',
+        text: 'The post was added successfully.',
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+        // Redirect to all-posts.php after showing the success message
+        window.location.href = 'all-posts.php';
+    });
+
+    // Clear the session status after showing the alert
+    <?php unset($_SESSION['status']); ?>
+<?php endif; ?>
+</script>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,8 +191,8 @@ if (!$test_result) {
             </div>
             
             <!-- Form -->
-            <form action="" method="POST" enctype="multipart/form-data" class="post-form">
-                <div class="form-group">
+            <form id="postForm" action="all-posts.php" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
                     <label for="post_title">Title</label>
                     <input type="text" name="post_title" class="form-control" autocomplete="off" required>
                 </div>
@@ -184,6 +250,56 @@ if (!$test_result) {
                     </div>
                 </div>
 
+
+
+                <style>
+.preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.preview-container img {
+    width: 120px; /* Fixed width */
+    height: 120px; /* Fixed height */
+    object-fit: contain; /* Ensure the full image is visible within the container */
+    border: 1px solid #ccc;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.side-image-container {
+    position: relative; /* Required for the cross button's absolute positioning */
+}
+
+.cross-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    padding: 3px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.side-image-container:hover .cross-btn {
+    visibility: visible;
+}
+
+</style>
+
+<div class="form-group">
+    <label for="side_images" id="side-images-label">Side Images</label>
+    <input type="file" id="side_images" name="side_images[]" multiple>
+    <div id="side-image-preview" class="preview-container"></div>
+  </div>
+
+
                 <!-- Replace the existing status-toggle div with this new one -->
                 <div class="form-group status-toggle">
                     <label class="status-label">Product Status</label>
@@ -202,6 +318,9 @@ if (!$test_result) {
         </div>
     </div>
 </div>
+
+
+
 
 <script>
 // JavaScript to dynamically show fields based on category selection
@@ -611,5 +730,93 @@ textarea.form-control {
 </style>
 
 <?php include "footer.php"; ?>
+<script>
+let allSideImages = []; // Array to hold all selected side images
+
+document.getElementById('side_images').addEventListener('change', function () {
+    const sideImagePreview = document.getElementById('side-image-preview');
+
+    // Loop through all selected files
+    Array.from(this.files).forEach(file => {
+        // Ensure no duplicate images are added to the array
+        if (!allSideImages.some(existingFile => existingFile.name === file.name)) {
+            allSideImages.push(file);  // Add new image to array
+
+            // Create a container for the image and cross button
+            const container = document.createElement('div');
+            container.classList.add('side-image-container');
+
+            // Create an image preview for the new file
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                container.appendChild(img);
+
+                // Create the cross button
+                const crossBtn = document.createElement('button');
+                crossBtn.classList.add('cross-btn');
+                crossBtn.innerHTML = 'X';
+
+                // Add click event to remove the image when clicked
+                crossBtn.addEventListener('click', function () {
+                    // Remove the image from preview
+                    container.remove();
+                    // Remove the image from the array
+                    const index = allSideImages.findIndex(existingFile => existingFile.name === file.name);
+                    if (index !== -1) {
+                        allSideImages.splice(index, 1);
+                    }
+
+                    
+                });
+
+                // Append the cross button to the container
+                container.appendChild(crossBtn);
+            };
+            reader.readAsDataURL(file);
+
+            // Append the container to the preview
+            sideImagePreview.appendChild(container);
+        }
+    });
+
+    // Reset input to allow same file re-selection
+    this.value = '';
+
+});
+
+document.getElementById('postForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // Remove default (empty) side_images input so only our appended ones are sent
+    formData.delete('side_images[]');
+
+    // Add all selected side images to the form data
+    allSideImages.forEach(file => {
+        formData.append('side_images[]', file);
+    });
+
+
+   
+
+    fetch('add-post.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            return response.text().then(console.warn);
+        }
+    })
+    .catch(error => console.error('Error during fetch:', error));
+});
+</script>
+
 </body>
 </html>

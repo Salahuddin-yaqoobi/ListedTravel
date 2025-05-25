@@ -50,7 +50,7 @@ if (!$result) {
         <img src="img/logo.png" alt="Logo" class="logo">
     </div>
     <nav class="sidebar-nav">
-        <ul>
+    <ul>
             <li <?php echo (basename($_SERVER['PHP_SELF']) == 'post.php') ? 'class="active"' : ''; ?>>
                 <a href="post.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
             </li>
@@ -66,10 +66,10 @@ if (!$result) {
             <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-blog.php') ? 'class="active"' : ''; ?>>
                 <a href="add-blog.php"><i class="fa fa-pencil"></i> <span>Add Blog</span></a>
             </li>
-            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'all-banners.php') ? 'class="active"' : ''; ?>>
                 <a href="all-banners.php"><i class="fa fa-plus"></i> <span>All Banner</span></a>
             </li>
-            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'add-post.php') ? 'class="active"' : ''; ?>>
+            <li <?php echo (basename($_SERVER['PHP_SELF']) == 'banner.php') ? 'class="active"' : ''; ?>>
                 <a href="banner.php"><i class="fa fa-plus"></i> <span>Add Banner</span></a>
             </li>
             <?php if(isset($_SESSION['role']) && $_SESSION['role'] == '1') { ?>
@@ -147,13 +147,14 @@ if (!$result) {
                             </td>
                             <td class="actions">
                                 <a href='update-post.php?id=<?php echo $row['post_id']; ?>' class="edit-btn"><i class='fa fa-edit'></i></a>
-                                <a href='delete-post.php?id=<?php echo $row['post_id']; ?>' class="delete-btn"><i class='fa fa-trash-o'></i></a>
-                            </td>
+                                <a href="#" class="delete-btn" data-id="<?php echo $row['post_id']; ?>"><i class='fa fa-trash-o'></i></a>
+                                </td>
                         </tr>
                     <?php }} ?>
                     </tbody>
                 </table>
             </div>
+          
 
             <!-- Pagination -->
             <?php
@@ -493,5 +494,35 @@ table td:nth-child(7) {
 </style>
 
 <?php include "footer.php"; ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent the link from navigating immediately
+            const postId = this.getAttribute('data-id'); // Get the post ID
+
+            // Show SweetAlert confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This action cannot be undone.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Proceed with deletion by redirecting to the delete page
+                    window.location.href = `delete-post.php?id=${postId}`;
+                }
+            });
+        });
+    });
+});
+</script>
 </body>
 </html> 
