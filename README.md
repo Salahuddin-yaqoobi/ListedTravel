@@ -2,8 +2,6 @@
 
 **TruckHub** is a fully responsive, full-stack truck-based eCommerce web application built from scratch. It supports **product listings for sale and rent**, includes an advanced **filter/search system**, and features both a **client-facing interface** and a secure **admin dashboard** for managing content.
 
-> Developed as a personal project to practice and demonstrate full-stack development skills using PHP, MySQL, and modern frontend technologies.
-
 ---
 
 ## 🔍 Key Features
