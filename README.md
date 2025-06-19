@@ -37,5 +37,5 @@
 
 Watch a full video demo of the project on Loom:
 
-👉 [Click here to watch the demo]([https://www.loom.com/share/your-loom-video-id](https://www.loom.com/share/a21f6052421c471b81f91b44a2a7e85b?sid=ccdf8e74-309e-4570-a300-f1b17068ec36 ))
+👉 [[[Click here to watch the demo](https://www.loom.com/share/a21f6052421c471b81f91b44a2a7e85b?sid=ccdf8e74-309e-4570-a300-f1b17068ec36 )]
 
